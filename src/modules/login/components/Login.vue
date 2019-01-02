@@ -7,7 +7,7 @@
 </template>
 
 <script>
-  import login from 'mixins/login';
+  import login from '../mixins/login';
 
   export default {
     name: 'login',
