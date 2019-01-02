@@ -10,7 +10,7 @@
   import login from '../mixins/login';
 
   export default {
-    name: 'login',
+    name: 'login-form',
     data: () => ({
       account: '',
       password: ''
