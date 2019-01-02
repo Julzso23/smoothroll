@@ -4,9 +4,13 @@
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav">
+    <div class="collapse navbar-collapse container" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
         <navbar-link to="/">Dashboard</navbar-link>
+      </ul>
+
+      <ul class="navbar-nav">
+        <navbar-link to="/login">Login</navbar-link>
       </ul>
     </div>
   </nav>
