@@ -1,7 +1,7 @@
 export default {
   methods: {
     async login(account, password) {
-      let session_id = localStorage.getItem('session_id')
+      let session_id = localStorage.getItem('session_id');
       if (!session_id) {
         session_id = await this.$api.startSession();
       }
@@ -13,6 +13,11 @@ export default {
       }).then(response => {
         if (!response.error) {
           localStorage.setItem('auth', response.data.auth);
+        } else {
+          if (response.code == 'bad_session') {
+            localStorage.removeItem('session_id');
+            this.login(account, password);
+          }
         }
       });
     }
