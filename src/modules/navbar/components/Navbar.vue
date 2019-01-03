@@ -7,6 +7,7 @@
     <div class="collapse navbar-collapse container" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <navbar-link to="/">Dashboard</navbar-link>
+        <navbar-link to="/browse">Browse</navbar-link>
       </ul>
 
       <ul class="navbar-nav">
