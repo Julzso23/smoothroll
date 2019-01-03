@@ -2,6 +2,7 @@
   <div>
     <div class="row">
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6" label="Filter" :options="filterOptions" @selectionUpdate="selection => filter = selection" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6" label="Media" :options="mediaOptions" @selectionUpdate="selection => media = selection" />
     </div>
   </div>
 </template>
@@ -23,10 +24,13 @@
         {key: 'simulcast', value: 'Simulcast'},
         {key: 'updated', value: 'Updated'}
       ],
-      filter: 'alpha'
+      filter: 'alpha',
+
+      mediaOptions: [
+        {key: 'anime', value: 'Anime'},
+        {key: 'drama', value: 'Drama'}
+      ],
+      media: 'anime'
     })
   }
 </script>
-
-<style lang="scss" module>
-</style>

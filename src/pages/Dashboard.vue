@@ -6,6 +6,3 @@
     name: 'dashboard'
   }
 </script>
-
-<style lang="scss" module>
-</style>

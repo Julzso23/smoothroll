@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
     <div class="input-group-prepend">
-      <label class="input-group-text">{{label}}</label>
+      <label class="input-group-text bg-dark text-light">{{label}}</label>
     </div>
     <select class="custom-select" v-model="selection" @change="onChange">
       <option v-for="option in options" :key="option.key">{{option.value}}</option>
