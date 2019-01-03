@@ -42,8 +42,17 @@ module.exports = {
               localIdentName: '[local]_[chunkhash:base64:8]'
             }
           },
+          {
+            loader: 'postcss-loader', // Run postcss actions
+            options: {
+              plugins: () => ([
+                require('autoprefixer')
+              ])
+            }
+          },
           'sass-loader'
-        ]
+        ],
+        exclude: /node_modules/
       }
     ]
   },

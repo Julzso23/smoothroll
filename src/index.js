@@ -3,7 +3,7 @@ import App from './App.vue';
 import Api from 'plugins/Api';
 import router from 'router';
 import 'bootstrap';
-import 'bootstrap/scss/bootstrap';
+import 'scss/_theme';
 
 Vue.use(Api);
 
