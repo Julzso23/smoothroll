@@ -21,15 +21,35 @@ class Api {
     return formData;
   }
 
-  async get(route, inputParameters = {}) {
+  get(route, inputParameters = {}) {
     let url = new URL(_url + route + '.' + _api_version + '.json');
+
     let parameters = Object.assign({}, _baseParameters, inputParameters);
+    const session_id = localStorage.getItem('session_id');
+    if (session_id) {
+      parameters.session_id = session_id;
+    }
+    const auth = localStorage.getItem('auth');
+    if (auth) {
+      parameters.auth = auth;
+    }
+
     url.search = new URLSearchParams(parameters);
 
-    return fetch(url).then(response => response.json());
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then(response => response.json())
+        .then(response => {
+          if (!response.error) {
+            resolve(response.data);
+          } else {
+            reject(response.code);
+          }
+        });
+    });
   }
 
-  async post(route, inputParameters = {}) {
+  post(route, inputParameters = {}) {
     let url = _url + route + '.' + _api_version + '.json';
     let parameters = Object.assign({}, _baseParameters, inputParameters);
 
@@ -37,14 +57,28 @@ class Api {
     if (session_id) {
       parameters.session_id = session_id;
     }
+    const auth = localStorage.getItem('auth');
+    if (auth) {
+      parameters.auth = auth;
+    }
 
-    return fetch(url, {
-      method: 'POST',
-      body: this.getFormData(parameters)
-    }).then(response => response.json())
+    return new Promise((resolve, reject) => {
+      fetch(url, {
+        method: 'POST',
+        body: this.getFormData(parameters)
+      })
+        .then(response => response.json())
+        .then(response => {
+          if (!response.error) {
+            resolve(response.data);
+          } else {
+            reject(response.code);
+          }
+        });
+    });
   }
 
-  async startSession() {
+  startSession() {
     const id = uuid().toUpperCase();
     localStorage.setItem('uuid', id);
 
@@ -52,12 +86,41 @@ class Api {
       access_token: _access_token,
       device_type: _device_type,
       device_id: id
-    }).then(response => {
-      if (!response.error) {
-        localStorage.setItem('session_id', response.data.session_id);
-        return response.data.session_id;
-      }
+    }).then(data => {
+      localStorage.setItem('session_id', data.session_id);
+      return data.session_id;
     });
+  }
+
+  listSeries(filter, mediaType, limit, offset) {
+    return this.get('list_series', {
+      filter: filter,
+      media_type: mediaType,
+      limit: limit,
+      offset: offset
+    });
+  }
+
+  async login(account, password) {
+    let session_id = localStorage.getItem('session_id');
+    if (!session_id) {
+      session_id = await this.startSession();
+    }
+
+    await this.post('login', {
+      account: account,
+      password: password,
+      session_id: session_id
+    })
+      .then(data => {
+        localStorage.setItem('auth', data.auth);
+      })
+      .catch(code => {
+        if (code == 'bad_session') {
+          localStorage.removeItem('session_id');
+          this.login(account, password);
+        }
+      });
   }
 }
 
