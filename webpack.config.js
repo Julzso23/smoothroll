@@ -16,7 +16,8 @@ module.exports = {
       extensions: [
           '.js',
           '.vue',
-          '.css'
+          '.css',
+          '.scss'
       ],
   },
   module: {
@@ -32,25 +33,12 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.css$/,
-        use: [
-          'vue-style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              localIdentName: '[local]_[chunkhash:base64:8]'
-            }
-          }
-        ]
-      },
-      {
         test: /\.scss$/,
         use: [
           'vue-style-loader',
           {
             loader: 'css-loader',
             options: {
-              modules: true,
               localIdentName: '[local]_[chunkhash:base64:8]'
             }
           },
