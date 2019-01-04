@@ -44,13 +44,7 @@
     methods: {
       async updateSeriesList() {
         await this.$api.listSeries(this.filter, this.mediaType, this.limit, this.offset)
-          .then(data => this.seriesList = data)
-          .catch(code => {
-            if (code == 'bad_session') {
-              localStorage.removeItem('session_id');
-            }
-            this.$router.push('/login');
-          });
+          .then(data => this.seriesList = data);
       }
     },
     created() {
