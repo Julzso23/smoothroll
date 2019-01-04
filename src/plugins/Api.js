@@ -1,4 +1,5 @@
 import uuid from 'uuid/v4';
+import EventBus from 'EventBus';
 
 const _locale = 'enGB';
 const _version = '1.1.20.0';
@@ -36,17 +37,24 @@ class Api {
 
     url.search = new URLSearchParams(parameters);
 
-    return new Promise((resolve, reject) => {
-      fetch(url)
-        .then(response => response.json())
-        .then(response => {
-          if (!response.error) {
-            resolve(response.data);
-          } else {
-            reject(response.code);
-          }
-        });
-    });
+    return fetch(url)
+      .then(response => response.json())
+      .then(response => {
+        if (!response.error) {
+          return response.data;
+        } else {
+          throw response.code;
+        }
+      })
+      .catch(code => {
+        if (code == 'bad_session') {
+          localStorage.removeItem('session_id');
+          this.startSession();
+          this.post(route, inputParameters);
+        } else {
+          throw code;
+        }
+      });
   }
 
   post(route, inputParameters = {}) {
@@ -62,20 +70,27 @@ class Api {
       parameters.auth = auth;
     }
 
-    return new Promise((resolve, reject) => {
-      fetch(url, {
-        method: 'POST',
-        body: this.getFormData(parameters)
+    return fetch(url, {
+      method: 'POST',
+      body: this.getFormData(parameters)
+    })
+      .then(response => response.json())
+      .then(response => {
+        if (!response.error) {
+          return response.data;
+        } else {
+          throw response.code;
+        }
       })
-        .then(response => response.json())
-        .then(response => {
-          if (!response.error) {
-            resolve(response.data);
-          } else {
-            reject(response.code);
-          }
-        });
-    });
+      .catch(code => {
+        if (code == 'bad_session') {
+          localStorage.removeItem('session_id');
+          this.startSession();
+          this.post(route, inputParameters);
+        } else {
+          throw code;
+        }
+      });
   }
 
   startSession() {
@@ -107,20 +122,33 @@ class Api {
       session_id = await this.startSession();
     }
 
-    await this.post('login', {
+    return await this.post('login', {
       account: account,
       password: password,
       session_id: session_id
     })
       .then(data => {
         localStorage.setItem('auth', data.auth);
-      })
-      .catch(code => {
-        if (code == 'bad_session') {
-          localStorage.removeItem('session_id');
-          this.login(account, password);
-        }
+        EventBus.$emit('onLogin', data);
       });
+  }
+
+  async logout() {
+    let auth = localStorage.getItem('auth');
+    if (auth) {
+      await this.post('logout', {
+        auth: auth
+      })
+        .catch(code => {
+          if (code == 'bad_auth_params') {
+            localStorage.removeItem('auth');
+          }
+        });
+
+      localStorage.removeItem('auth');
+    }
+
+    EventBus.$emit('onLogout');
   }
 }
 
