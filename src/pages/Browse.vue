@@ -1,23 +1,27 @@
 <template>
   <div>
-    <div class="row mb-4">
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6" label="Filter" :options="filterOptions" @selectionUpdate="selection => {filter = selection; updateSeriesList()}" />
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6" label="Media" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateSeriesList()}" />
+    <div class="row mb-2">
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" label="Filter" :options="filterOptions" @selectionUpdate="selection => {filter = selection; updateSeriesList()}" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" label="Media" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateSeriesList()}" />
     </div>
 
-    <ul class="list-group">
-      <li class="list-group-item bg-dark text-light" v-for="series in seriesList" :key="series.series_id">{{series.name}}</li>
-    </ul>
+    <div class="row">
+      <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" v-for="series in seriesList" :key="series.series_id">
+        <series-card :series="series" />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
   import DropdownSelector from 'modules/shared/components/DropdownSelector';
+  import SeriesCard from 'modules/cards/components/SeriesCard';
 
   export default {
     name: 'browse',
     components: {
-      DropdownSelector
+      DropdownSelector,
+      SeriesCard
     },
     data: () => ({
       filterOptions: [
@@ -44,7 +48,13 @@
     methods: {
       async updateSeriesList() {
         await this.$api.listSeries(this.filter, this.mediaType, this.limit, this.offset)
-          .then(data => this.seriesList = data);
+          .then(data => this.seriesList = data)
+          .catch (code => {
+            if (code == 'bad_auth_params') {
+              localStorage.removeItem('auth');
+              this.$router.push('login');
+            }
+          });
       }
     },
     created() {
