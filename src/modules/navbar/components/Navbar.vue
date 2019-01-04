@@ -10,20 +10,20 @@
         <navbar-link to="/browse">Browse</navbar-link>
       </ul>
 
-      <ul class="navbar-nav">
-        <navbar-link to="/login">Login</navbar-link>
-      </ul>
+      <authentication />
     </div>
   </nav>
 </template>
 
 <script>
   import NavbarLink from './NavbarLink';
+  import Authentication from './Authentication';
 
   export default {
     name: 'navbar',
     components: {
-      NavbarLink
+      NavbarLink,
+      Authentication
     }
   }
 </script>
