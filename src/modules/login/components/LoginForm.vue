@@ -15,7 +15,10 @@
     }),
     methods: {
       async login() {
-        await this.$api.login(this.account, this.password);
+        this.$store.dispatch('login', {
+          account: this.account,
+          password: this.password
+        });
         this.$router.go(-1);
       }
     }
