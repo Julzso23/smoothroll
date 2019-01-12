@@ -45,7 +45,7 @@
     }),
     computed: {
       seriesList() {
-        return this.$store.state.series.seriesList;
+        return this.$store.state.media.seriesList;
       }
     },
     methods: {
