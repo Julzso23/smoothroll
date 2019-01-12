@@ -21,6 +21,11 @@ export default new Router({
       path: '/browse',
       name: 'browse',
       component: () => import('pages/Browse')
+    },
+    {
+      path: '/queue',
+      name: 'queue',
+      component: () => import('pages/Queue')
     }
   ]
 });
