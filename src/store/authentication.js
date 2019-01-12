@@ -27,24 +27,24 @@ export default {
   },
 
   actions: {
-    startSession({commit}) {
+    async startSession({commit}) {
       const id = uuid().toUpperCase();
 
-      Vue.api.post('start_session', {
+      await Vue.api.post('start_session', {
         access_token: _access_token,
         device_type: _device_type,
         device_id: id
       }).then(data => {
-        commit('sessionId', data.session_id);
+        commit('setSession', data.session_id);
       });
     },
 
-    async login({commit, statedispatch, }, {account, password}) {
-      if (!state.sessionId) {
-        state.sessionId = await dispatch('startSession');
+    async login({commit, dispatch, state}, {account, password}) {
+      if (state.sessionId == null) {
+        await dispatch('startSession');
       }
 
-      this.post('login', {
+      await Vue.api.post('login', {
         account: account,
         password: password,
         session_id: state.sessionId
@@ -55,11 +55,10 @@ export default {
         });
     },
 
-    async logout({commit}) {
-      let auth = localStorage.getItem('auth');
-      if (auth) {
-        await this.post('logout', {
-          auth: auth
+    async logout({commit, state}) {
+      if (state.authTicket) {
+        await Vue.api.post('logout', {
+          auth: state.authTicket
         })
           .catch(code => {
           });
@@ -71,7 +70,7 @@ export default {
 
   getters: {
     isLoggedIn(state) {
-      return state.authToken != null;
+      return state.authTicket != null;
     }
   }
 };
