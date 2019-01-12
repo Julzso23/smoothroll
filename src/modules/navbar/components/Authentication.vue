@@ -2,7 +2,7 @@
   <ul class="navbar-nav" v-if="isLoggedIn">
     <span class="navbar-text text-muted">{{username}}</span>
     <li class="nav-item">
-      <a class="nav-link" href="#" @click="$api.logout()">Logout</a>
+      <a class="nav-link" href="#" @click="$store.dispatch('logout')">Logout</a>
     </li>
   </ul>
 
