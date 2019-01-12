@@ -9,6 +9,9 @@ export default {
   mutations: {
     setSeriesList(state, seriesList) {
       state.seriesList = seriesList;
+    },
+    setQueue(state, queue) {
+      state.queue = queue;
     }
   },
 
@@ -25,6 +28,19 @@ export default {
       })
         .then(data => {
           commit('setSeriesList', data);
+        });
+    },
+
+    async getQueue({commit, rootState, dispatch}) {
+      await dispatch('verifySession');
+
+      Vue.api.get('queue', {
+        media_types: 'anime|drama',
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
+      })
+        .then(data => {
+          commit('setQueue', data);
         });
     }
   }
