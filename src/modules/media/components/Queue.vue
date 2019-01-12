@@ -3,6 +3,9 @@
 
 <script>
   export default {
-    name: 'queue'
+    name: 'queue',
+    created() {
+      this.$store.dispatch('getQueue');
+    }
   }
 </script>
