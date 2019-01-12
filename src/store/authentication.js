@@ -39,10 +39,14 @@ export default {
       });
     },
 
-    async login({commit, dispatch, state}, {account, password}) {
+    async verifySession({dispatch, state}) {
       if (state.sessionId == null) {
         await dispatch('startSession');
       }
+    },
+
+    async login({commit, dispatch, state}, {account, password}) {
+      await dispatch('verifySession');
 
       await Vue.api.post('login', {
         account: account,
