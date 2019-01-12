@@ -40,21 +40,22 @@
       ],
       mediaType: 'anime',
 
-      seriesList: [],
-
       limit: 50,
       offset: 0
     }),
+    computed: {
+      seriesList() {
+        return this.$store.state.series.seriesList;
+      }
+    },
     methods: {
       async updateSeriesList() {
-        await this.$api.listSeries(this.filter, this.mediaType, this.limit, this.offset)
-          .then(data => this.seriesList = data)
-          .catch (code => {
-            if (code == 'bad_auth_params') {
-              localStorage.removeItem('auth');
-              this.$router.push('login');
-            }
-          });
+        await this.$store.dispatch('listSeries', {
+          filter: this.filter,
+          mediaType: this.mediaType,
+          limit: this.limit,
+          offset: this.offset
+        });
       }
     },
     created() {
