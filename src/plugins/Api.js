@@ -52,15 +52,6 @@ class Api {
         }
       });
   }
-
-  listSeries(filter, mediaType, limit, offset) {
-    return this.get('list_series', {
-      filter: filter,
-      media_type: mediaType,
-      limit: limit,
-      offset: offset
-    });
-  }
 }
 
 export default (Vue, options) => {
