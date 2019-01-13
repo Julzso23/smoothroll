@@ -2,9 +2,9 @@
   <div class="card bg-dark text-light">
     <img class="card-img-top" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
     <div class="mx-2 my-1 d-flex flex-column">
-      <span class="truncate">{{series.name}}</span>
+      <span class="text-truncate"><router-link :to="'/media/' + media.media_id">{{series.name}}</router-link></span>
       <small>Episode {{media.episode_number}}</small>
-      <small class="truncate">{{media.name}}</small>
+      <small class="text-truncate">{{media.name}}</small>
     </div>
   </div>
 </template>
@@ -18,11 +18,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .truncate {
-    overflow: hidden;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-  }
-</style>
