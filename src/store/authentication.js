@@ -6,20 +6,23 @@ const _device_type = 'com.crunchyroll.windows.desktop';
 
 export default {
   state: {
-    sessionId: null,
-    authTicket: null,
-    user: null
+    sessionId: localStorage.getItem('sessionId') || null,
+    authTicket: localStorage.getItem('authTicket') || null,
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
   },
 
   mutations: {
     setUser(state, user) {
       state.user = user;
+      localStorage.setItem('user', JSON.stringify(user));
     },
     setSession(state, sessionId) {
       state.sessionId = sessionId;
+      localStorage.setItem('sessionId', sessionId);
     },
     setAuthTicket(state, authTicket) {
       state.authTicket = authTicket;
+      localStorage.setItem('authTicket', authTicket);
     },
     removeAuthTicket(state) {
       state.authTicket = null;
