@@ -3,7 +3,8 @@ import Vue from 'vue';
 export default {
   state: {
     seriesList: [],
-    queue: []
+    queue: [],
+    currentMedia: null
   },
 
   mutations: {
@@ -12,6 +13,9 @@ export default {
     },
     setQueue(state, queue) {
       state.queue = queue;
+    },
+    setCurrentMedia(state, media) {
+      state.currentMedia = media;
     }
   },
 
@@ -41,6 +45,18 @@ export default {
       })
         .then(data => {
           commit('setQueue', data);
+        });
+    },
+
+    async getMedia({commit, rootState, dispatch}, id) {
+      await dispatch('verifySession');
+
+      Vue.api.get('info', {
+        media_id: id,
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          commit('setCurrentMedia', data);
         });
     }
   }

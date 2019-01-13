@@ -26,6 +26,10 @@ export default new Router({
       path: '/queue',
       name: 'queue',
       component: () => import('pages/Queue')
+    },
+    {
+      path: '/media/:id',
+      component: () => import('pages/Media')
     }
   ]
 });
