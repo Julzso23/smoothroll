@@ -6,7 +6,8 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name]_[hash:8].js'
+    filename: '[name]_[hash:8].js',
+    publicPath: '/'
   },
   resolve: {
       modules: [
@@ -82,5 +83,9 @@ module.exports = {
         }
       }
     }
+  },
+  devServer: {
+    historyApiFallback: true,
+    port: 8080
   }
 };
