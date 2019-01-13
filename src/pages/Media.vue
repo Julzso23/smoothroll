@@ -1,6 +1,7 @@
 <template>
   <div>
-    {{name}}
+    <h3 class="text-light">{{media.series_name}}</h3>
+    <h4 class="text-light">{{'Episode ' + media.episode_number + ' - ' + media.name}}</h4>
   </div>
 </template>
 
@@ -11,11 +12,8 @@
       this.$store.dispatch('getMedia', this.$route.params.id);
     },
     computed: {
-      name() {
-        if (this.$store.state.media.currentMedia) {
-          return this.$store.state.media.currentMedia.name;
-        }
-        return '';
+      media() {
+        return this.$store.state.media.currentMedia || {};
       }
     }
   }
