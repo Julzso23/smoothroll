@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4" v-for="queueItem in queue" :key="queueItem.queue_entry_id">
-      <media-card :media="queueItem.most_likely_media" :series="queueItem.series" />
+      <media-card :media="queueItem.most_likely_media" />
     </div>
   </div>
 </template>
