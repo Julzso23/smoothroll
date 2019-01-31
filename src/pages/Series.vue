@@ -1,6 +1,7 @@
 <template>
   <div>
     <h3 class="text-light">{{series.name}}</h3>
+    <p class="text-light">{{series.description}}</p>
   </div>
 </template>
 
