@@ -3,7 +3,7 @@
     <router-link :to="'/media/' + media.media_id" class="text-reset"><img class="card-img-top" :src="media.screenshot_image.large_url" alt="Media Thumbnail" /></router-link>
     <progress-bar :value="(media.playhead / media.duration) * 100" />
     <div class="mx-2 my-1 d-flex flex-column">
-      <span class="text-truncate">{{media.series_name}}</span>
+      <span class="text-truncate"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.series_name}}</router-link></span>
       <small>Episode {{media.episode_number}}</small>
       <small class="text-truncate"><router-link :to="'/media/' + media.media_id" class="text-reset">{{media.name}}</router-link></small>
     </div>
