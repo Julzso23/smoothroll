@@ -7,7 +7,8 @@ export default {
   state: {
     seriesList: [],
     queue: [],
-    currentMedia: null
+    currentMedia: null,
+    currentSeries: null
   },
 
   mutations: {
@@ -19,6 +20,9 @@ export default {
     },
     setCurrentMedia(state, media) {
       state.currentMedia = media;
+    },
+    setCurrentSeries(state, series) {
+      state.currentSeries = series;
     }
   },
 
@@ -78,6 +82,23 @@ export default {
             return dispatch('startSession').then(() => dispatch('getMedia'));
           }
         });
+    },
+
+    async getSeries({commit, rootState, dispatch}, id) {
+      await dispatch('verifySession');
+
+      Vue.api.get('info', {
+        series_id: id,
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          commit('setCurrentSeries', data);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('getSeries'));
+          }
+        })
     }
   }
 }
