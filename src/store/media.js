@@ -35,6 +35,11 @@ export default {
       })
         .then(data => {
           commit('setSeriesList', data);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('listSeries'));
+          }
         });
     },
 
@@ -49,6 +54,11 @@ export default {
       })
         .then(data => {
           commit('setQueue', data);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('getQueue'));
+          }
         });
     },
 
@@ -62,6 +72,11 @@ export default {
       })
         .then(data => {
           commit('setCurrentMedia', data);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('getMedia'));
+          }
         });
     }
   }
