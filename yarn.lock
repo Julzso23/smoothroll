@@ -1472,6 +1472,11 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
+clappr@^0.3.2:
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/clappr/-/clappr-0.3.2.tgz#74aed9f0ed986612481d3b3d9a78ac8dc967800c"
+  integrity sha512-52Tmk4RUy01gJLFpUAB8piO6xqb1ogh3uRw9guzyAdNG7ffecis+7I8sQwfxL0bUSM9oMK46DWAVZ4dUdcAwjw==
+
 class-utils@^0.3.5:
   version "0.3.6"
   resolved "https://registry.yarnpkg.com/class-utils/-/class-utils-0.3.6.tgz#f93369ae8b9a7ce02fd41faad0ca83033190c463"
@@ -3779,6 +3784,11 @@ lcid@^2.0.0:
   integrity sha512-avPEb8P8EGnwXKClwsNUgryVjllcRqtMYa49NTsbQagYuT1DcXnl1915oxWjoyGrXR6zH/Y0Zc96xWsPcoDKeA==
   dependencies:
     invert-kv "^2.0.0"
+
+level-selector@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/level-selector/-/level-selector-0.2.0.tgz#173d89f5d506af6d8bbebcdfafa76062b3334d1a"
+  integrity sha512-/n+0V6nIA8GEvYAwp9/4rrxykWs6cSNAqs0R51x4/VyMm7NOjcGxX5j6wQ2v4VvY4pkh9LfSe+ZJES2r/1wgcA==
 
 levn@~0.3.0:
   version "0.3.0"
