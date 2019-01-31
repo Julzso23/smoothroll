@@ -59,6 +59,11 @@ export default {
         .then(data => {
           commit('setAuthTicket', data.auth);
           commit('setUser', data.user);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('login', {account, password}));
+          }
         });
     },
 

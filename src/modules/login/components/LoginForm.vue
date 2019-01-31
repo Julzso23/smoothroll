@@ -18,8 +18,8 @@
         this.$store.dispatch('login', {
           account: this.account,
           password: this.password
-        });
-        this.$router.go(-1);
+        })
+          .then(() => this.$router.go(-1));
       }
     }
   }
