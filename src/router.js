@@ -30,6 +30,10 @@ export default new Router({
     {
       path: '/media/:id',
       component: () => import('pages/Media')
+    },
+    {
+      path: '/series/:id',
+      component: () => import('pages/Series')
     }
   ]
 });
