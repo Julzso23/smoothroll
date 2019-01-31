@@ -24,6 +24,10 @@ export default {
       state.sessionId = sessionId;
       localStorage.setItem('sessionId', sessionId);
     },
+    removeSession(state) {
+      state.sessionId = null;
+      localStorage.removeItem('sessionId');
+    },
     setAuthTicket(state, authTicket) {
       state.authTicket = authTicket;
       localStorage.setItem('authTicket', authTicket);
@@ -82,6 +86,7 @@ export default {
 
         commit('removeAuthTicket');
         commit('removeUser');
+        commit('removeSession');
       }
     }
   },
