@@ -94,6 +94,9 @@ export default {
   getters: {
     isLoggedIn(state) {
       return state.authTicket != null;
+    },
+    isPremium(state) {
+      return state.user != null && state.user.access_type == 'premium';
     }
   }
 };
