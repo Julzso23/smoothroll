@@ -1,9 +1,10 @@
 import Vue from 'vue';
 import Router from 'vue-router';
+import store from 'store';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -29,11 +30,44 @@ export default new Router({
     },
     {
       path: '/media/:id',
+      name: 'media',
       component: () => import('pages/Media')
     },
     {
       path: '/series/:id',
+      name: 'series',
       component: () => import('pages/Series')
+    },
+    {
+      path: '/premium',
+      name: 'premium',
+      component: () => import('pages/Premium')
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.name == 'login') {
+    if (store.getters.isLoggedIn) {
+      next(from);
+    } else {
+      next();
+    }
+  } else if (to.name == 'premium') {
+    if (!store.getters.isLoggedIn) {
+      next('login');
+    } else if (store.getters.isPremium) {
+      next(from);
+    } else {
+      next();
+    }
+  } else if (!store.getters.isLoggedIn) {
+    next('login');
+  } else if (!store.getters.isPremium) {
+    next('premium');
+  } else {
+    next();
+  }
+});
+
+export default router;
