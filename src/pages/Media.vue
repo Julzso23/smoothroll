@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3 class="text-light">{{media.series_name}}</h3>
+    <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.series_name}}</router-link></h3>
     <h4 class="text-light">{{'Episode ' + media.episode_number + ' - ' + media.name}}</h4>
   </div>
 </template>
