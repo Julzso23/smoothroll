@@ -1,10 +1,11 @@
 import Vue from 'vue';
 
 const mediaFields = 'media.media_id,media.available,media.available_time,media.collection_id,media.collection_name,media.series_id,media.series_name,media.type,media.episode_number,media.name,media.description,media.screenshot_image,media.created,media.duration,media.playhead,media.bif_url,media.stream_data';
-const seriesFields = 'series.series_id,series.name,series.portrait_image,series.landscape_image,series.description,series.in_queue';
+const seriesFields = 'series.series_id,series.name,series.portrait_image,series.landscape_image,series.description,series.in_queue,series.media_count';
 
 export default {
   state: {
+    mediaList: [],
     seriesList: [],
     queue: [],
     currentMedia: null,
@@ -12,6 +13,9 @@ export default {
   },
 
   mutations: {
+    setMediaList(state, mediaList) {
+      state.mediaList = mediaList;
+    },
     setSeriesList(state, seriesList) {
       state.seriesList = seriesList;
     },
@@ -27,6 +31,26 @@ export default {
   },
 
   actions: {
+    async listMedia({commit, rootState, dispatch}, {seriesId, count}) {
+      await dispatch('verifySession');
+
+      Vue.api.get('list_media', {
+        series_id: seriesId,
+        limit: count,
+        fields: mediaFields,
+        sort: 'desc',
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          commit('setMediaList', data);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('listMedia'));
+          }
+        });
+    },
+
     async listSeries({commit, rootState, dispatch}, {filter, mediaType, limit, offset}) {
       await dispatch('verifySession');
 
@@ -89,6 +113,7 @@ export default {
 
       Vue.api.get('info', {
         series_id: id,
+        fields: seriesFields,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
