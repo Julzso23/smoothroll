@@ -8,10 +8,20 @@ Clone the repository and open your command line console of choice in the folder.
 
 ### NPM
 
-`npm install`
-`npm run build`
+Install dependencies: `npm install`
+
+*Either* make a build: `npm run build`
+
+*Or* run the dev server: `npm run dev`
 
 ### Yarn
 
-`yarn install`
-`yarn build`
+Install dependencies: `yarn install`
+
+*Either* make a build: `yarn build`
+
+*Or* run the dev server: `yarn dev`
+
+## Note
+
+You require a premium Crunchyroll account to use Smoothroll.
