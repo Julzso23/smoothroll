@@ -45,5 +45,8 @@
     "dev": "webpack-dev-server --mode development --progress --hot --host 0.0.0.0",
     "build": "webpack --mode production --progress",
     "test": "mocha-webpack --mode development --webpack-config webpack.config.js --require src/testSetup.js src/modules/**/*.spec.js"
+  },
+  "resolutions": {
+    "terser": "3.14.1"
   }
 }
