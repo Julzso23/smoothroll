@@ -1,31 +1,17 @@
 <template>
-  <div>
-    <form class="form-inline dropdown mr-4" @submit.prevent>
-      <input
-        class="form-control bg-dark text-light"
-        type="search"
-        placeholder="Search"
-        aria-label="Search"
-        v-model="query"
-        @focus="hasFocus = true"
-        @blur="hasFocus = false"
-        />
-
-      <div class="dropdown-menu" :class="{show: (results.length != 0) && hasFocus}">
-        <a class="dropdown-item text-truncate" href="#" v-for="result in results" :key="result.series_id">{{result.name}}</a>
-      </div>
-    </form>
+  <div class="form-inline dropdown mr-4">
+    <typeahead v-model="query" :data="results" :serializer="result => result.name" placeholder="Search" @hit="hit" inputClass="bg-dark text-light" text-variant="light" backgroundVariant="dark" />
   </div>
 </template>
 
 <script>
   import debounce from 'debounce';
+  import Typeahead from 'vue-bootstrap-typeahead';
 
   export default {
     name: 'search',
     data: () => ({
-      query: '',
-      hasFocus: false
+      query: ''
     }),
     watch: {
       query(query) {
@@ -37,12 +23,18 @@
         if (query != '') {
           this.$store.dispatch('search', query);
         }
-      }, 300)
+      }, 300),
+      hit(result) {
+        this.$router.push(`/series/${result.series_id}`);
+      }
     },
     computed: {
       results() {
         return this.$store.state.media.searchResults;
       }
+    },
+    components: {
+      Typeahead
     }
   }
 </script>
