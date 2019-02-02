@@ -21,7 +21,7 @@
   export default {
     name: 'series',
     created() {
-      this.$store.dispatch('getSeries', this.$route.params.id);
+      this.$store.dispatch('getSeries', this.seriesId);
     },
     computed: {
       series() {
@@ -41,6 +41,9 @@
           collections.find(collection => collection.id == media.collection_id).media.push(media);
         }
         return collections;
+      },
+      seriesId() {
+        return this.$route.params.id;
       }
     },
     components: {
@@ -49,9 +52,12 @@
     watch: {
       series(value) {
         this.$store.dispatch('listMedia', {
-          seriesId: this.$route.params.id,
+          seriesId: this.seriesId,
           count: this.series.media_count
         });
+      },
+      seriesId() {
+        this.$store.dispatch('getSeries', this.seriesId);
       }
     }
   }

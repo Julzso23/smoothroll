@@ -14,15 +14,23 @@
   export default {
     name: 'media',
     created() {
-      this.$store.dispatch('getMedia', this.$route.params.id);
+      this.$store.dispatch('getMedia', this.mediaId);
     },
     computed: {
       media() {
         return this.$store.state.media.currentMedia || {};
+      },
+      mediaId() {
+        return this.$route.params.id;
       }
     },
     components: {
       Player
+    },
+    watch: {
+      mediaId() {
+        this.$store.dispatch('getMedia', this.mediaId);
+      }
     }
   }
 </script>
