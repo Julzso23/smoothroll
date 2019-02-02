@@ -47,7 +47,7 @@
       Collection
     },
     watch: {
-      series: function(value) {
+      series(value) {
         this.$store.dispatch('listMedia', {
           seriesId: this.$route.params.id,
           count: this.series.media_count
