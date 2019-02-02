@@ -25,8 +25,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader',
-        exclude: /node_modules/
+        use: 'vue-loader'
       },
       {
         test: /\.js$/,
@@ -52,8 +51,7 @@ module.exports = {
             }
           },
           'sass-loader'
-        ],
-        exclude: /node_modules/
+        ]
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
