@@ -9,7 +9,8 @@ export default {
     seriesList: [],
     queue: [],
     currentMedia: null,
-    currentSeries: null
+    currentSeries: null,
+    searchResults: []
   },
 
   mutations: {
@@ -27,6 +28,9 @@ export default {
     },
     setCurrentSeries(state, series) {
       state.currentSeries = series;
+    },
+    setSearchResults(state, results) {
+      state.searchResults = results;
     }
   },
 
@@ -123,7 +127,27 @@ export default {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getSeries'));
           }
+        });
+    },
+
+    async search({commit, rootState, dispatch}, query) {
+      await dispatch('verifySession');
+
+      Vue.api.get('autocomplete', {
+        media_types: 'anime|drama',
+        q: query,
+        filter: seriesFields,
+        limit: 5,
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          commit('setSearchResults', data);
         })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('search'));
+          }
+        });
     }
   }
 }
