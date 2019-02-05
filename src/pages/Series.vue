@@ -4,6 +4,7 @@
       <div class="col-9">
         <h3 class="text-light">{{series.name}}</h3>
         <p class="text-light">{{series.description}}</p>
+        <button class="btn btn-primary" @click="toggleQueue">{{series.in_queue ? 'Remove from queue' : 'Add to queue'}}</button>
       </div>
 
       <div class="col-3">
@@ -21,7 +22,7 @@
   export default {
     name: 'series',
     created() {
-      this.$store.dispatch('getSeries', this.$route.params.id);
+      this.$store.dispatch('getSeries', this.seriesId);
     },
     computed: {
       series() {
@@ -41,17 +42,34 @@
           collections.find(collection => collection.id == media.collection_id).media.push(media);
         }
         return collections;
+      },
+      seriesId() {
+        return this.$route.params.id;
       }
     },
     components: {
       Collection
     },
     watch: {
-      series: function(value) {
+      series(value) {
         this.$store.dispatch('listMedia', {
-          seriesId: this.$route.params.id,
+          seriesId: this.seriesId,
           count: this.series.media_count
         });
+      },
+      seriesId() {
+        this.$store.dispatch('getSeries', this.seriesId);
+      }
+    },
+    methods: {
+      toggleQueue() {
+        this.$store.dispatch('toggleQueue', {
+          seriesId: this.series.series_id,
+          inQueue: this.series.in_queue
+        })
+          .then(() => {
+            this.$store.dispatch('getSeries', this.seriesId);
+          });
       }
     }
   }

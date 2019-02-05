@@ -9,7 +9,8 @@ export default {
     seriesList: [],
     queue: [],
     currentMedia: null,
-    currentSeries: null
+    currentSeries: null,
+    searchResults: []
   },
 
   mutations: {
@@ -27,6 +28,9 @@ export default {
     },
     setCurrentSeries(state, series) {
       state.currentSeries = series;
+    },
+    setSearchResults(state, results) {
+      state.searchResults = results;
     }
   },
 
@@ -34,7 +38,7 @@ export default {
     async listMedia({commit, rootState, dispatch}, {seriesId, count}) {
       await dispatch('verifySession');
 
-      Vue.api.get('list_media', {
+      return Vue.api.get('list_media', {
         series_id: seriesId,
         limit: count,
         fields: mediaFields,
@@ -54,7 +58,7 @@ export default {
     async listSeries({commit, rootState, dispatch}, {filter, mediaType, limit, offset}) {
       await dispatch('verifySession');
 
-      Vue.api.get('list_series', {
+      return Vue.api.get('list_series', {
         filter: filter,
         media_type: mediaType,
         limit: limit,
@@ -74,7 +78,7 @@ export default {
     async getQueue({commit, rootState, dispatch}) {
       await dispatch('verifySession');
 
-      Vue.api.get('queue', {
+      return Vue.api.get('queue', {
         media_types: 'anime|drama',
         fields: [mediaFields, seriesFields].join(','),
         session_id: rootState.authentication.sessionId,
@@ -93,7 +97,7 @@ export default {
     async getMedia({commit, rootState, dispatch}, id) {
       await dispatch('verifySession');
 
-      Vue.api.get('info', {
+      return Vue.api.get('info', {
         media_id: id,
         fields: mediaFields,
         session_id: rootState.authentication.sessionId
@@ -111,7 +115,7 @@ export default {
     async getSeries({commit, rootState, dispatch}, id) {
       await dispatch('verifySession');
 
-      Vue.api.get('info', {
+      return Vue.api.get('info', {
         series_id: id,
         fields: seriesFields,
         session_id: rootState.authentication.sessionId
@@ -123,7 +127,42 @@ export default {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getSeries'));
           }
+        });
+    },
+
+    async search({commit, rootState, dispatch}, query) {
+      await dispatch('verifySession');
+
+      return Vue.api.get('autocomplete', {
+        media_types: 'anime|drama',
+        q: query,
+        filter: seriesFields,
+        limit: 5,
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          commit('setSearchResults', data);
         })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('search'));
+          }
+        });
+    },
+
+    async toggleQueue({rootState, dispatch}, {seriesId, inQueue}) {
+      await dispatch('verifySession');
+
+      const request = inQueue ? 'remove_from_queue' : 'add_to_queue';
+      return Vue.api.post(request, {
+        series_id: seriesId,
+        session_id: rootState.authentication.sessionId
+      })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('toggleQueue'));
+          }
+        });
     }
   }
 }
