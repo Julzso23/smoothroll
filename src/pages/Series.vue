@@ -4,6 +4,7 @@
       <div class="col-9">
         <h3 class="text-light">{{series.name}}</h3>
         <p class="text-light">{{series.description}}</p>
+        <button class="btn btn-primary" @click="toggleQueue">{{series.in_queue ? 'Remove from queue' : 'Add to queue'}}</button>
       </div>
 
       <div class="col-3">
@@ -58,6 +59,17 @@
       },
       seriesId() {
         this.$store.dispatch('getSeries', this.seriesId);
+      }
+    },
+    methods: {
+      toggleQueue() {
+        this.$store.dispatch('toggleQueue', {
+          seriesId: this.series.series_id,
+          inQueue: this.series.in_queue
+        })
+          .then(() => {
+            this.$store.dispatch('getSeries', this.seriesId);
+          });
       }
     }
   }
