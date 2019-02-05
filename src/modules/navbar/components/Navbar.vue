@@ -11,6 +11,8 @@
         <navbar-link to="/queue">Queue</navbar-link>
       </ul>
 
+      <search />
+
       <authentication />
     </div>
   </nav>
@@ -19,12 +21,14 @@
 <script>
   import NavbarLink from './NavbarLink';
   import Authentication from './Authentication';
+  import Search from './Search';
 
   export default {
     name: 'navbar',
     components: {
       NavbarLink,
-      Authentication
+      Authentication,
+      Search
     }
   }
 </script>

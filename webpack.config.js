@@ -1,5 +1,6 @@
 const { VueLoaderPlugin } = require('vue-loader');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -25,8 +26,7 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        use: 'vue-loader',
-        exclude: /node_modules/
+        use: 'vue-loader'
       },
       {
         test: /\.js$/,
@@ -52,8 +52,7 @@ module.exports = {
             }
           },
           'sass-loader'
-        ],
-        exclude: /node_modules/
+        ]
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
@@ -67,7 +66,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       title: 'Smoothroll',
-      template: __dirname + '/src/index.html',
+      template: path.join(__dirname, '/src/index.html'),
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -76,7 +75,11 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true
       }
-    })
+    }),
+    new CopyWebpackPlugin([{
+      from: path.join(__dirname, '/static'),
+      to: path.join(__dirname, '/dist')
+    }])
   ],
   optimization: {
     runtimeChunk: 'single',
