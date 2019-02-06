@@ -11,6 +11,8 @@
       <small>Episode {{media.episode_number}}</small>
       <small class="text-truncate"><router-link :to="'/media/' + media.media_id" class="text-reset">{{media.name}}</router-link></small>
     </div>
+
+    <slot></slot>
   </div>
 </template>
 
