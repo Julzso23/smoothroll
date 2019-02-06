@@ -163,6 +163,22 @@ export default {
             return dispatch('startSession').then(() => dispatch('toggleQueue'));
           }
         });
+    },
+
+    async logTime({rootState, dispatch}, {mediaId, time}) {
+      await dispatch('verifySession');
+
+      return Vue.api.post('log', {
+        media_id: mediaId,
+        playhead: time,
+        event: 'playback_status',
+        session_id: rootState.authentication.sessionId
+      })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('logTime'));
+          }
+        });
     }
   }
 }
