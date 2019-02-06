@@ -7,17 +7,32 @@
 <script>
   import Clappr from 'clappr';
   import LevelSelector from 'level-selector';
-  import 'clappr/dist/38861cba61c66739c1452c3a71e39852.ttf';
 
   export default {
     name: 'player',
+    data: () => ({
+      player : null
+    }),
     props: {
-      streamData: Object
+      mediaId: String,
+      streamData: Object,
+      poster: String,
+      duration: Number,
+      playhead: Number
     },
     watch: {
-      streamData: function(value) {
-        let player = new Clappr.Player({
-          source: value.streams[0].url,
+      streamData(value) {
+        this.createPlayer();
+      }
+    },
+    mounted() {
+      this.createPlayer();
+    },
+    methods: {
+      createPlayer() {
+        this.player = new Clappr.Player({
+          source: this.streamData.streams[0].url,
+          poster: this.poster,
           parentId: '#player',
           plugins: [LevelSelector],
           width: '100%',
@@ -32,6 +47,19 @@
               0: '240p'
             }
           }
+        });
+
+        this.player.seek(this.playhead);
+
+        this.player.on(Clappr.Events.PLAYER_ENDED, () => this.logTime(this.duration));
+        this.player.on(Clappr.Events.PLAYER_PAUSE, () => this.logTime(this.player.getCurrentTime()));
+        this.player.on(Clappr.Events.PLAYER_SEEK, () => this.logTime(this.player.getCurrentTime()));
+      },
+
+      logTime(time) {
+        this.$store.dispatch('logTime', {
+          mediaId: this.mediaId,
+          time: time
         });
       }
     }
