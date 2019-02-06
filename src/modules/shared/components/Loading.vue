@@ -9,6 +9,8 @@
 </template>
 
 <style lang="scss" scoped>
+  @import "scss/_variables";
+
   .spinner {
     margin: 100px auto;
     width: 50px;
@@ -17,7 +19,7 @@
     font-size: 10px;
 
     > div {
-      background-color: #eceeec;
+      background-color: $light;
       height: 100%;
       width: 6px;
       display: inline-block;
