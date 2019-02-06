@@ -1,6 +1,6 @@
 <template>
   <div v-if="media && media.media_id == mediaId">
-    <player :streamData="media.stream_data" :poster="media.screenshot_image.full_url" />
+    <player :mediaId="media.media_id" :streamData="media.stream_data" :poster="media.screenshot_image.full_url" :duration="media.duration" :playhead="media.playhead" />
 
     <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.series_name}}</router-link></h3>
     <h4 class="text-light">{{'Episode ' + media.episode_number + ' - ' + media.name}}</h4>
