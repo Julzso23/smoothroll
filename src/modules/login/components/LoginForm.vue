@@ -1,8 +1,14 @@
 <template>
   <form @submit.prevent="login">
-    <input v-model="account" type="text" name="account" placeholder="Username or email" class="form-control" />
-    <input v-model="password" type="password" name="password" placeholder="Password" class="form-control" />
-    <button type="submit" class="btn btn-primary">Login</button>
+    <div class="form-group">
+      <input v-model="account" type="text" name="account" placeholder="Username or email" class="form-control" />
+    </div>
+
+    <div class="form-group">
+      <input v-model="password" type="password" name="password" placeholder="Password" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-block btn-primary">Login</button>
   </form>
 </template>
 
