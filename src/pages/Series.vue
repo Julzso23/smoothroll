@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="series && series.series_id == seriesId">
     <div class="row mb-4">
       <div class="col-9">
         <h3 class="text-light">{{series.name}}</h3>
@@ -14,10 +14,12 @@
 
     <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
   </div>
+  <loading v-else />
 </template>
 
 <script>
   import Collection from 'modules/media/components/Collection';
+  import Loading from 'modules/shared/components/Loading';
 
   export default {
     name: 'series',
@@ -26,7 +28,7 @@
     },
     computed: {
       series() {
-        return this.$store.state.media.currentSeries || {};
+        return this.$store.state.media.currentSeries;
       },
       mediaCollections() {
         let collections = [];
@@ -48,7 +50,8 @@
       }
     },
     components: {
-      Collection
+      Collection,
+      Loading
     },
     watch: {
       series(value) {
