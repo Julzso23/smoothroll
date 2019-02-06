@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <player :streamData="media.stream_data" />
+  <div v-if="media">
+    <player :streamData="media.stream_data" :poster="media.screenshot_image.full_url" />
 
     <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.series_name}}</router-link></h3>
     <h4 class="text-light">{{'Episode ' + media.episode_number + ' - ' + media.name}}</h4>
@@ -18,7 +18,7 @@
     },
     computed: {
       media() {
-        return this.$store.state.media.currentMedia || {};
+        return this.$store.state.media.currentMedia;
       },
       mediaId() {
         return this.$route.params.id;
