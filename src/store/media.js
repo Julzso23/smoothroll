@@ -179,6 +179,10 @@ export default {
             return dispatch('startSession').then(() => dispatch('logTime'));
           }
         });
+    },
+
+    async sortQueue({rootState, dispatch, commit}, queue) {
+      commit('setQueue', queue);
     }
   }
 }
