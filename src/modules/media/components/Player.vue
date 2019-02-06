@@ -7,7 +7,6 @@
 <script>
   import Clappr from 'clappr';
   import LevelSelector from 'level-selector';
-  import debounce from 'debounce';
 
   export default {
     name: 'player',
@@ -55,7 +54,6 @@
         this.player.on(Clappr.Events.PLAYER_ENDED, () => this.logTime(this.duration));
         this.player.on(Clappr.Events.PLAYER_PAUSE, () => this.logTime(this.player.getCurrentTime()));
         this.player.on(Clappr.Events.PLAYER_SEEK, () => this.logTime(this.player.getCurrentTime()));
-        this.player.on(Clappr.Events.PLAYER_TIMEUPDATE, debounce(() => this.logTime(this.player.getCurrentTime()), 10000));
       },
 
       logTime(time) {
