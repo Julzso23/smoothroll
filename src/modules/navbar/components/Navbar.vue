@@ -11,6 +11,7 @@
             <navbar-link to="/">Dashboard</navbar-link>
             <navbar-link to="/browse">Browse</navbar-link>
             <navbar-link to="/queue">Queue</navbar-link>
+            <navbar-link to="/history">History</navbar-link>
           </ul>
 
           <search />
