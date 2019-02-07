@@ -13,6 +13,9 @@
     name: 'login',
     components: {
       LoginForm
+    },
+    created() {
+      document.title = 'Login ― Smoothroll';
     }
   }
 </script>

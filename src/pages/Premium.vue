@@ -6,6 +6,9 @@
 
 <script>
   export default {
-    name: 'premium'
+    name: 'premium',
+    created() {
+      document.title = 'Premium ― Smoothroll';
+    }
   }
 </script>
