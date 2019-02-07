@@ -181,8 +181,32 @@ export default {
         });
     },
 
-    async sortQueue({rootState, dispatch, commit}, queue) {
+    async sortQueue({commit}, queue) {
       commit('setQueue', queue);
+    },
+
+    async getHistory({rootState, dispatch, commit}, {mediaTypes, limit, offset}) {
+      await dispatch('verifySession');
+
+      return Vue.api.get('recently_watched', {
+        media_types: mediaTypes,
+        offset: offset,
+        limit: limit,
+        fields: mediaFields,
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          let mediaList = [];
+          for (let item of data) {
+            mediaList.push(item.media);
+          }
+          commit('setMediaList', mediaList);
+        })
+        .catch(code => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('getHistory'));
+          }
+        });
     }
   }
 }

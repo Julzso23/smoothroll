@@ -42,6 +42,11 @@ const router = new Router({
       path: '/premium',
       name: 'premium',
       component: () => import('pages/Premium')
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: () => import('pages/History')
     }
   ]
 });
