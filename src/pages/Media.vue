@@ -33,6 +33,9 @@
     watch: {
       mediaId() {
         this.$store.dispatch('getMedia', this.mediaId);
+      },
+      media() {
+        document.title = `Episode ${this.media.episode_number}: ${this.media.name} - ${this.media.series_name} ― Smoothroll`;
       }
     }
   }

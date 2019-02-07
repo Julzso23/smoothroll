@@ -11,6 +11,9 @@
     name: 'queue-page',
     components: {
       Queue
+    },
+    created() {
+      document.title = 'Queue ― Smoothroll';
     }
   }
 </script>
