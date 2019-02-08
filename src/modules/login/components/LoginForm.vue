@@ -1,5 +1,7 @@
 <template>
-  <form @submit.prevent="login">
+  <form @submit.prevent="login" v-if="!loading">
+    <div class="alert alert-danger" role="alert" v-if="error.length != 0">{{error}}</div>
+
     <div class="form-group">
       <input v-model="account" type="text" name="account" placeholder="Username or email" class="form-control" />
     </div>
@@ -10,9 +12,13 @@
 
     <button type="submit" class="btn btn-block btn-primary">Login</button>
   </form>
+
+  <loading v-else />
 </template>
 
 <script>
+  import Loading from 'modules/shared/components/Loading';
+
   export default {
     name: 'login-form',
     data: () => ({
@@ -27,6 +33,17 @@
         })
           .then(() => this.$router.go(-1));
       }
+    },
+    computed: {
+      loading() {
+        return this.$store.state.authentication.loading;
+      },
+      error() {
+        return this.$store.state.authentication.error;
+      }
+    },
+    components: {
+      Loading
     }
   }
 </script>

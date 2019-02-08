@@ -30,7 +30,7 @@ class Api {
         if (!response.error) {
           return response.data;
         } else {
-          throw response.code;
+          throw response;
         }
       });
   }
@@ -48,7 +48,7 @@ class Api {
         if (!response.error) {
           return response.data;
         } else {
-          throw response.code;
+          throw response;
         }
       });
   }
