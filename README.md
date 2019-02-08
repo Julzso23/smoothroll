@@ -2,7 +2,7 @@
 
 A new frontend for Crunchyroll, with a less crunchy experience.
 
-[![Build Status](https://semaphoreci.com/api/v1/julzso23/smoothroll/branches/develop/badge.svg)](https://semaphoreci.com/julzso23/smoothroll)
+[![Build Status](https://semaphoreci.com/api/v1/julzso23/smoothroll/branches/master/badge.svg)](https://semaphoreci.com/julzso23/smoothroll)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/43060739-6d25-49a3-82ac-e496721a1963/deploy-status)](https://app.netlify.com/sites/smoothroll/deploys)
 
 ## Setup
