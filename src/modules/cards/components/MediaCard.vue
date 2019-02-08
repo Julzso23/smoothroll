@@ -2,7 +2,6 @@
   <card>
     <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
       <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
-      <div class="m-auto" v-else>Missing image!</div>
       <div class="play"></div>
     </router-link>
 
