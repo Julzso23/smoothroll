@@ -20,6 +20,10 @@
     padding: 12px;
   }
 
+  .nav-item > .nav-link:hover {
+    border-bottom: solid 2px $primary / 2;
+  }
+
   .router-link-exact-active {
     border-bottom: solid 2px $primary;
   }
