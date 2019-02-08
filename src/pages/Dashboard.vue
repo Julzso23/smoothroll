@@ -12,6 +12,9 @@
     name: 'dashboard',
     components: {
       Queue
+    },
+    created() {
+      document.title = "Dashboard ― Smoothroll";
     }
   }
 </script>

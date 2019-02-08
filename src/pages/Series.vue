@@ -59,6 +59,8 @@
           seriesId: this.seriesId,
           count: this.series.media_count
         });
+
+        document.title = `${this.series.name} ― Smoothroll`;
       },
       seriesId() {
         this.$store.dispatch('getSeries', this.seriesId);

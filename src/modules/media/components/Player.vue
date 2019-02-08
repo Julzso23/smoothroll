@@ -49,7 +49,9 @@
           }
         });
 
-        this.player.seek(this.playhead);
+        if (this.playhead == this.duration) {
+          this.player.seek(this.playhead);
+        }
 
         this.player.on(Clappr.Events.PLAYER_ENDED, () => this.logTime(this.duration));
         this.player.on(Clappr.Events.PLAYER_PAUSE, () => this.logTime(this.player.getCurrentTime()));

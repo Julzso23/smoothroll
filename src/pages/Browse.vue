@@ -60,6 +60,7 @@
     },
     created() {
       this.updateSeriesList();
+      document.title = 'Browse ― Smoothroll';
     }
   }
 </script>
