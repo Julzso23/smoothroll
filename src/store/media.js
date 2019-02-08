@@ -1,13 +1,10 @@
 import Vue from 'vue';
-
-const mediaFields = 'media.media_id,media.available,media.available_time,media.collection_id,media.collection_name,media.series_id,media.series_name,media.type,media.episode_number,media.name,media.description,media.screenshot_image,media.created,media.duration,media.playhead,media.bif_url,media.stream_data';
-const seriesFields = 'series.series_id,series.name,series.portrait_image,series.landscape_image,series.description,series.in_queue,series.media_count';
+import {mediaFields, seriesFields} from './fields';
 
 export default {
   state: {
     mediaList: [],
     seriesList: [],
-    queue: [],
     currentMedia: null,
     currentSeries: null,
     searchResults: []
@@ -19,9 +16,6 @@ export default {
     },
     setSeriesList(state, seriesList) {
       state.seriesList = seriesList;
-    },
-    setQueue(state, queue) {
-      state.queue = queue;
     },
     setCurrentMedia(state, media) {
       state.currentMedia = media;
@@ -72,25 +66,6 @@ export default {
         .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('listSeries'));
-          }
-        });
-    },
-
-    async getQueue({commit, rootState, dispatch}) {
-      await dispatch('verifySession');
-
-      return Vue.api.get('queue', {
-        media_types: 'anime|drama',
-        fields: [mediaFields, seriesFields].join(','),
-        session_id: rootState.authentication.sessionId,
-        auth: rootState.authentication.authTicket
-      })
-        .then(data => {
-          commit('setQueue', data);
-        })
-        .catch(({code}) => {
-          if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getQueue'));
           }
         });
     },
@@ -182,10 +157,6 @@ export default {
         });
     },
 
-    async sortQueue({commit}, queue) {
-      commit('setQueue', queue);
-    },
-
     async getHistory({rootState, dispatch, commit}, {mediaTypes, limit, offset}) {
       await dispatch('verifySession');
 
@@ -210,4 +181,4 @@ export default {
         });
     }
   }
-}
+};

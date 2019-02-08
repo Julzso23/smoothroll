@@ -33,7 +33,7 @@
     computed: {
       queue: {
         get() {
-          return this.$store.state.media.queue;
+          return this.$store.state.queue.queue;
         },
         set(value) {
           this.$store.dispatch('sortQueue', value);
