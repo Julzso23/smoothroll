@@ -12,7 +12,7 @@
   @import "scss/_variables";
 
   .spinner {
-    margin: 100px auto;
+    margin: 0 auto;
     width: 50px;
     height: 40px;
     text-align: center;
