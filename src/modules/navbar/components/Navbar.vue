@@ -37,3 +37,9 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .navbar {
+    padding: 0;
+  }
+</style>

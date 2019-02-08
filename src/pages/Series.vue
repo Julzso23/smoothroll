@@ -4,7 +4,8 @@
       <div class="col-9">
         <h3 class="text-light">{{series.name}}</h3>
         <p class="text-light">{{series.description}}</p>
-        <button class="btn btn-primary" @click="toggleQueue">{{series.in_queue ? 'Remove from queue' : 'Add to queue'}}</button>
+
+        <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
       </div>
 
       <div class="col-3">
@@ -12,20 +13,28 @@
       </div>
     </div>
 
-    <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+    <div v-if="!collectionsLoading">
+      <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+    </div>
+    <loading v-else />
   </div>
+
   <loading v-else />
 </template>
 
 <script>
   import Collection from 'modules/media/components/Collection';
   import Loading from 'modules/shared/components/Loading';
+  import ToggleQueueButton from 'modules/media/components/ToggleQueueButton';
 
   export default {
     name: 'series',
     created() {
       this.$store.dispatch('getSeries', this.seriesId);
     },
+    data: () => ({
+      collectionsLoading: false
+    }),
     computed: {
       series() {
         return this.$store.state.media.currentSeries;
@@ -51,14 +60,20 @@
     },
     components: {
       Collection,
-      Loading
+      Loading,
+      ToggleQueueButton
     },
     watch: {
       series(value) {
+        this.collectionsLoading = true;
+
         this.$store.dispatch('listMedia', {
           seriesId: this.seriesId,
           count: this.series.media_count
-        });
+        })
+          .then(() => {
+            this.collectionsLoading = false;
+          });
 
         document.title = `${this.series.name} ― Smoothroll`;
       },
@@ -67,13 +82,10 @@
       }
     },
     methods: {
-      toggleQueue() {
-        this.$store.dispatch('toggleQueue', {
-          seriesId: this.series.series_id,
-          inQueue: this.series.in_queue
-        })
+      onQueueToggle(endLoading) {
+        this.$store.dispatch('getSeries', this.seriesId)
           .then(() => {
-            this.$store.dispatch('getSeries', this.seriesId);
+            endLoading();
           });
       }
     }

@@ -48,7 +48,7 @@ export default {
         .then(data => {
           commit('setMediaList', data);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('listMedia'));
           }
@@ -63,12 +63,13 @@ export default {
         media_type: mediaType,
         limit: limit,
         offset: offset,
+        fields: seriesFields,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
           commit('setSeriesList', data);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('listSeries'));
           }
@@ -87,7 +88,7 @@ export default {
         .then(data => {
           commit('setQueue', data);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getQueue'));
           }
@@ -105,7 +106,7 @@ export default {
         .then(data => {
           commit('setCurrentMedia', data);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getMedia'));
           }
@@ -123,7 +124,7 @@ export default {
         .then(data => {
           commit('setCurrentSeries', data);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getSeries'));
           }
@@ -143,7 +144,7 @@ export default {
         .then(data => {
           commit('setSearchResults', data);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('search'));
           }
@@ -158,7 +159,7 @@ export default {
         series_id: seriesId,
         session_id: rootState.authentication.sessionId
       })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('toggleQueue'));
           }
@@ -174,7 +175,7 @@ export default {
         event: 'playback_status',
         session_id: rootState.authentication.sessionId
       })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('logTime'));
           }
@@ -202,7 +203,7 @@ export default {
           }
           commit('setMediaList', mediaList);
         })
-        .catch(code => {
+        .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getHistory'));
           }
