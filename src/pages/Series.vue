@@ -4,7 +4,8 @@
       <div class="col-9">
         <h3 class="text-light">{{series.name}}</h3>
         <p class="text-light">{{series.description}}</p>
-        <button class="btn btn-primary" @click="toggleQueue">{{series.in_queue ? 'Remove from queue' : 'Add to queue'}}</button>
+
+        <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
       </div>
 
       <div class="col-3">
@@ -14,12 +15,14 @@
 
     <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
   </div>
+
   <loading v-else />
 </template>
 
 <script>
   import Collection from 'modules/media/components/Collection';
   import Loading from 'modules/shared/components/Loading';
+  import ToggleQueueButton from 'modules/media/components/ToggleQueueButton';
 
   export default {
     name: 'series',
@@ -51,7 +54,8 @@
     },
     components: {
       Collection,
-      Loading
+      Loading,
+      ToggleQueueButton
     },
     watch: {
       series(value) {
@@ -67,13 +71,10 @@
       }
     },
     methods: {
-      toggleQueue() {
-        this.$store.dispatch('toggleQueue', {
-          seriesId: this.series.series_id,
-          inQueue: this.series.in_queue
-        })
+      onQueueToggle(endLoading) {
+        this.$store.dispatch('getSeries', this.seriesId)
           .then(() => {
-            this.$store.dispatch('getSeries', this.seriesId);
+            endLoading();
           });
       }
     }
