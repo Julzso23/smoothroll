@@ -15,5 +15,10 @@
 
   .card {
     border: none;
+    box-shadow: 0px 1px 2px black;
+  }
+
+  .card:hover {
+    box-shadow: 0px 1px 4px black;
   }
 </style>
