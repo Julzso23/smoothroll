@@ -13,7 +13,10 @@
       </div>
     </div>
 
-    <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+    <div v-if="!collectionsLoading">
+      <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+    </div>
+    <loading v-else />
   </div>
 
   <loading v-else />
@@ -29,6 +32,9 @@
     created() {
       this.$store.dispatch('getSeries', this.seriesId);
     },
+    data: () => ({
+      collectionsLoading: false
+    }),
     computed: {
       series() {
         return this.$store.state.media.currentSeries;
@@ -59,10 +65,15 @@
     },
     watch: {
       series(value) {
+        this.collectionsLoading = true;
+
         this.$store.dispatch('listMedia', {
           seriesId: this.seriesId,
           count: this.series.media_count
-        });
+        })
+          .then(() => {
+            this.collectionsLoading = false;
+          });
 
         document.title = `${this.series.name} ― Smoothroll`;
       },
