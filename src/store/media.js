@@ -191,7 +191,7 @@ export default {
       return Vue.api.get('list_series', {
         media_type: mediaType,
         filter: 'updated',
-        limit: 25,
+        limit: 50,
         fields: [mediaFields, 'series.most_recent_media'].join(','),
         session_id: rootState.authentication.sessionId
       })
