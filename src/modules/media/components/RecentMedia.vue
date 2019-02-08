@@ -1,6 +1,14 @@
 <template>
   <div v-if="recentMedia.length != 0">
-    <h4 class="text-light" v-for="date in recentMedia" :key="date.date">{{date.date}}</h4>
+    <div v-for="date in recentMedia" :key="date.date">
+      <h4 class="text-light">{{date.date}}</h4>
+
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4 draggable-card" v-for="media in date.media" :key="media.media_id">
+          <media-card :media="media" />
+        </div>
+      </div>
+    </div>
   </div>
 
   <loading v-else />
@@ -13,7 +21,8 @@
   export default {
     name: 'recent-media',
     components: {
-      Loading
+      Loading,
+      MediaCard
     },
     data: () => ({
       mediaType: 'anime'
@@ -23,7 +32,7 @@
         let dates = [];
 
         for (let media of this.$store.state.media.recentMedia) {
-          if (!dates.find(time => time.time == this.timeToDate(media.available_time))) {
+          if (!dates.find(date => date.date == this.timeToDate(media.available_time))) {
             let date = {};
             date.date = this.timeToDate(media.available_time);
             date.media = [];
