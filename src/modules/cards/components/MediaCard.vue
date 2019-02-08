@@ -1,5 +1,5 @@
 <template>
-  <div class="card bg-dark text-light">
+  <card>
     <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
       <img class="card-img-top embed-responsive-item image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
     </router-link>
@@ -13,11 +13,12 @@
     </div>
 
     <slot></slot>
-  </div>
+  </card>
 </template>
 
 <script>
   import ProgressBar from 'modules/shared/components/ProgressBar';
+  import Card from './Card';
 
   export default {
     name: 'media-card',
@@ -25,7 +26,8 @@
       media: Object
     },
     components: {
-      ProgressBar
+      ProgressBar,
+      Card
     }
   }
 </script>
