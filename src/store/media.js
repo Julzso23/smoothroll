@@ -7,7 +7,8 @@ export default {
     seriesList: [],
     currentMedia: null,
     currentSeries: null,
-    searchResults: []
+    searchResults: [],
+    recentMedia: []
   },
 
   mutations: {
@@ -25,6 +26,9 @@ export default {
     },
     setSearchResults(state, results) {
       state.searchResults = results;
+    },
+    setRecentMedia(state, recentMedia) {
+      state.recentMedia = recentMedia;
     }
   },
 
@@ -177,6 +181,31 @@ export default {
         .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getHistory'));
+          }
+        });
+    },
+
+    async getRecentMedia({rootState, dispatch, commit}, mediaType) {
+      await dispatch('verifySession');
+
+      return Vue.api.get('list_series', {
+        media_type: mediaType,
+        filter: 'updated',
+        limit: 25,
+        fields: [mediaFields, 'series.most_recent_media'].join(','),
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          let recentMedia = [];
+          for (let series of data) {
+            recentMedia.push(series.most_recent_media);
+          }
+
+          commit('setRecentMedia', recentMedia);
+        })
+        .catch(({code}) => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('getRecentMedia'));
           }
         });
     }
