@@ -63,6 +63,7 @@ export default {
         media_type: mediaType,
         limit: limit,
         offset: offset,
+        fields: seriesFields,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
