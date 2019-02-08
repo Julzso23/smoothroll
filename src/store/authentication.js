@@ -8,7 +8,9 @@ export default {
   state: {
     sessionId: localStorage.getItem('sessionId') || null,
     authTicket: localStorage.getItem('authTicket') || null,
-    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+    user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+    loading: false,
+    error: ''
   },
 
   mutations: {
@@ -35,6 +37,12 @@ export default {
     removeAuthTicket(state) {
       state.authTicket = null;
       localStorage.removeItem('authTicket');
+    },
+    setLoading(state, loading) {
+      state.loading = loading;
+    },
+    setError(state, error) {
+      state.error = error;
     }
   },
 
@@ -58,6 +66,7 @@ export default {
     },
 
     async login({commit, dispatch, state}, {account, password}) {
+      commit('setLoading', true);
       await dispatch('verifySession');
 
       await Vue.api.post('login', {
@@ -69,10 +78,15 @@ export default {
           commit('setAuthTicket', data.auth);
           commit('setUser', data.user);
         })
-        .catch(code => {
+        .catch(({code, message}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('login', {account, password}));
+          } else {
+            commit('setError', message);
           }
+        })
+        .then(() => {
+          commit('setLoading', false)
         });
     },
 
@@ -81,7 +95,7 @@ export default {
         await Vue.api.post('logout', {
           auth: state.authTicket
         })
-          .catch(code => {
+          .catch(() => {
           });
 
         commit('removeAuthTicket');
