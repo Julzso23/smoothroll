@@ -16,9 +16,11 @@
   .card {
     border: none;
     box-shadow: 0px 1px 2px black;
+
+    transition: transform 100ms;
   }
 
   .card:hover {
-    box-shadow: 0px 1px 4px black;
+    transform: scale(1.05);
   }
 </style>

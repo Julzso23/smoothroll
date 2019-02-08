@@ -1,7 +1,8 @@
 <template>
   <card>
     <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
-      <img class="card-img-top embed-responsive-item image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
+      <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
+      <div class="play"></div>
     </router-link>
 
     <progress-bar :value="(media.playhead / media.duration) * 100" />
@@ -33,7 +34,26 @@
 </script>
 
 <style lang="scss" scoped>
+  @import 'scss/_variables';
+
   .image {
     object-fit: cover;
+  }
+
+  $play-size: 48px;
+
+  .card:hover .play {
+    box-sizing: border-box;
+    width: $play-size;
+    height: $play-size;
+    position: absolute;
+    border-style: solid;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-width: ($play-size / 2) 0 ($play-size / 2) $play-size;
+    border-color: transparent transparent transparent $light;
   }
 </style>
