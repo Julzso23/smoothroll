@@ -15,6 +15,9 @@ export default {
     setMediaList(state, mediaList) {
       state.mediaList = mediaList;
     },
+    appendMediaList(state, mediaList) {
+      state.mediaList = state.mediaList.concat(mediaList);
+    },
     setSeriesList(state, seriesList) {
       state.seriesList = seriesList;
     },
@@ -168,7 +171,7 @@ export default {
         });
     },
 
-    async getHistory({rootState, dispatch, commit}, {mediaTypes, limit, offset}) {
+    async getHistory({rootState, dispatch, commit}, {mediaTypes, limit, offset, append}) {
       await dispatch('verifySession');
 
       return Vue.api.get('recently_watched', {
@@ -183,7 +186,12 @@ export default {
           for (let item of data) {
             mediaList.push(item.media);
           }
-          commit('setMediaList', mediaList);
+
+          if (append) {
+            commit('appendMediaList', mediaList);
+          } else {
+            commit('setMediaList', mediaList);
+          }
         })
         .catch(({code}) => {
           if (code == 'bad_session') {

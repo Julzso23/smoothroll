@@ -4,10 +4,15 @@
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" label="Media" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateMediaList()}" />
     </div>
 
-    <div class="row" v-if="!loading">
-      <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4" v-for="media in mediaList" :key="media.media_id">
-        <media-card :media="media" />
+    <div class="mb-4" v-if="!loading">
+      <div class="row">
+        <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4" v-for="media in mediaList" :key="media.media_id">
+          <media-card :media="media" />
+        </div>
       </div>
+
+      <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
+      <button class="btn btn-block btn-disabled" v-else><loading /></button>
     </div>
 
     <loading v-else />
@@ -32,11 +37,13 @@
       limit: 50,
       offset: 0,
 
-      loading: false
+      loading: false,
+      loadingMore: false
     }),
     methods: {
       async updateMediaList() {
         this.loading = true;
+        this.offset = 0;
 
         await this.$store.dispatch('getHistory', {
           mediaTypes: this.mediaType,
@@ -45,6 +52,21 @@
         })
           .then(() => {
             this.loading = false;
+          });
+      },
+
+      async loadMore() {
+        this.loadingMore = true;
+        this.offset += this.limit;
+
+        await this.$store.dispatch('getHistory', {
+          mediaTypes: this.mediaType,
+          limit: this.limit,
+          offset: this.offset,
+          append: true
+        })
+          .then(() => {
+            this.loadingMore = false;
           });
       }
     },
