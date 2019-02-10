@@ -18,6 +18,9 @@ export default {
     setSeriesList(state, seriesList) {
       state.seriesList = seriesList;
     },
+    appendSeriesList(state, seriesList) {
+      state.seriesList = state.seriesList.concat(seriesList);
+    },
     setCurrentMedia(state, media) {
       state.currentMedia = media;
     },
@@ -53,7 +56,7 @@ export default {
         });
     },
 
-    async listSeries({commit, rootState, dispatch}, {filter, mediaType, limit, offset}) {
+    async listSeries({commit, rootState, dispatch}, {filter, mediaType, limit, offset, append}) {
       await dispatch('verifySession');
 
       return Vue.api.get('list_series', {
@@ -65,7 +68,11 @@ export default {
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
-          commit('setSeriesList', data);
+          if (append) {
+            commit('appendSeriesList', data);
+          } else {
+            commit('setSeriesList', data);
+          }
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
