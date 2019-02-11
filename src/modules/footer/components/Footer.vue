@@ -32,5 +32,6 @@
     flex-direction: column;
     background: $dark;
     text-align: center;
+    margin-top: auto;
   }
 </style>
