@@ -1,9 +1,11 @@
 <template>
   <div>
     <h3 class="text-light">Queue</h3>
+    <hr class="mt-0 bg-light" />
     <queue />
 
     <h3 class="text-light">Recent Releases</h3>
+    <hr class="mt-0 bg-light" />
     <recent-media />
   </div>
 </template>
