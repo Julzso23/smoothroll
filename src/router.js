@@ -36,7 +36,10 @@ const router = new Router({
     {
       path: '/series/:id',
       name: 'series',
-      component: () => import('pages/Series')
+      component: () => import('pages/Series'),
+      meta: {
+        disableContainer: true
+      }
     },
     {
       path: '/premium',
