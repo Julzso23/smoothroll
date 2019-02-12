@@ -18,13 +18,14 @@
 
   .nav-item > .nav-link {
     padding: 12px;
+    border-bottom: solid 2px transparent;
   }
 
   .nav-item > .nav-link:hover {
-    border-bottom: solid 2px $primary / 2;
+    border-bottom: solid 2px $primary / 1.5;
   }
 
-  .router-link-exact-active {
+  .nav-item > .nav-link.router-link-exact-active {
     border-bottom: solid 2px $primary;
   }
 </style>
