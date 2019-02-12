@@ -1,22 +1,28 @@
 <template>
   <div v-if="series && series.series_id == seriesId">
-    <div class="row mb-4">
-      <div class="col-9">
-        <h3 class="text-light">{{series.name}}</h3>
-        <p class="text-light">{{series.description}}</p>
-
-        <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
-      </div>
-
-      <div class="col-3">
-        <img class="img-fluid mx-auto d-block" v-if="series.portrait_image" :src="series.portrait_image.large_url" />
-      </div>
+    <div class="header mb-4">
+      <div class="header-image" :style="{'background-image': `url('${series.landscape_image.full_url}')`}"></div>
+      <div class="header-gradient"><div class="container"><div class="row"><h2 class="text-light col-9">{{series.name}}</h2></div></div></div>
     </div>
 
-    <div v-if="!collectionsLoading">
-      <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+    <div class="container">
+      <div class="row mb-4">
+        <div class="col-md-9 col-12">
+          <p class="text-light">{{series.description}}</p>
+
+          <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
+        </div>
+
+        <div class="col-3 d-none d-md-block">
+          <img class="img-fluid mx-auto d-block box-image" v-if="series.portrait_image" :src="series.portrait_image.large_url" />
+        </div>
+      </div>
+
+      <div v-if="!collectionsLoading">
+        <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+      </div>
+      <loading v-else />
     </div>
-    <loading v-else />
   </div>
 
   <loading v-else />
@@ -91,3 +97,39 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .header {
+    position: relative;
+    overflow: hidden;
+    margin-top: -1.5rem;
+
+    .header-gradient {
+      background: rgb(0,0,0);
+      background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.8) 90%);
+      width: 100%;
+      position: absolute;
+      bottom: 0;
+      padding-top: 1rem;
+
+      h2 {
+        padding: 0 10px;
+        text-shadow: 1px 1px 2px black;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .header-image {
+    filter: blur(4px);
+    width: 100%;
+    height: 15rem;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .box-image {
+    margin-top: -10rem;
+    box-shadow: 0 1px 4px black;
+  }
+</style>
