@@ -12,8 +12,10 @@
         </div>
       </div>
 
-      <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
-      <button class="btn btn-block btn-disabled" v-else><loading /></button>
+      <div v-if="canLoadMore">
+        <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
+        <button class="btn btn-block btn-disabled" v-else><loading /></button>
+      </div>
     </div>
 
     <loading v-else />
@@ -53,7 +55,8 @@
       offset: 0,
 
       loading: false,
-      loadingMore: false
+      loadingMore: false,
+      canLoadMore: true
     }),
     computed: {
       seriesList() {
@@ -87,8 +90,11 @@
           offset: this.offset,
           append: true
         })
-          .then(() => {
+          .then(data => {
             this.loadingMore = false;
+            if (this.seriesList.length % this.limit != 0 || data.length == 0) {
+              this.canLoadMore = false;
+            }
           });
       }
     },

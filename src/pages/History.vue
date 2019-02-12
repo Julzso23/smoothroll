@@ -11,8 +11,10 @@
         </div>
       </div>
 
-      <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
-      <button class="btn btn-block btn-disabled" v-else><loading /></button>
+      <div v-if="canLoadMore">
+        <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
+        <button class="btn btn-block btn-disabled" v-else><loading /></button>
+      </div>
     </div>
 
     <loading v-else />
@@ -38,7 +40,8 @@
       offset: 0,
 
       loading: false,
-      loadingMore: false
+      loadingMore: false,
+      canLoadMore: true
     }),
     methods: {
       async updateMediaList() {
@@ -67,6 +70,9 @@
         })
           .then(() => {
             this.loadingMore = false;
+            if (this.mediaList.length % this.limit != 0 || data.length == 0) {
+              this.canLoadMore = false;
+            }
           });
       }
     },
