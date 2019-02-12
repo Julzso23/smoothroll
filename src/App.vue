@@ -2,9 +2,10 @@
   <main id="app">
     <navbar />
 
-    <div class="container">
+    <div class="container" v-if="!$route.meta.disableContainer">
       <router-view />
     </div>
+    <router-view v-else />
 
     <app-footer />
   </main>
