@@ -72,6 +72,11 @@ const router = new Router({
       meta: {
         guard: premiumGuard
       }
+    },
+    {
+      path: '*',
+      name: 'notFound',
+      component: () => import('pages/NotFound')
     }
   ]
 });
