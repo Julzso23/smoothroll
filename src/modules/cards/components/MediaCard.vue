@@ -1,5 +1,5 @@
 <template>
-  <card>
+  <card :class="active ? 'active-card' : ''">
     <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
       <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
       <div class="play"></div>
@@ -24,7 +24,8 @@
   export default {
     name: 'media-card',
     props: {
-      media: Object
+      media: Object,
+      active: Boolean
     },
     components: {
       ProgressBar,
@@ -42,7 +43,7 @@
 
   $play-size: 48px;
 
-  .card:hover .play {
+  .card:hover .play, .active-card .play {
     box-sizing: border-box;
     width: 0;
     height: 0;
@@ -55,5 +56,9 @@
     margin: auto;
     border-width: ($play-size / 2) 0 ($play-size / 2) $play-size * 0.866;
     border-color: transparent transparent transparent $light;
+  }
+
+  .active-card {
+    border-bottom: solid 2px $primary;
   }
 </style>
