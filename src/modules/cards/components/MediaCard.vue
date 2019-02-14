@@ -9,7 +9,7 @@
 
     <div class="mx-2 my-1 d-flex flex-column">
       <span class="text-truncate"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.series_name}}</router-link></span>
-      <small>Episode {{media.episode_number}}</small>
+      <small><router-link :to="'/media/' + media.media_id" class="text-reset">Episode {{media.episode_number}}</router-link></small>
       <small class="text-truncate"><router-link :to="'/media/' + media.media_id" class="text-reset">{{media.name}}</router-link></small>
     </div>
 
