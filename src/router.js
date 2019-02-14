@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import store from 'store';
+import {authGuard, premiumGuard, loginGuard} from 'routeGuards';
 
 Vue.use(Router);
 
@@ -11,68 +11,79 @@ const router = new Router({
     {
       path: '/',
       name: 'dashboard',
-      component: () => import('pages/Dashboard')
+      component: () => import('pages/Dashboard'),
+      meta: {
+        guard: premiumGuard
+      }
     },
     {
       path: '/login',
       name: 'login',
-      component: () => import('pages/Login')
+      component: () => import('pages/Login'),
+      meta: {
+        guard: loginGuard
+      }
     },
     {
       path: '/browse',
       name: 'browse',
-      component: () => import('pages/Browse')
+      component: () => import('pages/Browse'),
+      meta: {
+        guard: premiumGuard
+      }
     },
     {
       path: '/queue',
       name: 'queue',
-      component: () => import('pages/Queue')
+      component: () => import('pages/Queue'),
+      meta: {
+        guard: premiumGuard
+      }
     },
     {
       path: '/media/:id',
       name: 'media',
-      component: () => import('pages/Media')
+      component: () => import('pages/Media'),
+      meta: {
+        guard: premiumGuard
+      }
     },
     {
       path: '/series/:id',
       name: 'series',
       component: () => import('pages/Series'),
       meta: {
-        disableContainer: true
+        disableContainer: true,
+        guard: premiumGuard
       }
     },
     {
       path: '/premium',
       name: 'premium',
-      component: () => import('pages/Premium')
+      component: () => import('pages/Premium'),
+      meta: {
+        guard: authGuard
+      }
     },
     {
       path: '/history',
       name: 'history',
-      component: () => import('pages/History')
+      component: () => import('pages/History'),
+      meta: {
+        guard: premiumGuard
+      }
+    },
+    {
+      path: '*',
+      name: 'notFound',
+      component: () => import('pages/NotFound')
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
-  if (to.name == 'login') {
-    if (store.getters.isLoggedIn) {
-      next(from);
-    } else {
-      next();
-    }
-  } else if (to.name == 'premium') {
-    if (!store.getters.isLoggedIn) {
-      next('login');
-    } else if (store.getters.isPremium) {
-      next(from);
-    } else {
-      next();
-    }
-  } else if (!store.getters.isLoggedIn) {
-    next('login');
-  } else if (!store.getters.isPremium) {
-    next('premium');
+  if (to.meta.guard != null) {
+    to.meta.guard(to, from, next)
   } else {
     next();
   }
