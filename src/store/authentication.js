@@ -110,7 +110,7 @@ export default {
       return state.authTicket != null;
     },
     isPremium(state) {
-      return state.user != null && state.user.access_type == 'premium';
+      return state.user != null && (state.user.access_type == 'premium' || state.user.premium.includes('anime'));
     }
   }
 };
