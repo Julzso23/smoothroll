@@ -8,7 +8,8 @@ export default {
     currentMedia: null,
     currentSeries: null,
     searchResults: [],
-    recentMedia: []
+    recentMedia: [],
+    collection: []
   },
 
   mutations: {
@@ -35,6 +36,9 @@ export default {
     },
     setRecentMedia(state, recentMedia) {
       state.recentMedia = recentMedia;
+    },
+    setCollection(state, collection) {
+      state.collection = collection;
     }
   },
 
@@ -221,6 +225,23 @@ export default {
         .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('getRecentMedia'));
+          }
+        });
+    },
+
+    async getCollection({rootState, dispatch, commit}, collectionId) {
+      await dispatch('verifySession');
+
+      return Vue.api.get('list_media', {
+        collection_id: collectionId,
+        session_id: rootState.authentication.sessionId
+      })
+        .then(data => {
+          commit('setCollection', data);
+        })
+        .catch(({code}) => {
+          if (code == 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('getCollection'));
           }
         });
     }
