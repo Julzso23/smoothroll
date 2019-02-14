@@ -44,8 +44,8 @@
 
   .card:hover .play {
     box-sizing: border-box;
-    width: $play-size;
-    height: $play-size;
+    width: 0;
+    height: 0;
     position: absolute;
     border-style: solid;
     top: 0;
@@ -53,7 +53,7 @@
     left: 0;
     right: 0;
     margin: auto;
-    border-width: ($play-size / 2) 0 ($play-size / 2) $play-size;
+    border-width: ($play-size / 2) 0 ($play-size / 2) $play-size * 0.866;
     border-color: transparent transparent transparent $light;
   }
 </style>
