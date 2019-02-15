@@ -1,8 +1,14 @@
 <template>
   <ul class="navbar-nav" v-if="isLoggedIn">
-    <span class="navbar-text text-muted">{{username}}</span>
-    <li class="nav-item">
-      <a class="nav-link" href="#" @click="$store.dispatch('logout')">Logout</a>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        {{username}}
+      </a>
+      <div class="dropdown-menu bg-dark" aria-labelledby="userDropdown">
+        <router-link class="dropdown-item bg-dark text-light" to="/settings">Settings</router-link>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item bg-dark text-light" href="#" @click="logout">Logout</a>
+      </div>
     </li>
   </ul>
 
@@ -25,6 +31,12 @@
       },
       username() {
         return this.$store.state.authentication.user.username;
+      }
+    },
+    methods: {
+      async logout() {
+        await this.$store.dispatch('logout');
+        this.$router.push('/login');
       }
     }
   }

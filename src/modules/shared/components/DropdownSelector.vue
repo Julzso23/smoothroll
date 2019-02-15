@@ -14,12 +14,21 @@
     name: 'dropdown-selector',
     props: {
       options: Array,
-      label: String
+      label: String,
+      initialSelection: String
     },
     data: () => ({
       selection: ''
     }),
-    created() {
+    mounted() {
+      if (this.initialSelection) {
+        for (let option of this.options) {
+          if (option.key == this.initialSelection) {
+            this.selection = option.value;
+            return;
+          }
+        }
+      }
       this.selection = this.options[0].value;
     },
     methods: {

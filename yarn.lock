@@ -1485,7 +1485,20 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-clappr@^0.3.2:
+clappr-playback-rate-plugin@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/clappr-playback-rate-plugin/-/clappr-playback-rate-plugin-0.5.1.tgz#c7badbd8d4087871a7d989a6eda6d343e69e194d"
+  integrity sha512-FoOaDL3ElgV5OdMhOn0+SqjQgC7Ic/xhINNP9NFs0UPaRD4fTl1ENC+ImBa3+/uR3k4IsjRBqICJLkTp7TBg2A==
+  dependencies:
+    clappr "^0.3.1"
+    clappr-zepto latest
+
+clappr-zepto@latest:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/clappr-zepto/-/clappr-zepto-0.0.7.tgz#a235973d668d9041af589c265e2c31fe54226fe1"
+  integrity sha1-ojWXPWaNkEGvWJwmXiwx/lQib+E=
+
+clappr@^0.3.1, clappr@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/clappr/-/clappr-0.3.2.tgz#74aed9f0ed986612481d3b3d9a78ac8dc967800c"
   integrity sha512-52Tmk4RUy01gJLFpUAB8piO6xqb1ogh3uRw9guzyAdNG7ffecis+7I8sQwfxL0bUSM9oMK46DWAVZ4dUdcAwjw==

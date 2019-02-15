@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "clappr": "^0.3.2",
+    "clappr-playback-rate-plugin": "^0.5.1",
     "debounce": "^1.2.0",
     "level-selector": "^0.2.0",
     "uuid": "^3.3.2",
