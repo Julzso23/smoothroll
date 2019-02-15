@@ -7,6 +7,7 @@
 <script>
   import Clappr from 'clappr';
   import LevelSelector from 'level-selector';
+  import PlaybackRatePlugin from 'clappr-playback-rate-plugin';
 
   export default {
     name: 'player',
@@ -34,7 +35,9 @@
           source: this.streamData.streams[0].url,
           poster: this.poster,
           parentId: '#player',
-          plugins: [LevelSelector],
+          plugins: {
+            core: [Clappr.MediaControl, LevelSelector, PlaybackRatePlugin]
+          },
           width: '100%',
           height: '100%',
           levelSelectorConfig: {
@@ -46,6 +49,16 @@
               1: '360p',
               0: '240p'
             }
+          },
+          playbackRateConfig: {
+            defaultValue: '1.0',
+            options: [
+              {value: '0.25', label: '0.25x'},
+              {value: '0.5', label: '0.5x'},
+              {value: '1.0', label: '1x'},
+              {value: '1.5', label: '1.5x'},
+              {value: '2.0', label: '2x'}
+            ]
           }
         });
 
