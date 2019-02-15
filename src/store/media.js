@@ -51,6 +51,7 @@ export default {
         limit: count,
         fields: mediaFields,
         sort: 'desc',
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -72,6 +73,7 @@ export default {
         limit: limit,
         offset: offset,
         fields: seriesFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -94,6 +96,7 @@ export default {
       return Vue.api.get('info', {
         media_id: id,
         fields: mediaFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -112,6 +115,7 @@ export default {
       return Vue.api.get('info', {
         series_id: id,
         fields: seriesFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -132,6 +136,7 @@ export default {
         q: query,
         filter: seriesFields,
         limit: 5,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -183,6 +188,7 @@ export default {
         offset: offset,
         limit: limit,
         fields: mediaFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -212,6 +218,7 @@ export default {
         filter: 'updated',
         limit: 50,
         fields: [mediaFields, 'series.most_recent_media'].join(','),
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -234,6 +241,7 @@ export default {
 
       return Vue.api.get('list_media', {
         collection_id: collectionId,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
