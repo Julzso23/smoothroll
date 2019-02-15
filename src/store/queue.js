@@ -59,6 +59,7 @@ export default {
       return Vue.api.get('queue', {
         media_types: 'anime|drama',
         fields: [mediaFields, seriesFields].join(','),
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })

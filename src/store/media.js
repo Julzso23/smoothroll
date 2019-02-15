@@ -51,6 +51,7 @@ export default {
         limit: count,
         fields: mediaFields,
         sort: 'desc',
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -72,6 +73,7 @@ export default {
         limit: limit,
         offset: offset,
         fields: seriesFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -83,7 +85,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('listSeries'));
+            return dispatch('startSession').then(() => dispatch('listSeries', {filter, mediaType, limit, offset, append}));
           }
         });
     },
@@ -94,6 +96,7 @@ export default {
       return Vue.api.get('info', {
         media_id: id,
         fields: mediaFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -101,7 +104,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getMedia'));
+            return dispatch('startSession').then(() => dispatch('getMedia', id));
           }
         });
     },
@@ -112,6 +115,7 @@ export default {
       return Vue.api.get('info', {
         series_id: id,
         fields: seriesFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -119,7 +123,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getSeries'));
+            return dispatch('startSession').then(() => dispatch('getSeries', id));
           }
         });
     },
@@ -132,6 +136,7 @@ export default {
         q: query,
         filter: seriesFields,
         limit: 5,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -139,7 +144,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('search'));
+            return dispatch('startSession').then(() => dispatch('search', query));
           }
         });
     },
@@ -154,7 +159,7 @@ export default {
       })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('toggleQueue'));
+            return dispatch('startSession').then(() => dispatch('toggleQueue', {seriesId, inQueue}));
           }
         });
     },
@@ -170,7 +175,7 @@ export default {
       })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('logTime'));
+            return dispatch('startSession').then(() => dispatch('logTime', {mediaId, time}));
           }
         });
     },
@@ -183,6 +188,7 @@ export default {
         offset: offset,
         limit: limit,
         fields: mediaFields,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -199,7 +205,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getHistory'));
+            return dispatch('startSession').then(() => dispatch('getHistory', {mediaTypes, limit, offset, append}));
           }
         });
     },
@@ -212,6 +218,7 @@ export default {
         filter: 'updated',
         limit: 50,
         fields: [mediaFields, 'series.most_recent_media'].join(','),
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -224,7 +231,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getRecentMedia'));
+            return dispatch('startSession').then(() => dispatch('getRecentMedia', mediaType));
           }
         });
     },
@@ -234,6 +241,7 @@ export default {
 
       return Vue.api.get('list_media', {
         collection_id: collectionId,
+        locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
         .then(data => {
@@ -241,7 +249,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getCollection'));
+            return dispatch('startSession').then(() => dispatch('getCollection', collectionId));
           }
         });
     }
