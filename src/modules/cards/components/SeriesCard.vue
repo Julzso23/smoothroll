@@ -7,7 +7,7 @@
     </router-link>
 
     <div class="mx-2 my-1 text-truncate">
-      <span><router-link :to="'/series/' + series.series_id" class="text-reset">{{series.name}}</router-link></span>
+      <span><router-link :to="'/series/' + series.series_id" class="text-reset" :title="series.name">{{series.name}}</router-link></span>
     </div>
   </card>
 </template>
