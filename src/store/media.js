@@ -83,7 +83,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('listSeries'));
+            return dispatch('startSession').then(() => dispatch('listSeries', {filter, mediaType, limit, offset, append}));
           }
         });
     },
@@ -101,7 +101,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getMedia'));
+            return dispatch('startSession').then(() => dispatch('getMedia', id));
           }
         });
     },
@@ -119,7 +119,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getSeries'));
+            return dispatch('startSession').then(() => dispatch('getSeries', id));
           }
         });
     },
@@ -139,7 +139,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('search'));
+            return dispatch('startSession').then(() => dispatch('search', query));
           }
         });
     },
@@ -154,7 +154,7 @@ export default {
       })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('toggleQueue'));
+            return dispatch('startSession').then(() => dispatch('toggleQueue', {seriesId, inQueue}));
           }
         });
     },
@@ -170,7 +170,7 @@ export default {
       })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('logTime'));
+            return dispatch('startSession').then(() => dispatch('logTime', {mediaId, time}));
           }
         });
     },
@@ -199,7 +199,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getHistory'));
+            return dispatch('startSession').then(() => dispatch('getHistory', {mediaTypes, limit, offset, append}));
           }
         });
     },
@@ -224,7 +224,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getRecentMedia'));
+            return dispatch('startSession').then(() => dispatch('getRecentMedia', mediaType));
           }
         });
     },
@@ -241,7 +241,7 @@ export default {
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getCollection'));
+            return dispatch('startSession').then(() => dispatch('getCollection', collectionId));
           }
         });
     }
