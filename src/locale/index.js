@@ -5,6 +5,7 @@ import store from 'store';
 import enUS from './enUS';
 import esLA from './esLA';
 import esES from './esES';
+import deDE from './deDE';
 
 Vue.use(VueI18n);
 
@@ -14,7 +15,8 @@ export default new VueI18n({
   messages: {
     enUS,
     esLA,
-    esES
+    esES,
+    deDE
   },
   silentTranslationWarn: true
 });
