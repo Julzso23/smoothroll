@@ -59,7 +59,7 @@ export default {
         media_types: 'anime|drama',
         fields: [
           'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
-          'media.collection_name', 'media.name', 'media.episode_number'
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
         ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,
