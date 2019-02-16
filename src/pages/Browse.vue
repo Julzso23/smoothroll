@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="row mb-2">
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" label="Filter" :options="filterOptions" @selectionUpdate="selection => {filter = selection; updateSeriesList()}" />
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" label="Media" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateSeriesList()}" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.filter')" :options="filterOptions" @selectionUpdate="selection => {filter = selection; updateSeriesList()}" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateSeriesList()}" />
     </div>
 
     <div v-if="!loading" class="mb-4">
@@ -13,7 +13,7 @@
       </div>
 
       <div v-if="canLoadMore">
-        <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
+        <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">{{$t('media.loadMore')}}</button>
         <button class="btn btn-block btn-disabled" v-else><loading /></button>
       </div>
     </div>
@@ -34,30 +34,32 @@
       SeriesCard,
       Loading
     },
-    data: () => ({
-      filterOptions: [
-        {key: 'alpha', value: 'Alphabetical'},
-        {key: 'featured', value: 'Featured'},
-        {key: 'newest', value: 'Newest'},
-        {key: 'popular', value: 'Popular'},
-        {key: 'simulcast', value: 'Simulcast'},
-        {key: 'updated', value: 'Updated'}
-      ],
-      filter: 'alpha',
+    data: function() {
+      return {
+        filterOptions: [
+          {key: 'alpha', value: this.$t('media.filters.alphabetical')},
+          {key: 'featured', value: this.$t('media.filters.featured')},
+          {key: 'newest', value: this.$t('media.filters.newest')},
+          {key: 'popular', value: this.$t('media.filters.popular')},
+          {key: 'simulcast', value: this.$t('media.filters.simulcast')},
+          {key: 'updated', value: this.$t('media.filters.updated')}
+        ],
+        filter: 'alpha',
 
-      mediaOptions: [
-        {key: 'anime', value: 'Anime'},
-        {key: 'drama', value: 'Drama'}
-      ],
-      mediaType: 'anime',
+        mediaOptions: [
+          {key: 'anime', value: this.$t('media.types.anime')},
+          {key: 'drama', value: this.$t('media.types.drama')}
+        ],
+        mediaType: 'anime',
 
-      limit: 50,
-      offset: 0,
+        limit: 50,
+        offset: 0,
 
-      loading: false,
-      loadingMore: false,
-      canLoadMore: true
-    }),
+        loading: false,
+        loadingMore: false,
+        canLoadMore: true
+      };
+    },
     computed: {
       seriesList() {
         return this.$store.state.media.seriesList;
@@ -101,7 +103,7 @@
     created() {
       this.updateSeriesList();
 
-      document.title = 'Browse ― Smoothroll';
+      document.title = `${this.$t('navbar.browse')} ― Smoothroll`;
     }
   }
 </script>

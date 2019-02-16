@@ -1,5 +1,5 @@
 <template>
-  <button class="btn btn-primary" @click="toggleQueue" v-if="!loading">{{inQueue ? 'Remove from queue' : 'Add to queue'}}</button>
+  <button class="btn btn-primary" @click="toggleQueue" v-if="!loading">{{inQueue ? $t('media.queueRemove') : $t('media.queueAdd')}}</button>
   <button class="btn btn-disabled" v-else><loading /></button>
 </template>
 

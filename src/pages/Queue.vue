@@ -13,7 +13,7 @@
       Queue
     },
     created() {
-      document.title = 'Queue ― Smoothroll';
+      document.title = `${this.$t('navbar.queue')} ― Smoothroll`;
     }
   }
 </script>

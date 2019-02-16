@@ -8,10 +8,10 @@
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
-            <navbar-link to="/">Dashboard</navbar-link>
-            <navbar-link to="/browse">Browse</navbar-link>
-            <navbar-link to="/queue">Queue</navbar-link>
-            <navbar-link to="/history">History</navbar-link>
+            <navbar-link to="/">{{$t('navbar.dashboard')}}</navbar-link>
+            <navbar-link to="/browse">{{$t('navbar.browse')}}</navbar-link>
+            <navbar-link to="/queue">{{$t('navbar.queue')}}</navbar-link>
+            <navbar-link to="/history">{{$t('navbar.history')}}</navbar-link>
           </ul>
 
           <search />
