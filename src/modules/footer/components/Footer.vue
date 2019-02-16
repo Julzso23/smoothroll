@@ -2,10 +2,10 @@
   <footer id="footer">
     <div class="container">
       <div class="row">
-        <footer-item>Made by <a class="text-white-50" href="https://julians.website" target="_blank">Julian Bath</a>.</footer-item>
-        <footer-item><a class="text-white-50" href="https://github.com/Julzso23/smoothroll" target="_blank">View the source and/or contribute to the project on GitHub.</a></footer-item>
-        <footer-item>Smoothroll is not endorsed by or affiliated with Crunchyroll.</footer-item>
-        <footer-item>Smoothroll does not store <b>any</b> of your data on its servers. It is simply an interface that sits on top of Crunchyroll.</footer-item>
+        <footer-item><a class="text-white-50" href="https://julians.website" target="_blank">{{$t('footer.madeBy', {name: 'Julian Bath'})}}</a></footer-item>
+        <footer-item><a class="text-white-50" href="https://github.com/Julzso23/smoothroll" target="_blank">{{$t('footer.contribute')}}</a></footer-item>
+        <footer-item>{{$t('footer.endorsement')}}</footer-item>
+        <footer-item>{{$t('footer.dataNotice')}}</footer-item>
       </div>
     </div>
   </footer>

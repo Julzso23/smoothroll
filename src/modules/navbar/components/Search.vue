@@ -1,6 +1,6 @@
 <template>
   <div class="form-inline dropdown mr-4">
-    <typeahead v-model="query" :data="results" :serializer="result => result.name" placeholder="Search" @hit="hit" inputClass="bg-dark text-light" text-variant="light" backgroundVariant="dark" />
+    <typeahead v-model="query" :data="results" :serializer="result => result.name" :placeholder="$t('navbar.search')" @hit="hit" inputClass="bg-dark text-light" text-variant="light" backgroundVariant="dark" />
   </div>
 </template>
 
