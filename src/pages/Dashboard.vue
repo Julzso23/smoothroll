@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h3 class="text-light">Queue</h3>
+    <h3 class="text-light">{{$t('dashboard.queue')}}</h3>
     <hr class="mt-0 bg-light" />
     <queue />
 
-    <h3 class="text-light">Recent Releases</h3>
+    <h3 class="text-light">{{$t('dashboard.recent')}}</h3>
     <hr class="mt-0 bg-light" />
     <recent-media />
   </div>
@@ -21,7 +21,7 @@
       RecentMedia
     },
     created() {
-      document.title = "Dashboard ― Smoothroll";
+      document.title = `${this.$t('navbar.dashboard')} ― Smoothroll`;
     }
   }
 </script>

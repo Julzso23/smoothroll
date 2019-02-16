@@ -15,7 +15,7 @@
       LoginForm
     },
     created() {
-      document.title = 'Login ― Smoothroll';
+      document.title = `${this.$t('authentication.login')} ― Smoothroll`;
     }
   }
 </script>

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-light">You need to have a premium account to use this service!</h1>
+    <h1 class="text-light">{{$t('error.premium')}}</h1>
   </div>
 </template>
 

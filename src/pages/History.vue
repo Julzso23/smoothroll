@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mb-2">
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" label="Media" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateMediaList()}" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateMediaList()}" />
     </div>
 
     <div class="mb-4" v-if="!loading">
@@ -28,21 +28,23 @@
 
   export default {
     name: 'History',
-    data: () => ({
-      mediaOptions: [
-        {key: 'anime', value: 'Anime'},
-        {key: 'drama', value: 'Drama'},
-        {key: 'anime|drama', value: 'Both'}
-      ],
-      mediaType: 'anime',
+    data: function() {
+      return {
+        mediaOptions: [
+          {key: 'anime', value: this.$t('media.types.anime')},
+          {key: 'drama', value: this.$t('media.types.drama')},
+          {key: 'anime|drama', value: this.$t('media.types.both')}
+        ],
+        mediaType: 'anime',
 
-      limit: 50,
-      offset: 0,
+        limit: 50,
+        offset: 0,
 
-      loading: false,
-      loadingMore: false,
-      canLoadMore: true
-    }),
+        loading: false,
+        loadingMore: false,
+        canLoadMore: true
+      };
+    },
     methods: {
       async updateMediaList() {
         this.loading = true;
@@ -78,7 +80,7 @@
     },
     created() {
       this.updateMediaList();
-      document.title = 'History ― Smoothroll';
+      document.title = `${this.$t('navbar.history')} ― Smoothroll`;
     },
     components: {
       DropdownSelector,

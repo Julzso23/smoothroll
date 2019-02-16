@@ -3,14 +3,14 @@
     <div class="alert alert-danger" role="alert" v-if="error.length != 0">{{error}}</div>
 
     <div class="form-group">
-      <input v-model="account" type="text" name="account" placeholder="Username or email" class="form-control" />
+      <input v-model="account" type="text" name="account" :placeholder="$t('authentication.usernameEmail')" class="form-control" />
     </div>
 
     <div class="form-group">
-      <input v-model="password" type="password" name="password" placeholder="Password" class="form-control" />
+      <input v-model="password" type="password" name="password" :placeholder="$t('authentication.password')" class="form-control" />
     </div>
 
-    <button type="submit" class="btn btn-block btn-primary">Login</button>
+    <button type="submit" class="btn btn-block btn-primary">{{$t('authentication.login')}}</button>
   </form>
 
   <loading v-else />
