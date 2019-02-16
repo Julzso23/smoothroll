@@ -18,6 +18,7 @@
     },
     created() {
       this.$store.dispatch('getLocales');
+      document.title = `${this.$t('navbar.settings')} ― Smoothroll`;
     },
     computed: {
       locale() {
