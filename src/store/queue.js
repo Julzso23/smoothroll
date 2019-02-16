@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import {mediaFields, seriesFields} from './fields';
 
 function sortQueue(queue, order) {
   queue.sort((a, b) => {
@@ -58,7 +57,10 @@ export default {
 
       return Vue.api.get('queue', {
         media_types: 'anime|drama',
-        fields: [mediaFields, seriesFields].join(','),
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number'
+        ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket

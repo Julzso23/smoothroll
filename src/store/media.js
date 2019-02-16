@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import {mediaFields, seriesFields} from './fields';
 
 export default {
   state: {
@@ -49,7 +48,10 @@ export default {
       return Vue.api.get('list_media', {
         series_id: seriesId,
         limit: count,
-        fields: mediaFields,
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.collection_id', 'media.collection_name'
+        ].join(','),
         sort: 'desc',
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
@@ -72,7 +74,7 @@ export default {
         media_type: mediaType,
         limit: limit,
         offset: offset,
-        fields: seriesFields,
+        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue'].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
@@ -95,7 +97,10 @@ export default {
 
       return Vue.api.get('info', {
         media_id: id,
-        fields: mediaFields,
+        fields: [
+          'media.media_id', 'media.name', 'media.description', 'media.episode_number', 'media.collection_name',
+          'media.screenshot_image', 'media.stream_data', 'media.duration', 'media.playhead', 'media.collection_id'
+        ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
@@ -114,7 +119,10 @@ export default {
 
       return Vue.api.get('info', {
         series_id: id,
-        fields: seriesFields,
+        fields: [
+          'series.series_id', 'series.name', 'series.description', 'series.portrait_image', 'series.landscape_image',
+          'series.in_queue'
+        ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
@@ -134,7 +142,7 @@ export default {
       return Vue.api.get('autocomplete', {
         media_types: 'anime|drama',
         q: query,
-        filter: seriesFields,
+        filter: 'series.name',
         limit: 5,
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
@@ -187,7 +195,10 @@ export default {
         media_types: mediaTypes,
         offset: offset,
         limit: limit,
-        fields: mediaFields,
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number'
+        ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
@@ -217,7 +228,10 @@ export default {
         media_type: mediaType,
         filter: 'updated',
         limit: 50,
-        fields: [mediaFields, 'series.most_recent_media'].join(','),
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'series.most_recent_media',
+          'media.screenshot_image', 'media.collection_name', 'media.name', 'media.episode_number'
+        ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
