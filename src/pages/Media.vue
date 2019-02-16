@@ -3,7 +3,7 @@
     <player :mediaId="media.media_id" :streamData="media.stream_data" :poster="media.screenshot_image.full_url" :duration="media.duration" :playhead="media.playhead" />
 
     <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.collection_name}}</router-link></h3>
-    <h4 class="text-light">{{'Episode ' + media.episode_number + ' - ' + media.name}}</h4>
+    <h4 class="text-light">{{$t('media.episode', {number: media.episode_number}) + ' - ' + media.name}}</h4>
     <p class="text-light">{{media.description}}</p>
 
     <scrolling-collection :collection="collection" :active="media.media_id" />
@@ -42,7 +42,7 @@
         this.$store.dispatch('getMedia', this.mediaId);
       },
       media() {
-        document.title = `Episode ${this.media.episode_number}: ${this.media.name} - ${this.media.series_name} ― Smoothroll`;
+        document.title = `${this.$t('media.episode', {number: this.media.episode_number})}: ${this.media.name} - ${this.media.series_name} ― Smoothroll`;
 
         this.$store.dispatch('getCollection', this.media.collection_id);
       }
