@@ -9,6 +9,7 @@ import ptBR from './ptBR';
 import ptPT from './ptPT';
 import frFR from './frFR';
 import deDE from './deDE';
+import itIT from './itIT';
 import ruRU from './ruRU';
 
 Vue.use(VueI18n);
@@ -24,6 +25,7 @@ export default new VueI18n({
     ptPT,
     frFR,
     deDE,
+    itIT,
     ruRU
   },
   silentTranslationWarn: true
