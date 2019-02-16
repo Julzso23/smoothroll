@@ -1,0 +1,5 @@
+export default {
+  notFound: '404 Page non trouvée',
+  notFoundLong: 'Il semble que vous ayez essayé d’accéder à une page qui n’existe pas.',
+  premium: 'Vous devez avoir un compte premium pour utiliser ce service!'
+}
