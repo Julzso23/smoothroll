@@ -6,6 +6,7 @@ import enUS from './enUS';
 import esLA from './esLA';
 import esES from './esES';
 import deDE from './deDE';
+import ruRU from './ruRU';
 
 Vue.use(VueI18n);
 
@@ -16,7 +17,8 @@ export default new VueI18n({
     enUS,
     esLA,
     esES,
-    deDE
+    deDE,
+    ruRU
   },
   silentTranslationWarn: true
 });
