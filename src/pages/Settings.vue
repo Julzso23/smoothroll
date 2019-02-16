@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-md-6 offset-md-0 col-10 offset-1">
-      <dropdown-selector v-if="localeList.length != 0" :options="localeList" label="Locale" :initialSelection="locale" @selectionUpdate="key => setLocale(key)" />
+      <dropdown-selector v-if="localeList.length != 0" :options="localeList" :label="$t('settings.language')" :initialSelection="locale" @selectionUpdate="key => setLocale(key)" />
     </div>
   </div>
 </template>
