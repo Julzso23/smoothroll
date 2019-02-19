@@ -50,7 +50,8 @@ export default {
         limit: count,
         fields: [
           'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
-          'media.collection_name', 'media.name', 'media.episode_number', 'media.collection_id', 'media.collection_name'
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.collection_id', 'media.collection_name',
+          'media.series_id'
         ].join(','),
         sort: 'desc',
         locale: rootState.locale.locale,
@@ -99,7 +100,8 @@ export default {
         media_id: id,
         fields: [
           'media.media_id', 'media.name', 'media.description', 'media.episode_number', 'media.collection_name',
-          'media.screenshot_image', 'media.stream_data', 'media.duration', 'media.playhead', 'media.collection_id'
+          'media.screenshot_image', 'media.stream_data', 'media.duration', 'media.playhead', 'media.collection_id',
+          'media.series_id'
         ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
@@ -255,6 +257,9 @@ export default {
 
       return Vue.api.get('list_media', {
         collection_id: collectionId,
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image', 'media.name', 'media.episode_number'
+        ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
