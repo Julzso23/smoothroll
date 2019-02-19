@@ -81,6 +81,8 @@
             this.collectionsLoading = false;
           });
 
+        this.fixMixedContent();
+
         document.title = `${this.series.name} ― Smoothroll`;
       },
       seriesId() {
@@ -93,6 +95,15 @@
           .then(() => {
             endLoading();
           });
+      },
+      fixMixedContent() {
+        if (this.series.landscape_image) {
+          this.series.landscape_image.full_url = this.series.landscape_image.full_url.replace('http://', 'https://');
+        }
+
+        if (this.series.portrait_image) {
+          this.series.portrait_image.large_url = this.series.portrait_image.large_url.replace('http://', 'https://');
+        }
       }
     }
   }
