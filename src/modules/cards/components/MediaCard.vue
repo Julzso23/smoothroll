@@ -30,6 +30,16 @@
     components: {
       ProgressBar,
       Card
+    },
+    mounted() {
+      this.fixMixedContent();
+    },
+    methods: {
+      fixMixedContent() {
+        if (this.media.screenshot_image) {
+          this.media.screenshot_image.large_url = this.media.screenshot_image.large_url.replace('http://', 'https://');
+        }
+      }
     }
   }
 </script>
