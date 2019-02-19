@@ -35,10 +35,23 @@
 </script>
 
 <style lang="scss" scoped>
+  @import 'scss/_variables';
+
   .collection {
     flex-wrap: nowrap;
     overflow-x: scroll;
     padding: 1rem;
     position: relative;
+  }
+
+  div::-webkit-scrollbar {
+    height: 12px;
+  }
+  div::-webkit-scrollbar-thumb {
+    background-color: $dark - 10%;
+    border-radius: 4px;
+  }
+  div::-webkit-scrollbar-thumb:hover {
+    background-color: $secondary;
   }
 </style>
