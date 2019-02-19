@@ -24,6 +24,16 @@
     components: {
       Card,
       Ribbon
+    },
+    mounted() {
+      this.fixMixedContent();
+    },
+    methods: {
+      fixMixedContent() {
+        if (this.series.portrait_image) {
+          this.series.portrait_image.thumb_url = this.series.portrait_image.thumb_url.replace('http://', 'https://');
+        }
+      }
     }
   }
 </script>
