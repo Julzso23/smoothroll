@@ -45,6 +45,15 @@
         document.title = `${this.$t('media.episode', {number: this.media.episode_number})}: ${this.media.name} - ${this.media.series_name} ― Smoothroll`;
 
         this.$store.dispatch('getCollection', this.media.collection_id);
+
+        this.fixMixedContent();
+      }
+    },
+    methods: {
+      fixMixedContent() {
+        if (this.media && this.media.screenshot_image) {
+          this.media.screenshot_image.full_url = this.media.screenshot_image.full_url.replace('http://', 'https://');
+        }
       }
     }
   }
