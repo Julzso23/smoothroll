@@ -202,7 +202,8 @@ export default {
           'media.collection_name', 'media.name', 'media.episode_number'
         ].join(','),
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           let mediaList = [];
