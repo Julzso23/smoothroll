@@ -17,5 +17,6 @@ export default {
     popular: 'Beliebt',
     simulcast: 'Simulcast',
     updated: 'Aktualisierte'
-  }
+  },
+  emptyHistory: 'Ihre Geschichte ist derzeit leer.'
 };

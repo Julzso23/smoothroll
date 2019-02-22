@@ -17,5 +17,6 @@ export default {
     popular: 'Popular',
     simulcast: 'Simulcast',
     updated: 'Updated'
-  }
+  },
+  emptyHistory: 'Your history is currently empty.'
 };
