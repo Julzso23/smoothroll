@@ -17,5 +17,6 @@ export default {
     popular: 'Popolare',
     simulcast: 'Simulcast',
     updated: 'Aggiornato'
-  }
+  },
+  emptyHistory: 'La tua cronologia è attualmente vuota.'
 };
