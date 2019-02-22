@@ -17,5 +17,6 @@ export default {
     popular: 'Популярный',
     simulcast: 'Simulcast',
     updated: 'обновленный'
-  }
+  },
+  emptyHistory: 'Ваша история в настоящее время пуста.'
 };

@@ -5,7 +5,7 @@
     </div>
 
     <div class="alert alert-info" v-if="!mediaList.length">
-      Your history is currently empty, when you watch an episode it will show up here.
+      {{$t('media.emptyHistory')}}
     </div>
 
     <div class="mb-4" v-if="!loading">
@@ -16,7 +16,7 @@
       </div>
 
       <div v-if="canLoadMore">
-        <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">Load More</button>
+        <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">{{$t('media.loadMore')}}</button>
         <button class="btn btn-block btn-disabled" v-else><loading /></button>
       </div>
     </div>
