@@ -70,7 +70,7 @@
           offset: this.offset,
           append: true
         })
-          .then(() => {
+          .then(data => {
             this.loadingMore = false;
             if (this.mediaList.length % this.limit != 0 || data.length == 0) {
               this.canLoadMore = false;

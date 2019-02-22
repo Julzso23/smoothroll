@@ -85,6 +85,8 @@ export default {
           } else {
             commit('setSeriesList', data);
           }
+
+          return data
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
@@ -215,6 +217,8 @@ export default {
           } else {
             commit('setMediaList', mediaList);
           }
+
+          return data
         })
         .catch(({code}) => {
           if (code == 'bad_session') {
