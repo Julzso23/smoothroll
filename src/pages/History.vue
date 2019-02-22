@@ -4,6 +4,10 @@
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateMediaList()}" />
     </div>
 
+    <div class="alert alert-info" v-if="!mediaList.length">
+      Your history is currently empty, when you watch an episode it will show up here.
+    </div>
+
     <div class="mb-4" v-if="!loading">
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4" v-for="media in mediaList" :key="media.media_id">
@@ -55,8 +59,12 @@
           limit: this.limit,
           offset: this.offset
         })
-          .then(() => {
+          .then(data => {
             this.loading = false;
+
+            if (data.length == 0) {
+              this.canLoadMore = false;
+            }
           });
       },
 
