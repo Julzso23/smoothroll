@@ -265,6 +265,7 @@ export default {
         fields: [
           'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image', 'media.name', 'media.episode_number'
         ].join(','),
+        limit: 999,
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId
       })
