@@ -76,7 +76,7 @@ export default {
         media_type: mediaType,
         limit: limit,
         offset: offset,
-        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue'].join(','),
+        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue', 'series.description'].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
