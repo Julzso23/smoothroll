@@ -1,9 +1,11 @@
 <template>
   <card>
-    <ribbon v-if="series.in_queue" />
-
     <router-link :to="'/series/' + series.series_id" class="text-reset">
-      <img class="card-img-top" :src="series.portrait_image.thumb_url" alt="Series Thumbnail" />
+      <div class="card-img-top image-container">
+        <ribbon v-if="series.in_queue" />
+        <img class="card-img-top" :src="series.portrait_image.thumb_url" alt="Series Thumbnail" />
+        <p class="text-light description">{{series.description}}</p>
+      </div>
     </router-link>
 
     <div class="mx-2 my-1 text-truncate">
@@ -37,3 +39,30 @@
     }
   }
 </script>
+
+<style lang="scss" scoped>
+  .card {
+    overflow: hidden;
+  }
+
+  .card .description {
+    display: none;
+  }
+
+  .card:hover .description {
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 4px;
+    margin: 0;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.6);
+  }
+
+  .image-container {
+    position: relative;
+  }
+</style>
