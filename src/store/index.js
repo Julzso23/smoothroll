@@ -4,6 +4,7 @@ import authentication from './authentication';
 import media from './media';
 import queue from './queue';
 import locale from './locale';
+import browse from './browse';
 
 Vue.use(Vuex);
 
@@ -12,6 +13,7 @@ export default new Vuex.Store({
     authentication,
     media,
     queue,
-    locale
+    locale,
+    browse
   }
 });
