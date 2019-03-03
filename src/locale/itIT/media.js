@@ -19,4 +19,4 @@ export default {
     updated: 'Aggiornato'
   },
   emptyHistory: 'La tua cronologia è attualmente vuota.'
-};
+}

@@ -19,4 +19,4 @@ export default {
     updated: 'Updated'
   },
   emptyHistory: 'Your history is currently empty.'
-};
+}
