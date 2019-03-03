@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-import {authGuard, premiumGuard, loginGuard} from 'routeGuards';
+import Vue from 'vue'
+import Router from 'vue-router'
+import { authGuard, premiumGuard, loginGuard } from 'routeGuards'
 
-Vue.use(Router);
+Vue.use(Router)
 
 const router = new Router({
   mode: 'history',
@@ -87,14 +87,14 @@ const router = new Router({
       component: () => import('pages/NotFound')
     }
   ]
-});
+})
 
 router.beforeEach((to, from, next) => {
   if (to.meta.guard != null) {
     to.meta.guard(to, from, next)
   } else {
-    next();
+    next()
   }
-});
+})
 
-export default router;
+export default router
