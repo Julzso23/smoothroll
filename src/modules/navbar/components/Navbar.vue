@@ -2,14 +2,14 @@
   <div class="bg-dark mb-4">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <router-link to="/" class="navbar-brand"><img src="logo.svg" alt="logo" /></router-link>
+        <router-link to="/" class="navbar-brand"><img src="/logo.svg" alt="logo" /></router-link>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
-            <navbar-link to="/">{{$t('navbar.dashboard')}}</navbar-link>
+            <navbar-link to="/" exact>{{$t('navbar.dashboard')}}</navbar-link>
             <navbar-link to="/browse">{{$t('navbar.browse')}}</navbar-link>
             <navbar-link to="/queue">{{$t('navbar.queue')}}</navbar-link>
             <navbar-link to="/history">{{$t('navbar.history')}}</navbar-link>

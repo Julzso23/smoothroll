@@ -1,6 +1,6 @@
 <template>
   <li class="nav-item">
-    <router-link :to="to" class="nav-link"><slot></slot></router-link>
+    <router-link :to="to" class="nav-link" active-class="active" :exact="exact"><slot></slot></router-link>
   </li>
 </template>
 
@@ -8,7 +8,8 @@
   export default {
     name: 'navbar-link',
     props: {
-      to: String
+      to: String,
+      exact: Boolean
     }
   }
 </script>
@@ -26,7 +27,7 @@
     background: rgba(255, 255, 255, 0.03);
   }
 
-  .nav-item > .nav-link.router-link-exact-active {
+  .nav-item > .nav-link.active {
     border-bottom: solid 2px $primary;
   }
 </style>
