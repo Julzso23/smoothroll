@@ -4,5 +4,5 @@ export default {
   queue: 'Queue',
   history: 'History',
   search: 'Search',
-  settings: 'Settings',
-};
+  settings: 'Settings'
+}

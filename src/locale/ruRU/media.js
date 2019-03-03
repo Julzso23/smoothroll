@@ -19,4 +19,4 @@ export default {
     updated: 'обновленный'
   },
   emptyHistory: 'Ваша история в настоящее время пуста.'
-};
+}

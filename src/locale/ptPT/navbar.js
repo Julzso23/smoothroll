@@ -4,5 +4,5 @@ export default {
   queue: 'Fila',
   history: 'História',
   search: 'Procurar',
-  settings: 'Definições',
-};
+  settings: 'Definições'
+}

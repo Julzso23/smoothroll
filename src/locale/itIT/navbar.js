@@ -4,5 +4,5 @@ export default {
   queue: 'Coda',
   history: 'Storia',
   search: 'Ricerca',
-  settings: 'Impostazioni',
-};
+  settings: 'Impostazioni'
+}

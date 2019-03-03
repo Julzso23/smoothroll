@@ -19,4 +19,4 @@ export default {
     updated: 'Mis à jour'
   },
   emptyHistory: 'Votre historique est actuellement vide.'
-};
+}
