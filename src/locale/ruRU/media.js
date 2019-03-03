@@ -18,5 +18,9 @@ export default {
     simulcast: 'Simulcast',
     updated: 'обновленный'
   },
-  emptyHistory: 'Ваша история в настоящее время пуста.'
+  emptyHistory: 'Ваша история в настоящее время пуста.',
+  categories: 'категории',
+  genres: 'Жанры',
+  seasons: 'Сезоны',
+  emptyBrowse: 'По Вашему запросу нет результатов.'
 }

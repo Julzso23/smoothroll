@@ -1,11 +1,15 @@
 <template>
   <div>
-    <div class="row mb-2">
+    <div class="row mb-2" v-if="!tag">
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.filter')" :options="filterOptions" @selectionUpdate="selection => {filter = selection; updateSeriesList()}" />
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateSeriesList()}" />
     </div>
 
     <div v-if="!loading" class="mb-4">
+      <div class="alert alert-info bg-dark text-light" v-if="!seriesList.length">
+        {{$t('media.emptyBrowse')}}
+      </div>
+
       <div class="row">
         <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" v-for="series in seriesList" :key="series.series_id">
           <series-card :series="series" />
@@ -28,7 +32,7 @@
   import SeriesCard from 'modules/cards/components/SeriesCard';
 
   export default {
-    name: 'browse',
+    name: 'browse-filter',
     components: {
       DropdownSelector,
       SeriesCard,
@@ -62,7 +66,16 @@
     },
     computed: {
       seriesList() {
-        return this.$store.state.media.seriesList;
+        return this.$store.state.browse.seriesList;
+      },
+      tag() {
+        return this.$route.params.tag;
+      },
+      uriMediaType() {
+        return this.$route.params.mediaType;
+      },
+      tagAndMediaType() {
+        return `${this.tag}${this.uriMediaType}`;
       }
     },
     methods: {
@@ -76,8 +89,11 @@
           limit: this.limit,
           offset: this.offset
         })
-          .then(() => {
+          .then(data => {
             this.loading = false;
+            if (this.seriesList.length % this.limit != 0 || data.length == 0) {
+              this.canLoadMore = false;
+            }
           });
       },
 
@@ -98,12 +114,36 @@
               this.canLoadMore = false;
             }
           });
+      },
+
+      updateFilter(tag) {
+        if (tag) {
+          this.filter = 'tag:' + tag;
+        } else {
+          this.filter = this.filterOptions[0].key;
+        }
+      },
+      updateMediaType(type) {
+        this.mediaType = type || 'anime';
       }
     },
-    created() {
+    mounted() {
+      this.updateFilter(this.$route.params.tag);
+      this.updateMediaType(this.$route.params.mediaType);
       this.updateSeriesList();
 
       document.title = `${this.$t('navbar.browse')} ― Smoothroll`;
+    },
+    watch: {
+      tag(value) {
+        this.updateFilter(value);
+      },
+      uriMediaType(value) {
+        this.updateMediaType(value);
+      },
+      tagAndMediaType() {
+        this.updateSeriesList();
+      }
     }
   }
 </script>
