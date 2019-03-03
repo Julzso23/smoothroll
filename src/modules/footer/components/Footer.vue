@@ -1,5 +1,5 @@
 <template>
-  <footer id="footer" class="mt-3">
+  <footer id="footer">
     <div class="container">
       <div class="row">
         <footer-item><a class="text-white-50" href="https://julians.website" target="_blank">{{$t('footer.madeBy', {name: 'Julian Bath'})}}</a></footer-item>
