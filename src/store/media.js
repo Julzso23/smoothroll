@@ -3,7 +3,6 @@ import Vue from 'vue';
 export default {
   state: {
     mediaList: [],
-    seriesList: [],
     currentMedia: null,
     currentSeries: null,
     searchResults: [],
@@ -17,12 +16,6 @@ export default {
     },
     appendMediaList(state, mediaList) {
       state.mediaList = state.mediaList.concat(mediaList);
-    },
-    setSeriesList(state, seriesList) {
-      state.seriesList = seriesList;
-    },
-    appendSeriesList(state, seriesList) {
-      state.seriesList = state.seriesList.concat(seriesList);
     },
     setCurrentMedia(state, media) {
       state.currentMedia = media;
@@ -64,35 +57,6 @@ export default {
         .catch(({code}) => {
           if (code == 'bad_session') {
             return dispatch('startSession').then(() => dispatch('listMedia'));
-          }
-        });
-    },
-
-    async listSeries({commit, rootState, dispatch}, {filter, mediaType, limit, offset, append}) {
-      await dispatch('verifySession');
-
-      return Vue.api.get('list_series', {
-        filter: filter,
-        media_type: mediaType,
-        limit: limit,
-        offset: offset,
-        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue', 'series.description'].join(','),
-        locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId,
-        auth: rootState.authentication.authTicket
-      })
-        .then(data => {
-          if (append) {
-            commit('appendSeriesList', data);
-          } else {
-            commit('setSeriesList', data);
-          }
-
-          return data
-        })
-        .catch(({code}) => {
-          if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('listSeries', {filter, mediaType, limit, offset, append}));
           }
         });
     },
