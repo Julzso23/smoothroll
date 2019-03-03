@@ -11,6 +11,7 @@
           <p class="text-light">{{series.description}}</p>
 
           <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
+          <rating class="float-right" :rating="series.rating" />
         </div>
 
         <div class="col-3 d-none d-md-block">
@@ -32,6 +33,7 @@
   import Collection from 'modules/media/components/Collection';
   import Loading from 'modules/shared/components/Loading';
   import ToggleQueueButton from 'modules/media/components/ToggleQueueButton';
+  import Rating from 'modules/media/components/Rating';
 
   export default {
     name: 'series',
@@ -67,7 +69,8 @@
     components: {
       Collection,
       Loading,
-      ToggleQueueButton
+      ToggleQueueButton,
+      Rating
     },
     watch: {
       series(value) {
