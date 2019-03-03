@@ -1,12 +1,12 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import authentication from './authentication';
-import media from './media';
-import queue from './queue';
-import locale from './locale';
-import browse from './browse';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import authentication from './authentication'
+import media from './media'
+import queue from './queue'
+import locale from './locale'
+import browse from './browse'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   modules: {
@@ -16,4 +16,4 @@ export default new Vuex.Store({
     locale,
     browse
   }
-});
+})

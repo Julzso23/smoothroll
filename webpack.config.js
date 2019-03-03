@@ -1,7 +1,7 @@
-const { VueLoaderPlugin } = require('vue-loader');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
@@ -11,16 +11,16 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-      modules: [
-          path.join(__dirname, 'src'),
-          'node_modules',
-      ],
-      extensions: [
-          '.js',
-          '.vue',
-          '.css',
-          '.scss'
-      ],
+    modules: [
+      path.join(__dirname, 'src'),
+      'node_modules'
+    ],
+    extensions: [
+      '.js',
+      '.vue',
+      '.css',
+      '.scss'
+    ]
   },
   module: {
     rules: [
@@ -97,4 +97,4 @@ module.exports = {
     historyApiFallback: true,
     port: 8080
   }
-};
+}

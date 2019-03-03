@@ -4,5 +4,5 @@ export default {
   queue: 'Cola',
   history: 'Historia',
   search: 'Buscar',
-  settings: 'Ajustes',
-};
+  settings: 'Ajustes'
+}
