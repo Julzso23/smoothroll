@@ -62,7 +62,7 @@
           .then(data => {
             this.loading = false;
 
-            if (data.length == 0) {
+            if (this.mediaList.length % this.limit != 0 || data.length == 0) {
               this.canLoadMore = false;
             }
           });
