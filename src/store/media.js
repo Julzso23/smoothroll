@@ -55,7 +55,8 @@ export default {
         ].join(','),
         sort: 'desc',
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           commit('setMediaList', data);
@@ -75,9 +76,10 @@ export default {
         media_type: mediaType,
         limit: limit,
         offset: offset,
-        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue'].join(','),
+        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue', 'series.description'].join(','),
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           if (append) {
@@ -106,7 +108,8 @@ export default {
           'media.series_id'
         ].join(','),
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           commit('setCurrentMedia', data);
@@ -128,7 +131,8 @@ export default {
           'series.in_queue'
         ].join(','),
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           commit('setCurrentSeries', data);
@@ -149,7 +153,8 @@ export default {
         filter: 'series.name',
         limit: 5,
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           commit('setSearchResults', data);
@@ -167,7 +172,8 @@ export default {
       const request = inQueue ? 'remove_from_queue' : 'add_to_queue';
       return Vue.api.post(request, {
         series_id: seriesId,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .catch(({code}) => {
           if (code == 'bad_session') {
@@ -183,7 +189,8 @@ export default {
         media_id: mediaId,
         playhead: time,
         event: 'playback_status',
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .catch(({code}) => {
           if (code == 'bad_session') {
@@ -240,7 +247,8 @@ export default {
           'media.screenshot_image', 'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
         ].join(','),
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           let recentMedia = [];
@@ -267,7 +275,8 @@ export default {
         ].join(','),
         limit: 999,
         locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
       })
         .then(data => {
           commit('setCollection', data);
