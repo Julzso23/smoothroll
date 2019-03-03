@@ -26,11 +26,24 @@ const router = new Router({
     },
     {
       path: '/browse',
-      name: 'browse',
-      component: () => import('pages/Browse'),
+      component: () => import('pages/browse/Browse'),
       meta: {
         guard: premiumGuard
-      }
+      },
+      children: [
+        {
+          path: 'categories',
+          component: () => import('pages/browse/Categories')
+        },
+        {
+          path: 'categories/:mediaType/:tag',
+          component: () => import('pages/browse/Filter')
+        },
+        {
+          path: '',
+          component: () => import('pages/browse/Filter')
+        }
+      ]
     },
     {
       path: '/queue',

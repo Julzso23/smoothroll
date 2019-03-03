@@ -18,5 +18,9 @@ export default {
     simulcast: 'Simulcast',
     updated: 'Actualizado'
   },
-  emptyHistory: 'Tu historial está actualmente vacío.'
+  emptyHistory: 'Tu historial está actualmente vacío.',
+  categories: 'Categorías',
+  genres: 'Géneros',
+  seasons: 'Estaciones',
+  emptyBrowse: 'Su búsqueda no produjo resultados.'
 }
