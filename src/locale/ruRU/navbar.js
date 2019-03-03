@@ -4,5 +4,5 @@ export default {
   queue: 'Очередь',
   history: 'история',
   search: 'Поиск',
-  settings: 'настройки',
-};
+  settings: 'настройки'
+}

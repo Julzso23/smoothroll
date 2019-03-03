@@ -23,4 +23,4 @@ export default {
   genres: 'Gêneros',
   seasons: 'Temporadas',
   emptyBrowse: 'Sua busca não retornou resultados.'
-};
+}

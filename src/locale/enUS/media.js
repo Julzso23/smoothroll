@@ -23,4 +23,4 @@ export default {
   genres: 'Genres',
   seasons: 'Seasons',
   emptyBrowse: 'Your search returned no results.'
-};
+}
