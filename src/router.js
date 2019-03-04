@@ -37,7 +37,7 @@ const router = new Router({
         },
         {
           path: 'categories/:mediaType/:tag',
-          component: () => import('pages/browse/Filter')
+          component: () => import('pages/browse/Tags')
         },
         {
           path: '',
