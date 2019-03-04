@@ -3,4 +3,4 @@ export default {
   logout: 'Disconnettersi',
   usernameEmail: 'Nome utente o email',
   password: 'Parola d\'ordine'
-};
+}

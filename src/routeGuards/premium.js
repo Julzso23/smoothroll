@@ -1,13 +1,13 @@
-import store from 'store';
+import store from 'store'
 
-export default function(to, from, next) {
+export default function (to, from, next) {
   if (store.getters.isLoggedIn) {
     if (store.getters.isPremium) {
-      next();
+      next()
     } else {
-      next('premium');
+      next('premium')
     }
   } else {
-    next('login');
+    next('login')
   }
 };

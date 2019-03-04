@@ -23,4 +23,4 @@ export default {
   genres: 'Genres',
   seasons: 'Jahreszeiten',
   emptyBrowse: 'Deine Suche ergab keine Ergebnisse.'
-};
+}
