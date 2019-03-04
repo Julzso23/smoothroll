@@ -10,13 +10,13 @@ export default {
   },
 
   mutations: {
-    setCategories(state, categories) {
+    setCategories (state, categories) {
       state.categories = categories
     },
-    setSeriesList(state, seriesList) {
+    setSeriesList (state, seriesList) {
       state.seriesList = seriesList
     },
-    appendSeriesList(state, seriesList) {
+    appendSeriesList (state, seriesList) {
       state.seriesList = state.seriesList.concat(seriesList)
     }
   },
@@ -41,8 +41,8 @@ export default {
         })
     },
 
-    async listSeries({commit, rootState, dispatch}, {filter, mediaType, limit, offset, append}) {
-      await dispatch('verifySession');
+    async listSeries ({ commit, rootState, dispatch }, { filter, mediaType, limit, offset, append }) {
+      await dispatch('verifySession')
 
       return Vue.api.get('list_series', {
         filter: filter,
@@ -56,18 +56,18 @@ export default {
       })
         .then(data => {
           if (append) {
-            commit('appendSeriesList', data);
+            commit('appendSeriesList', data)
           } else {
-            commit('setSeriesList', data);
+            commit('setSeriesList', data)
           }
 
           return data
         })
-        .catch(({code}) => {
-          if (code == 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('listSeries', {filter, mediaType, limit, offset, append}));
+        .catch(({ code }) => {
+          if (code === 'bad_session') {
+            return dispatch('startSession').then(() => dispatch('listSeries', { filter, mediaType, limit, offset, append }))
           }
-        });
+        })
     }
   }
 }

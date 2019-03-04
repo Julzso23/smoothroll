@@ -17,7 +17,7 @@ export default {
     appendMediaList (state, mediaList) {
       state.mediaList = state.mediaList.concat(mediaList)
     },
-    setCurrentMedia(state, media) {
+    setCurrentMedia (state, media) {
       state.currentMedia = media
     },
     setCurrentSeries (state, series) {
@@ -61,7 +61,7 @@ export default {
         })
     },
 
-    async getMedia({commit, rootState, dispatch}, id) {
+    async getMedia ({ commit, rootState, dispatch }, id) {
       await dispatch('verifySession')
 
       return Vue.api.get('info', {
