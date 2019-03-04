@@ -23,4 +23,4 @@ export default {
   genres: 'Жанры',
   seasons: 'Сезоны',
   emptyBrowse: 'По Вашему запросу нет результатов.'
-};
+}

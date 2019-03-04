@@ -3,4 +3,4 @@ export default {
   logout: 'Logout',
   usernameEmail: 'Username or email',
   password: 'Password'
-};
+}

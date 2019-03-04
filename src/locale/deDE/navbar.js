@@ -4,5 +4,5 @@ export default {
   queue: 'Warteschlange',
   history: 'Geschichte',
   search: 'Suche',
-  settings: 'Einstellungen',
-};
+  settings: 'Einstellungen'
+}
