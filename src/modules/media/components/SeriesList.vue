@@ -63,6 +63,8 @@
             this.loading = false;
             if (this.seriesList.length % this.limit != 0 || data.length == 0) {
               this.canLoadMore = false;
+            } else {
+              this.canLoadMore = true;
             }
           });
       },
@@ -82,6 +84,8 @@
             this.loadingMore = false;
             if (this.seriesList.length % this.limit != 0 || data.length == 0) {
               this.canLoadMore = false;
+            } else {
+              this.canLoadMore = true;
             }
           });
       }
