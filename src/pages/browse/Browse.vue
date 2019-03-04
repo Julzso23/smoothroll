@@ -15,6 +15,9 @@
 
 <script>
   export default {
-    name: 'browse'
+    name: 'browse',
+    mounted() {
+      document.title = `${this.$t('navbar.browse')} ― Smoothroll`;
+    }
   }
 </script>
