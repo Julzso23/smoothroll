@@ -1,0 +1,60 @@
+{
+  "navbar": {
+    "dashboard": "Painel de controle",
+    "browse": "Folhear",
+    "queue": "Fila",
+    "history": "História",
+    "search": "Procurar",
+    "settings": "Definições"
+  },
+  "authentication": {
+    "login": "Entrar",
+    "logout": "Sair",
+    "usernameEmail": "Nome de usuário ou email",
+    "password": "Senha"
+  },
+  "settings": {
+    "language": "Língua"
+  },
+  "media": {
+    "episode": "Episódio {number}",
+    "queueAdd": "Adicionar à fila",
+    "queueRemove": "Remover da fila",
+    "filter": "Filtro",
+    "media": "Meios",
+    "loadMore": "Carregue mais",
+    "types": {
+      "anime": "Anime",
+      "drama": "Drama",
+      "both": "Ambos"
+    },
+    "filters": {
+      "alphabetical": "Alfabético",
+      "featured": "Destaque",
+      "newest": "O mais novo",
+      "popular": "Popular",
+      "simulcast": "Simulcast",
+      "updated": "Atualizado"
+    },
+    "emptyHistory": "Seu histórico está vazio no momento.",
+    "categories": "Categorias",
+    "genres": "Gêneros",
+    "seasons": "Temporadas",
+    "emptyBrowse": "Sua busca não retornou resultados."
+  },
+  "footer": {
+    "madeBy": "Feito por {name}.",
+    "contribute": "Veja a fonte e / ou contribua para o projeto no GitHub.",
+    "endorsement": "A Smoothroll não é recomendada ou afiliada à Crunchyroll.",
+    "dataNotice": "O Smoothroll não armazena nenhum dos seus dados em seus servidores. É simplesmente uma interface que fica no topo do Crunchyroll."
+  },
+  "dashboard": {
+    "queue": "Fila",
+    "recent": "Lançamentos Recentes"
+  },
+  "error": {
+    "notFound": "404 - Página Não Encontrada",
+    "notFoundLong": "Parece que você tentou acessar uma página que não existe.",
+    "premium": "Você precisa ter uma conta premium Crunchyroll para usar este serviço!"
+  }
+}
