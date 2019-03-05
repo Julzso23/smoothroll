@@ -42,7 +42,7 @@
         this.$store.dispatch('getMedia', this.mediaId);
       },
       media() {
-        document.title = `${this.$t('media.episode', {number: this.media.episode_number})}: ${this.media.name} - ${this.media.series_name} ― Smoothroll`;
+        document.title = `${this.$t('media.episode', {number: this.media.episode_number})}: ${this.media.name} - ${this.media.collection_name} ― Smoothroll`;
 
         this.$store.dispatch('getCollection', this.media.collection_id);
 
