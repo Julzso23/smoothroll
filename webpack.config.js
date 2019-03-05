@@ -17,6 +17,7 @@ module.exports = {
     ],
     extensions: [
       '.js',
+      '.json',
       '.vue',
       '.css',
       '.scss'
