@@ -27,20 +27,20 @@
 </template>
 
 <script>
-  import NavbarLink from './NavbarLink'
-  import Authentication from './Authentication'
-  import Search from './Search'
-  import LocalePicker from './LocalePicker'
+import NavbarLink from './NavbarLink'
+import Authentication from './Authentication'
+import Search from './Search'
+import LocalePicker from './LocalePicker'
 
-  export default {
-    name: 'navbar',
-    components: {
-      NavbarLink,
-      Authentication,
-      Search,
-      LocalePicker
-    }
+export default {
+  name: 'navbar',
+  components: {
+    NavbarLink,
+    Authentication,
+    Search,
+    LocalePicker
   }
+}
 </script>
 
 <style lang="scss" scoped>

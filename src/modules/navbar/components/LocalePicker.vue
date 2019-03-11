@@ -15,40 +15,40 @@
 </template>
 
 <script>
-  import 'flag-icon-css/sass/flag-icon.scss'
+import 'flag-icon-css/sass/flag-icon.scss'
 
-  export default {
-    name: 'locale-picker',
-    computed: {
-      localeList() {
-        return this.$store.state.locale.localeList;
-      },
-      locale() {
-        return this.$store.state.locale.locale;
-      }
+export default {
+  name: 'locale-picker',
+  computed: {
+    localeList () {
+      return this.$store.state.locale.localeList
     },
-    mounted() {
-      this.$store.dispatch('getLocales');
-    },
-    methods: {
-      setLocale(locale) {
-        this.$store.commit('setLocale', locale);
-        this.$i18n.locale = locale;
-      }
-    },
-    data: () => ({
-      flags: {
-        enUS: 'flag-icon-us',
-        enGB: 'flag-icon-gb',
-        esLA: 'flag-icon-mx',
-        esES: 'flag-icon-es',
-        ptBR: 'flag-icon-br',
-        ptPT: 'flag-icon-pt',
-        frFR: 'flag-icon-fr',
-        deDE: 'flag-icon-de',
-        itIT: 'flag-icon-it',
-        ruRU: 'flag-icon-ru'
-      }
-    })
-  }
+    locale () {
+      return this.$store.state.locale.locale
+    }
+  },
+  mounted () {
+    this.$store.dispatch('getLocales')
+  },
+  methods: {
+    setLocale (locale) {
+      this.$store.commit('setLocale', locale)
+      this.$i18n.locale = locale
+    }
+  },
+  data: () => ({
+    flags: {
+      enUS: 'flag-icon-us',
+      enGB: 'flag-icon-gb',
+      esLA: 'flag-icon-mx',
+      esES: 'flag-icon-es',
+      ptBR: 'flag-icon-br',
+      ptPT: 'flag-icon-pt',
+      frFR: 'flag-icon-fr',
+      deDE: 'flag-icon-de',
+      itIT: 'flag-icon-it',
+      ruRU: 'flag-icon-ru'
+    }
+  })
+}
 </script>

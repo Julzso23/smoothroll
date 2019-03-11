@@ -7,15 +7,15 @@
 </template>
 
 <script>
-  import LoginForm from 'modules/login/components/LoginForm';
+import LoginForm from 'modules/login/components/LoginForm'
 
-  export default {
-    name: 'login',
-    components: {
-      LoginForm
-    },
-    created() {
-      document.title = `${this.$t('authentication.login')} ― Smoothroll`;
-    }
+export default {
+  name: 'login',
+  components: {
+    LoginForm
+  },
+  created () {
+    document.title = `${this.$t('authentication.login')} ― Smoothroll`
   }
+}
 </script>

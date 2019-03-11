@@ -10,38 +10,38 @@
 </template>
 
 <script>
-  export default {
-    name: 'dropdown-selector',
-    props: {
-      options: Array,
-      label: String,
-      initialSelection: String
-    },
-    data: () => ({
-      selection: ''
-    }),
-    mounted() {
-      if (this.initialSelection) {
-        for (let option of this.options) {
-          if (option.key == this.initialSelection) {
-            this.selection = option.value;
-            return;
-          }
+export default {
+  name: 'dropdown-selector',
+  props: {
+    options: Array,
+    label: String,
+    initialSelection: String
+  },
+  data: () => ({
+    selection: ''
+  }),
+  mounted () {
+    if (this.initialSelection) {
+      for (let option of this.options) {
+        if (option.key === this.initialSelection) {
+          this.selection = option.value
+          return
         }
-      }
-      this.selection = this.options[0].value;
-    },
-    methods: {
-      onChange() {
-        let key = '';
-        for (let option of this.options) {
-          if (option.value == this.selection) {
-            key = option.key;
-            break;
-          }
-        }
-        this.$emit('selectionUpdate', key);
       }
     }
+    this.selection = this.options[0].value
+  },
+  methods: {
+    onChange () {
+      let key = ''
+      for (let option of this.options) {
+        if (option.value === this.selection) {
+          key = option.key
+          break
+        }
+      }
+      this.$emit('selectionUpdate', key)
+    }
   }
+}
 </script>

@@ -7,31 +7,30 @@
 </template>
 
 <script>
-  import MediaCard from 'modules/cards/components/MediaCard';
-  import $ from 'jquery';
+import MediaCard from 'modules/cards/components/MediaCard'
 
-  export default {
-    name: 'scrolling-collection',
-    components: {
-      MediaCard
-    },
-    props: {
-      collection: Array,
-      active: String
-    },
-    watch: {
-      collection() {
-        this.$nextTick(function() {
-          for (let card of this.$refs.media) {
-            if (card.$props.active) {
-              this.$el.scrollLeft = card.$el.getBoundingClientRect().left - this.$el.getBoundingClientRect().left;
-              break;
-            }
+export default {
+  name: 'scrolling-collection',
+  components: {
+    MediaCard
+  },
+  props: {
+    collection: Array,
+    active: String
+  },
+  watch: {
+    collection () {
+      this.$nextTick(function () {
+        for (let card of this.$refs.media) {
+          if (card.$props.active) {
+            this.$el.scrollLeft = card.$el.getBoundingClientRect().left - this.$el.getBoundingClientRect().left
+            break
           }
-        });
-      }
+        }
+      })
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

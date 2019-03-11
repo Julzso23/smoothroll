@@ -11,17 +11,17 @@
 </template>
 
 <script>
-  import Queue from 'modules/media/components/Queue';
-  import RecentMedia from 'modules/media/components/RecentMedia';
+import Queue from 'modules/media/components/Queue'
+import RecentMedia from 'modules/media/components/RecentMedia'
 
-  export default {
-    name: 'dashboard',
-    components: {
-      Queue,
-      RecentMedia
-    },
-    created() {
-      document.title = `${this.$t('navbar.dashboard')} ― Smoothroll`;
-    }
+export default {
+  name: 'dashboard',
+  components: {
+    Queue,
+    RecentMedia
+  },
+  created () {
+    document.title = `${this.$t('navbar.dashboard')} ― Smoothroll`
   }
+}
 </script>

@@ -17,45 +17,45 @@
 </template>
 
 <script>
-  import DropdownSelector from 'modules/shared/components/DropdownSelector';
-  import Loading from 'modules/shared/components/Loading';
+import DropdownSelector from 'modules/shared/components/DropdownSelector'
+import Loading from 'modules/shared/components/Loading'
 
-  export default {
-    name: 'browse-tags',
-    created() {
-      this.updateCategories();
-    },
-    methods: {
-      updateCategories() {
-        this.loading = true;
-        this.$store.dispatch('getCategories', this.mediaType)
-          .then(() => {
-            this.loading = false;
-          });
-      }
-    },
-    computed: {
-      genres() {
-        return this.$store.state.browse.categories.genre;
-      },
-      seasons() {
-        return this.$store.state.browse.categories.season;
-      }
-    },
-    data() {
-      return {
-        mediaOptions: [
-          {key: 'anime', value: this.$t('media.types.anime')},
-          {key: 'drama', value: this.$t('media.types.drama')}
-        ],
-        mediaType: 'anime',
-
-        loading: false
-      };
-    },
-    components: {
-      DropdownSelector,
-      Loading
+export default {
+  name: 'browse-tags',
+  created () {
+    this.updateCategories()
+  },
+  methods: {
+    updateCategories () {
+      this.loading = true
+      this.$store.dispatch('getCategories', this.mediaType)
+        .then(() => {
+          this.loading = false
+        })
     }
+  },
+  computed: {
+    genres () {
+      return this.$store.state.browse.categories.genre
+    },
+    seasons () {
+      return this.$store.state.browse.categories.season
+    }
+  },
+  data () {
+    return {
+      mediaOptions: [
+        { key: 'anime', value: this.$t('media.types.anime') },
+        { key: 'drama', value: this.$t('media.types.drama') }
+      ],
+      mediaType: 'anime',
+
+      loading: false
+    }
+  },
+  components: {
+    DropdownSelector,
+    Loading
   }
+}
 </script>
