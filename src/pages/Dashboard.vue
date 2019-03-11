@@ -7,7 +7,10 @@
     <hr class="mt-0 bg-light" />
     <queue ref="queue" />
 
-    <h3 class="text-light">{{$t('dashboard.recent')}}</h3>
+    <h3 class="text-light">
+      {{$t('dashboard.recent')}}
+      <loading-small v-if="recentMediaLoading && recentMediaLength != 0" />
+    </h3>
     <hr class="mt-0 bg-light" />
     <recent-media />
   </div>
@@ -34,6 +37,12 @@ export default {
     },
     queueLength () {
       return this.$store.state.queue.queue.length
+    },
+    recentMediaLoading () {
+      return this.$store.state.media.recentMediaLoading
+    },
+    recentMediaLength () {
+      return this.$store.state.media.recentMedia.length
     }
   }
 }
