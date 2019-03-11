@@ -14,10 +14,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'browse',
-    mounted() {
-      document.title = `${this.$t('navbar.browse')} ― Smoothroll`;
-    }
+export default {
+  name: 'browse',
+  mounted () {
+    document.title = `${this.$t('navbar.browse')} ― Smoothroll`
   }
+}
 </script>

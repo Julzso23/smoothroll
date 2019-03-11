@@ -20,41 +20,41 @@
 </template>
 
 <script>
-  import Card from './Card';
-  import Ribbon from './Ribbon';
-  import Popper from 'popper.js';
+import Card from './Card'
+import Ribbon from './Ribbon'
+import Popper from 'popper.js'
 
-  export default {
-    name: 'series-card',
-    props: {
-      series: Object
-    },
-    components: {
-      Card,
-      Ribbon
-    },
-    mounted() {
-      this.fixMixedContent();
-      this.popper = new Popper(this.$refs.card.$el, this.$refs.popper.$el, {placement: 'right-start'});
-    },
-    methods: {
-      fixMixedContent() {
-        if (this.series.portrait_image) {
-          this.series.portrait_image.thumb_url = this.series.portrait_image.thumb_url.replace('http://', 'https://');
-        }
-      },
-      setPopperVisible(visible) {
-        this.showPopper = visible;
-        this.popperHeight = this.$refs.card.$el.offsetHeight;
-        this.popper.scheduleUpdate();
+export default {
+  name: 'series-card',
+  props: {
+    series: Object
+  },
+  components: {
+    Card,
+    Ribbon
+  },
+  mounted () {
+    this.fixMixedContent()
+    this.popper = new Popper(this.$refs.card.$el, this.$refs.popper.$el, { placement: 'right-start' })
+  },
+  methods: {
+    fixMixedContent () {
+      if (this.series.portrait_image) {
+        this.series.portrait_image.thumb_url = this.series.portrait_image.thumb_url.replace('http://', 'https://')
       }
     },
-    data: () => ({
-      popper: null,
-      showPopper: false,
-      popperHeight: 0
-    })
-  }
+    setPopperVisible (visible) {
+      this.showPopper = visible
+      this.popperHeight = this.$refs.card.$el.offsetHeight
+      this.popper.scheduleUpdate()
+    }
+  },
+  data: () => ({
+    popper: null,
+    showPopper: false,
+    popperHeight: 0
+  })
+}
 </script>
 
 <style lang="scss" scoped>

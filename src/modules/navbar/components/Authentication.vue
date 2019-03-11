@@ -18,26 +18,26 @@
 </template>
 
 <script>
-  import NavbarLink from './NavbarLink';
+import NavbarLink from './NavbarLink'
 
-  export default {
-    name: 'navbar-authentication',
-    components: {
-      NavbarLink
+export default {
+  name: 'navbar-authentication',
+  components: {
+    NavbarLink
+  },
+  computed: {
+    isLoggedIn () {
+      return this.$store.getters.isLoggedIn
     },
-    computed: {
-      isLoggedIn() {
-        return this.$store.getters.isLoggedIn;
-      },
-      username() {
-        return this.$store.state.authentication.user.username;
-      }
-    },
-    methods: {
-      async logout() {
-        await this.$store.dispatch('logout');
-        this.$router.push('/login');
-      }
+    username () {
+      return this.$store.state.authentication.user.username
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$store.dispatch('logout')
+      this.$router.push('/login')
     }
   }
+}
 </script>

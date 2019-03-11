@@ -5,13 +5,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'navbar-link',
-    props: {
-      to: String,
-      exact: Boolean
-    }
+export default {
+  name: 'navbar-link',
+  props: {
+    to: String,
+    exact: Boolean
   }
+}
 </script>
 
 <style lang="scss" scoped>

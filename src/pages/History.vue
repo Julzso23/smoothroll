@@ -26,79 +26,79 @@
 </template>
 
 <script>
-  import DropdownSelector from 'modules/shared/components/DropdownSelector';
-  import Loading from 'modules/shared/components/Loading';
-  import MediaCard from 'modules/cards/components/MediaCard';
+import DropdownSelector from 'modules/shared/components/DropdownSelector'
+import Loading from 'modules/shared/components/Loading'
+import MediaCard from 'modules/cards/components/MediaCard'
 
-  export default {
-    name: 'History',
-    data: function() {
-      return {
-        mediaOptions: [
-          {key: 'anime', value: this.$t('media.types.anime')},
-          {key: 'drama', value: this.$t('media.types.drama')},
-          {key: 'anime|drama', value: this.$t('media.types.both')}
-        ],
-        mediaType: 'anime',
+export default {
+  name: 'History',
+  data: function () {
+    return {
+      mediaOptions: [
+        { key: 'anime', value: this.$t('media.types.anime') },
+        { key: 'drama', value: this.$t('media.types.drama') },
+        { key: 'anime|drama', value: this.$t('media.types.both') }
+      ],
+      mediaType: 'anime',
 
-        limit: 50,
-        offset: 0,
+      limit: 50,
+      offset: 0,
 
-        loading: false,
-        loadingMore: false,
-        canLoadMore: true
-      };
-    },
-    methods: {
-      async updateMediaList() {
-        this.loading = true;
-        this.offset = 0;
+      loading: false,
+      loadingMore: false,
+      canLoadMore: true
+    }
+  },
+  methods: {
+    async updateMediaList () {
+      this.loading = true
+      this.offset = 0
 
-        await this.$store.dispatch('getHistory', {
-          mediaTypes: this.mediaType,
-          limit: this.limit,
-          offset: this.offset
+      await this.$store.dispatch('getHistory', {
+        mediaTypes: this.mediaType,
+        limit: this.limit,
+        offset: this.offset
+      })
+        .then(data => {
+          this.loading = false
+
+          if (this.mediaList.length % this.limit !== 0 || data.length === 0) {
+            this.canLoadMore = false
+          }
         })
-          .then(data => {
-            this.loading = false;
+    },
 
-            if (this.mediaList.length % this.limit != 0 || data.length == 0) {
-              this.canLoadMore = false;
-            }
-          });
-      },
+    async loadMore () {
+      this.loadingMore = true
+      this.offset += this.limit
 
-      async loadMore() {
-        this.loadingMore = true;
-        this.offset += this.limit;
-
-        await this.$store.dispatch('getHistory', {
-          mediaTypes: this.mediaType,
-          limit: this.limit,
-          offset: this.offset,
-          append: true
+      await this.$store.dispatch('getHistory', {
+        mediaTypes: this.mediaType,
+        limit: this.limit,
+        offset: this.offset,
+        append: true
+      })
+        .then(data => {
+          this.loadingMore = false
+          if (this.mediaList.length % this.limit !== 0 || data.length === 0) {
+            this.canLoadMore = false
+          }
         })
-          .then(data => {
-            this.loadingMore = false;
-            if (this.mediaList.length % this.limit != 0 || data.length == 0) {
-              this.canLoadMore = false;
-            }
-          });
-      }
-    },
-    created() {
-      this.updateMediaList();
-      document.title = `${this.$t('navbar.history')} ― Smoothroll`;
-    },
-    components: {
-      DropdownSelector,
-      MediaCard,
-      Loading
-    },
-    computed: {
-      mediaList() {
-        return this.$store.state.media.mediaList;
-      }
+    }
+  },
+  created () {
+    this.updateMediaList()
+    document.title = `${this.$t('navbar.history')} ― Smoothroll`
+  },
+  components: {
+    DropdownSelector,
+    MediaCard,
+    Loading
+  },
+  computed: {
+    mediaList () {
+      return this.$store.state.media.mediaList
     }
   }
+}
 </script>

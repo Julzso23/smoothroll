@@ -11,39 +11,39 @@
 </template>
 
 <script>
-  import MediaCard from 'modules/cards/components/MediaCard';
-  import GrabHandle from 'modules/shared/components/GrabHandle';
-  import Loading from 'modules/shared/components/Loading';
-  import Draggable from 'vuedraggable'
+import MediaCard from 'modules/cards/components/MediaCard'
+import GrabHandle from 'modules/shared/components/GrabHandle'
+import Loading from 'modules/shared/components/Loading'
+import Draggable from 'vuedraggable'
 
-  export default {
-    name: 'queue',
-    components: {
-      MediaCard,
-      GrabHandle,
-      Draggable,
-      Loading
-    },
-    created() {
-      this.$store.dispatch('getQueue')
-        .then(() => {
-          this.loading = false;
-        });
-    },
-    computed: {
-      queue: {
-        get() {
-          return this.$store.state.queue.queue;
-        },
-        set(value) {
-          this.$store.dispatch('sortQueue', value);
-        }
+export default {
+  name: 'queue',
+  components: {
+    MediaCard,
+    GrabHandle,
+    Draggable,
+    Loading
+  },
+  created () {
+    this.$store.dispatch('getQueue')
+      .then(() => {
+        this.loading = false
+      })
+  },
+  computed: {
+    queue: {
+      get () {
+        return this.$store.state.queue.queue
+      },
+      set (value) {
+        this.$store.dispatch('sortQueue', value)
       }
-    },
-    data: () => ({
-      loading: true
-    })
-  }
+    }
+  },
+  data: () => ({
+    loading: true
+  })
+}
 </script>
 
 <style lang="scss" scoped>

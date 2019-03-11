@@ -15,48 +15,48 @@
 </template>
 
 <script>
-  import Loading from 'modules/shared/components/Loading';
-  import MediaCard from 'modules/cards/components/MediaCard';
+import Loading from 'modules/shared/components/Loading'
+import MediaCard from 'modules/cards/components/MediaCard'
 
-  export default {
-    name: 'recent-media',
-    components: {
-      Loading,
-      MediaCard
-    },
-    data: () => ({
-      mediaType: 'anime'
-    }),
-    computed: {
-      recentMedia() {
-        let dates = [];
+export default {
+  name: 'recent-media',
+  components: {
+    Loading,
+    MediaCard
+  },
+  data: () => ({
+    mediaType: 'anime'
+  }),
+  computed: {
+    recentMedia () {
+      let dates = []
 
-        for (let media of this.$store.state.media.recentMedia) {
-          if (!dates.find(date => date.date == this.timeToDate(media.available_time))) {
-            let date = {};
-            date.date = this.timeToDate(media.available_time);
-            date.media = [];
-            dates.push(date);
-          }
-
-          dates.find(date => date.date == this.timeToDate(media.available_time)).media.push(media);
+      for (let media of this.$store.state.media.recentMedia) {
+        if (!dates.find(date => date.date === this.timeToDate(media.available_time))) {
+          let date = {}
+          date.date = this.timeToDate(media.available_time)
+          date.media = []
+          dates.push(date)
         }
 
-        return dates;
+        dates.find(date => date.date === this.timeToDate(media.available_time)).media.push(media)
       }
-    },
-    created() {
-      this.$store.dispatch('getRecentMedia', this.mediaType);
-    },
-    methods: {
-      timeToDate(time) {
-        const date = new Date(time);
-        const options = {
-          day: '2-digit',
-          month: 'long'
-        }
-        return date.toLocaleDateString(navigator.language, options);
+
+      return dates
+    }
+  },
+  created () {
+    this.$store.dispatch('getRecentMedia', this.mediaType)
+  },
+  methods: {
+    timeToDate (time) {
+      const date = new Date(time)
+      const options = {
+        day: '2-digit',
+        month: 'long'
       }
+      return date.toLocaleDateString(navigator.language, options)
     }
   }
+}
 </script>

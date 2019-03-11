@@ -30,86 +30,86 @@
 </template>
 
 <script>
-  import Collection from 'modules/media/components/Collection';
-  import Loading from 'modules/shared/components/Loading';
-  import ToggleQueueButton from 'modules/media/components/ToggleQueueButton';
-  import Rating from 'modules/media/components/Rating';
+import Collection from 'modules/media/components/Collection'
+import Loading from 'modules/shared/components/Loading'
+import ToggleQueueButton from 'modules/media/components/ToggleQueueButton'
+import Rating from 'modules/media/components/Rating'
 
-  export default {
-    name: 'series',
-    created() {
-      this.$store.dispatch('getSeries', this.seriesId);
+export default {
+  name: 'series',
+  created () {
+    this.$store.dispatch('getSeries', this.seriesId)
+  },
+  data: () => ({
+    collectionsLoading: false
+  }),
+  computed: {
+    series () {
+      return this.$store.state.media.currentSeries
     },
-    data: () => ({
-      collectionsLoading: false
-    }),
-    computed: {
-      series() {
-        return this.$store.state.media.currentSeries;
-      },
-      mediaCollections() {
-        let collections = [];
-        for (let media of this.$store.state.media.mediaList) {
-          if (!collections.find(collection => collection.id == media.collection_id)) {
-            let collection = {};
-            collection.id = media.collection_id;
-            collection.name = media.collection_name;
-            collection.media = [];
-            collections.push(collection);
-          }
-
-          collections.find(collection => collection.id == media.collection_id).media.push(media);
+    mediaCollections () {
+      let collections = []
+      for (let media of this.$store.state.media.mediaList) {
+        if (!collections.find(collection => collection.id === media.collection_id)) {
+          let collection = {}
+          collection.id = media.collection_id
+          collection.name = media.collection_name
+          collection.media = []
+          collections.push(collection)
         }
-        return collections;
-      },
-      seriesId() {
-        return this.$route.params.id;
-      }
-    },
-    components: {
-      Collection,
-      Loading,
-      ToggleQueueButton,
-      Rating
-    },
-    watch: {
-      series(value) {
-        this.collectionsLoading = true;
 
-        this.$store.dispatch('listMedia', {
-          seriesId: this.seriesId,
-          count: this.series.media_count
+        collections.find(collection => collection.id === media.collection_id).media.push(media)
+      }
+      return collections
+    },
+    seriesId () {
+      return this.$route.params.id
+    }
+  },
+  components: {
+    Collection,
+    Loading,
+    ToggleQueueButton,
+    Rating
+  },
+  watch: {
+    series (value) {
+      this.collectionsLoading = true
+
+      this.$store.dispatch('listMedia', {
+        seriesId: this.seriesId,
+        count: this.series.media_count
+      })
+        .then(() => {
+          this.collectionsLoading = false
         })
-          .then(() => {
-            this.collectionsLoading = false;
-          });
 
-        this.fixMixedContent();
+      this.fixMixedContent()
 
-        document.title = `${this.series.name} ― Smoothroll`;
-      },
-      seriesId() {
-        this.$store.dispatch('getSeries', this.seriesId);
-      }
+      document.title = `${this.series.name} ― Smoothroll`
     },
-    methods: {
-      onQueueToggle(endLoading) {
-        this.$store.dispatch('getSeries', this.seriesId)
-          .then(() => {
-            endLoading();
-          });
-      },
-      fixMixedContent() {
-        if (this.series.landscape_image) {
-          this.series.landscape_image.full_url = this.series.landscape_image.full_url.replace('http://', 'https://');
-        }
+    seriesId () {
+      this.$store.dispatch('getSeries', this.seriesId)
+    }
+  },
+  methods: {
+    onQueueToggle (endLoading) {
+      this.$store.dispatch('getSeries', this.seriesId)
+        .then(() => {
+          endLoading()
+        })
+    },
+    fixMixedContent () {
+      if (this.series.landscape_image) {
+        this.series.landscape_image.full_url = this.series.landscape_image.full_url.replace('http://', 'https://')
+      }
 
-        if (this.series.portrait_image) {
-          this.series.portrait_image.large_url = this.series.portrait_image.large_url.replace('http://', 'https://');
-        }
+      if (this.series.portrait_image) {
+        this.series.portrait_image.large_url = this.series.portrait_image.large_url.replace('http://', 'https://')
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>
