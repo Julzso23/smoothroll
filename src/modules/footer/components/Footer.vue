@@ -12,14 +12,14 @@
 </template>
 
 <script>
-  import FooterItem from './FooterItem';
+import FooterItem from './FooterItem'
 
-  export default {
-    name: 'app-footer',
-    components: {
-      FooterItem
-    }
+export default {
+  name: 'app-footer',
+  components: {
+    FooterItem
   }
+}
 </script>
 
 <style lang="scss" scoped>

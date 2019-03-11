@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'progress-bar',
-    props: {
-      value: Number
-    }
+export default {
+  name: 'progress-bar',
+  props: {
+    value: Number
   }
+}
 </script>

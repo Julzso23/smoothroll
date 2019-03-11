@@ -5,36 +5,36 @@
 </template>
 
 <script>
-  import debounce from 'debounce';
-  import Typeahead from 'vue-bootstrap-typeahead';
+import debounce from 'debounce'
+import Typeahead from 'vue-bootstrap-typeahead'
 
-  export default {
-    name: 'search',
-    data: () => ({
-      query: ''
-    }),
-    watch: {
-      query(query) {
-        this.search(query);
-      }
-    },
-    methods: {
-      search: debounce(function(query) {
-        if (query != '') {
-          this.$store.dispatch('search', query);
-        }
-      }, 300),
-      hit(result) {
-        this.$router.push(`/series/${result.series_id}`);
-      }
-    },
-    computed: {
-      results() {
-        return this.$store.state.media.searchResults;
-      }
-    },
-    components: {
-      Typeahead
+export default {
+  name: 'search',
+  data: () => ({
+    query: ''
+  }),
+  watch: {
+    query (query) {
+      this.search(query)
     }
+  },
+  methods: {
+    search: debounce(function (query) {
+      if (query !== '') {
+        this.$store.dispatch('search', query)
+      }
+    }, 300),
+    hit (result) {
+      this.$router.push(`/series/${result.series_id}`)
+    }
+  },
+  computed: {
+    results () {
+      return this.$store.state.media.searchResults
+    }
+  },
+  components: {
+    Typeahead
   }
+}
 </script>

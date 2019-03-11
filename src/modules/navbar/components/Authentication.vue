@@ -5,8 +5,8 @@
         {{username}}
       </a>
       <div class="dropdown-menu bg-dark" aria-labelledby="userDropdown">
-        <router-link class="dropdown-item bg-dark text-light" to="/settings">{{$t('navbar.settings')}}</router-link>
-        <div class="dropdown-divider"></div>
+        <!-- <router-link class="dropdown-item bg-dark text-light" to="/settings">{{$t('navbar.settings')}}</router-link>
+        <div class="dropdown-divider"></div> -->
         <a class="dropdown-item bg-dark text-light" href="#" @click="logout">{{$t('authentication.logout')}}</a>
       </div>
     </li>
@@ -18,26 +18,26 @@
 </template>
 
 <script>
-  import NavbarLink from './NavbarLink';
+import NavbarLink from './NavbarLink'
 
-  export default {
-    name: 'navbar-authentication',
-    components: {
-      NavbarLink
+export default {
+  name: 'navbar-authentication',
+  components: {
+    NavbarLink
+  },
+  computed: {
+    isLoggedIn () {
+      return this.$store.getters.isLoggedIn
     },
-    computed: {
-      isLoggedIn() {
-        return this.$store.getters.isLoggedIn;
-      },
-      username() {
-        return this.$store.state.authentication.user.username;
-      }
-    },
-    methods: {
-      async logout() {
-        await this.$store.dispatch('logout');
-        this.$router.push('/login');
-      }
+    username () {
+      return this.$store.state.authentication.user.username
+    }
+  },
+  methods: {
+    async logout () {
+      await this.$store.dispatch('logout')
+      this.$router.push('/login')
     }
   }
+}
 </script>

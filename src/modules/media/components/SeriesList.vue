@@ -20,83 +20,83 @@
 </template>
 
 <script>
-  import Loading from 'modules/shared/components/Loading';
-  import SeriesCard from 'modules/cards/components/SeriesCard';
+import Loading from 'modules/shared/components/Loading'
+import SeriesCard from 'modules/cards/components/SeriesCard'
 
-  export default {
-    name: 'series-list',
-    components: {
-      SeriesCard,
-      Loading
-    },
-    props: {
-      filter: String,
-      mediaType: String
-    },
-    data: function() {
-      return {
-        limit: 50,
-        offset: 0,
+export default {
+  name: 'series-list',
+  components: {
+    SeriesCard,
+    Loading
+  },
+  props: {
+    filter: String,
+    mediaType: String
+  },
+  data: function () {
+    return {
+      limit: 50,
+      offset: 0,
 
-        loading: false,
-        loadingMore: false,
-        canLoadMore: false
-      };
-    },
-    computed: {
-      seriesList() {
-        return this.$store.state.browse.seriesList;
-      }
-    },
-    methods: {
-      async updateSeriesList() {
-        this.loading = true;
-        this.offset = 0;
+      loading: false,
+      loadingMore: false,
+      canLoadMore: false
+    }
+  },
+  computed: {
+    seriesList () {
+      return this.$store.state.browse.seriesList
+    }
+  },
+  methods: {
+    async updateSeriesList () {
+      this.loading = true
+      this.offset = 0
 
-        await this.$store.dispatch('listSeries', {
-          filter: this.filter,
-          mediaType: this.mediaType,
-          limit: this.limit,
-          offset: this.offset
+      await this.$store.dispatch('listSeries', {
+        filter: this.filter,
+        mediaType: this.mediaType,
+        limit: this.limit,
+        offset: this.offset
+      })
+        .then(data => {
+          this.loading = false
+          if (this.seriesList.length % this.limit !== 0 || data.length === 0) {
+            this.canLoadMore = false
+          } else {
+            this.canLoadMore = true
+          }
         })
-          .then(data => {
-            this.loading = false;
-            if (this.seriesList.length % this.limit != 0 || data.length == 0) {
-              this.canLoadMore = false;
-            } else {
-              this.canLoadMore = true;
-            }
-          });
-      },
-
-      async loadMore() {
-        this.loadingMore = true;
-        this.offset += this.limit;
-
-        await this.$store.dispatch('listSeries', {
-          filter: this.filter,
-          mediaType: this.mediaType,
-          limit: this.limit,
-          offset: this.offset,
-          append: true
-        })
-          .then(data => {
-            this.loadingMore = false;
-            if (this.seriesList.length % this.limit != 0 || data.length == 0) {
-              this.canLoadMore = false;
-            } else {
-              this.canLoadMore = true;
-            }
-          });
-      }
     },
-    watch: {
-      filter() {
-        this.updateSeriesList();
-      },
-      mediaType() {
-        this.updateSeriesList();
-      }
+
+    async loadMore () {
+      this.loadingMore = true
+      this.offset += this.limit
+
+      await this.$store.dispatch('listSeries', {
+        filter: this.filter,
+        mediaType: this.mediaType,
+        limit: this.limit,
+        offset: this.offset,
+        append: true
+      })
+        .then(data => {
+          this.loadingMore = false
+          if (this.seriesList.length % this.limit !== 0 || data.length === 0) {
+            this.canLoadMore = false
+          } else {
+            this.canLoadMore = true
+          }
+        })
+    }
+  },
+  watch: {
+    filter () {
+      this.updateSeriesList()
+    },
+    mediaType () {
+      this.updateSeriesList()
     }
   }
+}
 </script>

@@ -17,33 +17,33 @@
 </template>
 
 <script>
-  import Loading from 'modules/shared/components/Loading';
+import Loading from 'modules/shared/components/Loading'
 
-  export default {
-    name: 'login-form',
-    data: () => ({
-      account: '',
-      password: ''
-    }),
-    methods: {
-      async login() {
-        this.$store.dispatch('login', {
-          account: this.account,
-          password: this.password
-        })
-          .then(() => this.$router.go(-1));
-      }
-    },
-    computed: {
-      loading() {
-        return this.$store.state.authentication.loading;
-      },
-      error() {
-        return this.$store.state.authentication.error;
-      }
-    },
-    components: {
-      Loading
+export default {
+  name: 'login-form',
+  data: () => ({
+    account: '',
+    password: ''
+  }),
+  methods: {
+    async login () {
+      this.$store.dispatch('login', {
+        account: this.account,
+        password: this.password
+      })
+        .then(() => this.$router.go(-1))
     }
+  },
+  computed: {
+    loading () {
+      return this.$store.state.authentication.loading
+    },
+    error () {
+      return this.$store.state.authentication.error
+    }
+  },
+  components: {
+    Loading
   }
+}
 </script>

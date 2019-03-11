@@ -1,0 +1,60 @@
+{
+  "navbar": {
+    "dashboard": "Приборная доска",
+    "browse": "Просматривать",
+    "queue": "Очередь",
+    "history": "история",
+    "search": "Поиск",
+    "settings": "настройки"
+  },
+  "authentication": {
+    "login": "Авторизоваться",
+    "logout": "Выйти",
+    "usernameEmail": "Имя пользователя или адрес электронной почты",
+    "password": "пароль"
+  },
+  "settings": {
+    "language": "язык"
+  },
+  "media": {
+    "episode": "Эпизод {number}",
+    "queueAdd": "Добавить в очередь",
+    "queueRemove": "Удалить из очереди",
+    "filter": "Фильтр",
+    "media": "Средства массовой информации",
+    "loadMore": "Загрузи больше",
+    "types": {
+      "anime": "Аниме",
+      "drama": "драма",
+      "both": "И то и другое"
+    },
+    "filters": {
+      "alphabetical": "По алфавиту",
+      "featured": "Рекомендуемые",
+      "newest": "новейший",
+      "popular": "Популярный",
+      "simulcast": "Simulcast",
+      "updated": "обновленный"
+    },
+    "emptyHistory": "Ваша история в настоящее время пуста.",
+    "categories": "категории",
+    "genres": "Жанры",
+    "seasons": "Сезоны",
+    "emptyBrowse": "По Вашему запросу нет результатов."
+  },
+  "footer": {
+    "madeBy": "Сделано в {name}.",
+    "contribute": "Просмотреть исходный код и / или внести свой вклад в проект на GitHub.",
+    "endorsement": "Smoothroll не одобряется и не связан с Crunchyroll.",
+    "dataNotice": "Smoothroll не хранит никаких ваших данных на своих серверах. Это просто интерфейс, который находится поверх Crunchyroll."
+  },
+  "dashboard": {
+    "queue": "Очередь",
+    "recent": "Последние выпуски"
+  },
+  "error": {
+    "notFound": "404 - Страница не найдена",
+    "notFoundLong": "Кажется, вы пытались получить доступ к странице, которой не существует.",
+    "premium": "Вы должны иметь премиум-аккаунт Crunchyroll, чтобы использовать эту услугу!"
+  }
+}

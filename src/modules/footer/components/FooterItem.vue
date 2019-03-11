@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  export default {
-    name: 'footer-item'
-  }
+export default {
+  name: 'footer-item'
+}
 </script>
