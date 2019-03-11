@@ -26,9 +26,6 @@ export default {
   },
   created () {
     this.$store.dispatch('getQueue')
-      .then(() => {
-        this.loading = false
-      })
   },
   computed: {
     queue: {
@@ -38,11 +35,11 @@ export default {
       set (value) {
         this.$store.dispatch('sortQueue', value)
       }
+    },
+    loading () {
+      return this.$store.state.queue.loading
     }
-  },
-  data: () => ({
-    loading: true
-  })
+  }
 }
 </script>
 
