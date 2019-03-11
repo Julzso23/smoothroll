@@ -3,15 +3,14 @@
 </template>
 
 <script>
-  export default {
-    name: 'grab-handle',
-    props: {
-      dotsX: Number,
-      dotsY: Number
-    }
+export default {
+  name: 'grab-handle',
+  props: {
+    dotsX: Number,
+    dotsY: Number
   }
+}
 </script>
-
 
 <style lang="scss" scoped>
   @import 'scss/_variables';

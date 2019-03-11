@@ -13,15 +13,15 @@
 </template>
 
 <script>
-  import MediaCard from 'modules/cards/components/MediaCard';
+import MediaCard from 'modules/cards/components/MediaCard'
 
-  export default {
-    name: 'collection',
-    components: {
-      MediaCard
-    },
-    props: {
-      collection: Object
-    }
+export default {
+  name: 'collection',
+  components: {
+    MediaCard
+  },
+  props: {
+    collection: Object
   }
+}
 </script>

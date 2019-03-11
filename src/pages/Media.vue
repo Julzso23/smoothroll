@@ -12,49 +12,49 @@
 </template>
 
 <script>
-  import Player from 'modules/media/components/Player';
-  import Loading from 'modules/shared/components/Loading';
-  import ScrollingCollection from 'modules/media/components/ScrollingCollection';
+import Player from 'modules/media/components/Player'
+import Loading from 'modules/shared/components/Loading'
+import ScrollingCollection from 'modules/media/components/ScrollingCollection'
 
-  export default {
-    name: 'media',
-    created() {
-      this.$store.dispatch('getMedia', this.mediaId);
+export default {
+  name: 'media',
+  created () {
+    this.$store.dispatch('getMedia', this.mediaId)
+  },
+  computed: {
+    media () {
+      return this.$store.state.media.currentMedia
     },
-    computed: {
-      media() {
-        return this.$store.state.media.currentMedia;
-      },
-      mediaId() {
-        return this.$route.params.id;
-      },
-      collection() {
-        return this.$store.state.media.collection;
-      }
+    mediaId () {
+      return this.$route.params.id
     },
-    components: {
-      Player,
-      Loading,
-      ScrollingCollection
+    collection () {
+      return this.$store.state.media.collection
+    }
+  },
+  components: {
+    Player,
+    Loading,
+    ScrollingCollection
+  },
+  watch: {
+    mediaId () {
+      this.$store.dispatch('getMedia', this.mediaId)
     },
-    watch: {
-      mediaId() {
-        this.$store.dispatch('getMedia', this.mediaId);
-      },
-      media() {
-        document.title = `${this.$t('media.episode', {number: this.media.episode_number})}: ${this.media.name} - ${this.media.collection_name} ― Smoothroll`;
+    media () {
+      document.title = `${this.$t('media.episode', { number: this.media.episode_number })}: ${this.media.name} - ${this.media.collection_name} ― Smoothroll`
 
-        this.$store.dispatch('getCollection', this.media.collection_id);
+      this.$store.dispatch('getCollection', this.media.collection_id)
 
-        this.fixMixedContent();
-      }
-    },
-    methods: {
-      fixMixedContent() {
-        if (this.media && this.media.screenshot_image) {
-          this.media.screenshot_image.full_url = this.media.screenshot_image.full_url.replace('http://', 'https://');
-        }
+      this.fixMixedContent()
+    }
+  },
+  methods: {
+    fixMixedContent () {
+      if (this.media && this.media.screenshot_image) {
+        this.media.screenshot_image.full_url = this.media.screenshot_image.full_url.replace('http://', 'https://')
       }
     }
   }
+}
 </script>

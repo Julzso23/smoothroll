@@ -5,10 +5,10 @@
 </template>
 
 <script>
-  export default {
-    name: 'premium',
-    created() {
-      document.title = 'Premium ― Smoothroll';
-    }
+export default {
+  name: 'premium',
+  created () {
+    document.title = 'Premium ― Smoothroll'
   }
+}
 </script>

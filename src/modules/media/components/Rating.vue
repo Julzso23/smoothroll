@@ -3,12 +3,12 @@
 </template>
 
 <script>
-  export default {
-    name: 'rating',
-    props: {
-      rating: Number
-    }
+export default {
+  name: 'rating',
+  props: {
+    rating: Number
   }
+}
 </script>
 
 <style lang="scss" scoped>

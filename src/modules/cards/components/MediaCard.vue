@@ -18,30 +18,30 @@
 </template>
 
 <script>
-  import ProgressBar from 'modules/shared/components/ProgressBar';
-  import Card from './Card';
+import ProgressBar from 'modules/shared/components/ProgressBar'
+import Card from './Card'
 
-  export default {
-    name: 'media-card',
-    props: {
-      media: Object,
-      active: Boolean
-    },
-    components: {
-      ProgressBar,
-      Card
-    },
-    mounted() {
-      this.fixMixedContent();
-    },
-    methods: {
-      fixMixedContent() {
-        if (this.media.screenshot_image) {
-          this.media.screenshot_image.large_url = this.media.screenshot_image.large_url.replace('http://', 'https://');
-        }
+export default {
+  name: 'media-card',
+  props: {
+    media: Object,
+    active: Boolean
+  },
+  components: {
+    ProgressBar,
+    Card
+  },
+  mounted () {
+    this.fixMixedContent()
+  },
+  methods: {
+    fixMixedContent () {
+      if (this.media.screenshot_image) {
+        this.media.screenshot_image.large_url = this.media.screenshot_image.large_url.replace('http://', 'https://')
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

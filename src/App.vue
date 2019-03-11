@@ -12,16 +12,16 @@
 </template>
 
 <script>
-  import Navbar from 'modules/navbar/components/Navbar';
-  import AppFooter from 'modules/footer/components/Footer';
+import Navbar from 'modules/navbar/components/Navbar'
+import AppFooter from 'modules/footer/components/Footer'
 
-  export default {
-    name: 'app',
-    components: {
-      Navbar,
-      AppFooter
-    }
+export default {
+  name: 'app',
+  components: {
+    Navbar,
+    AppFooter
   }
+}
 </script>
 
 <style lang="scss">
