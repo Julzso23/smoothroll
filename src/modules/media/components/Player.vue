@@ -29,6 +29,11 @@ export default {
   mounted () {
     this.createPlayer()
   },
+  beforeDestroy() {
+    if (this.player.isPlaying()) {
+      this.logTime(this.player.getCurrentTime())
+    }
+  },
   methods: {
     createPlayer () {
       this.player = new Clappr.Player({
@@ -62,13 +67,12 @@ export default {
         }
       })
 
-      if (this.playhead === this.duration) {
+      if (this.playhead !== this.duration) {
         this.player.seek(this.playhead)
       }
 
       this.player.on(Clappr.Events.PLAYER_ENDED, () => this.logTime(this.duration))
       this.player.on(Clappr.Events.PLAYER_PAUSE, () => this.logTime(this.player.getCurrentTime()))
-      this.player.on(Clappr.Events.PLAYER_SEEK, () => this.logTime(this.player.getCurrentTime()))
     },
 
     logTime (time) {
