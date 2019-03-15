@@ -7,6 +7,7 @@ export default {
     currentSeries: null,
     searchResults: [],
     recentMedia: [],
+    recentMediaLoading: true,
     collection: []
   },
 
@@ -28,6 +29,9 @@ export default {
     },
     setRecentMedia (state, recentMedia) {
       state.recentMedia = recentMedia
+    },
+    setRecentMediaLoading (state, loading) {
+      state.recentMediaLoading = loading
     },
     setCollection (state, collection) {
       state.collection = collection
@@ -200,6 +204,7 @@ export default {
     },
 
     async getRecentMedia ({ rootState, dispatch, commit }, mediaType) {
+      commit('setRecentMediaLoading', true)
       await dispatch('verifySession')
 
       return Vue.api.get('list_series', {
@@ -221,6 +226,7 @@ export default {
           }
 
           commit('setRecentMedia', recentMedia)
+          commit('setRecentMediaLoading', false)
         })
         .catch(({ code }) => {
           if (code === 'bad_session') {

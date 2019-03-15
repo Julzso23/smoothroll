@@ -1,5 +1,5 @@
 <template>
-  <div v-if="recentMedia.length != 0">
+  <div v-if="!loading || recentMedia.length != 0">
     <div v-for="date in recentMedia" :key="date.date">
       <h4 class="text-light">{{date.date}}</h4>
 
@@ -43,6 +43,9 @@ export default {
       }
 
       return dates
+    },
+    loading () {
+      return this.$store.state.media.recentMediaLoading
     }
   },
   created () {

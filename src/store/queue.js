@@ -38,7 +38,8 @@ function sortQueue (queue, order) {
 export default {
   state: {
     queue: [],
-    queueOrder: JSON.parse(window.localStorage.getItem('queueOrder')) || []
+    queueOrder: JSON.parse(window.localStorage.getItem('queueOrder')) || [],
+    loading: true
   },
 
   mutations: {
@@ -48,11 +49,15 @@ export default {
     setQueueOrder (state, order) {
       state.queueOrder = order
       window.localStorage.setItem('queueOrder', JSON.stringify(order))
+    },
+    setLoading (state, loading) {
+      state.loading = loading
     }
   },
 
   actions: {
     async getQueue ({ commit, rootState, state, dispatch }) {
+      commit('setLoading', true)
       await dispatch('verifySession')
 
       return Vue.api.get('queue', {
@@ -67,6 +72,7 @@ export default {
       })
         .then(data => {
           commit('setQueue', sortQueue(data, state.queueOrder))
+          commit('setLoading', false)
         })
         .catch(({ code }) => {
           if (code === 'bad_session') {
