@@ -29,7 +29,7 @@ export default {
   mounted () {
     this.createPlayer()
   },
-  beforeDestroy() {
+  beforeDestroy () {
     if (this.player.isPlaying()) {
       this.logTime(this.player.getCurrentTime())
     }
