@@ -4,7 +4,7 @@
       {{collection.name}}
       <span class="dropdown-toggle float-right"></span>
     </button>
-    <div class="row collapse mt-2" :id="`collection-${collection.id}`">
+    <div :class="'row collapse mt-2' + (open ? ' show' : '')" :id="`collection-${collection.id}`">
       <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4" v-for="mediaItem in collection.media" :key="mediaItem.media_id">
         <media-card :media="mediaItem" />
       </div>
@@ -21,7 +21,8 @@ export default {
     MediaCard
   },
   props: {
-    collection: Object
+    collection: Object,
+    open: Boolean
   }
 }
 </script>
