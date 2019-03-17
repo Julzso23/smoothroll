@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mb-2">
-      <checkbox class="col-lg-3 col-md-4 col-sm-6 mb-2" v-model="compact" />
+      <checkbox class="col-lg-3 col-md-4 col-sm-6 mb-2" v-model="compact" :label="$t('media.compact')" />
     </div>
     <series-list :filter="filter" :mediaType="mediaType" />
   </div>

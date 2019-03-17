@@ -1,7 +1,7 @@
 <template>
   <div class="input-group">
     <div class="input-group-prepend">
-      <label class="input-group-text bg-dark text-light">Compact</label>
+      <label class="input-group-text bg-dark text-light">{{label}}</label>
     </div>
     <div class="input-group-append">
       <div class="input-group-text">
@@ -15,7 +15,8 @@
 export default {
   name: 'checkbox',
   props: {
-    value: Boolean
+    value: Boolean,
+    label: String
   },
   methods: {
     input (event) {

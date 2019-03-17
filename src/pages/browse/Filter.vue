@@ -3,7 +3,7 @@
     <div class="row mb-2">
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.filter')" :options="filterOptions" v-model="filter" />
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" v-model="mediaType" />
-      <checkbox class="col-lg-3 col-md-4 col-sm-6 mb-2" v-model="compact" />
+      <checkbox class="col-lg-3 col-md-4 col-sm-6 mb-2" v-model="compact" :label="$t('media.compact')" />
     </div>
 
     <series-list :filter="filter ? filter.key : ''" :mediaType="mediaType ? mediaType.key : ''" />
