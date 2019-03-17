@@ -27,9 +27,6 @@ export default {
 
   #footer {
     padding: 2em 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
     background: $dark;
     text-align: center;
     margin-top: auto;

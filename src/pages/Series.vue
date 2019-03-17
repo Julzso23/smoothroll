@@ -20,7 +20,7 @@
       </div>
 
       <div v-if="!collectionsLoading">
-        <collection v-for="collection in mediaCollections" :key="collection.id" :collection="collection" />
+        <collection v-for="(collection, index) in mediaCollections" :key="collection.id" :collection="collection" :open="index == 0" />
       </div>
       <loading v-else />
     </div>
