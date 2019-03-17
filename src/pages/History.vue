@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row mb-2">
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" @selectionUpdate="selection => {mediaType = selection; updateMediaList()}" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" v-model="mediaType" />
     </div>
 
     <div class="mb-4" v-if="!loading">
@@ -39,7 +39,7 @@ export default {
         { key: 'drama', value: this.$t('media.types.drama') },
         { key: 'anime|drama', value: this.$t('media.types.both') }
       ],
-      mediaType: 'anime',
+      mediaType: null,
 
       limit: 50,
       offset: 0,
@@ -55,7 +55,7 @@ export default {
       this.offset = 0
 
       await this.$store.dispatch('getHistory', {
-        mediaTypes: this.mediaType,
+        mediaTypes: this.mediaType.key,
         limit: this.limit,
         offset: this.offset
       })
@@ -86,9 +86,10 @@ export default {
         })
     }
   },
-  created () {
-    this.updateMediaList()
+  mounted () {
     document.title = `${this.$t('navbar.history')} ― Smoothroll`
+
+    this.mediaType = this.mediaOptions[0]
   },
   components: {
     DropdownSelector,
@@ -98,6 +99,11 @@ export default {
   computed: {
     mediaList () {
       return this.$store.state.media.mediaList
+    }
+  },
+  watch: {
+    mediaType () {
+      this.updateMediaList()
     }
   }
 }
