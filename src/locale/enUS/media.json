@@ -22,5 +22,6 @@
   "categories": "Categories",
   "genres": "Genres",
   "seasons": "Seasons",
-  "emptyBrowse": "Your search returned no results."
+  "emptyBrowse": "Your search returned no results.",
+  "compact": "Compact"
 }
