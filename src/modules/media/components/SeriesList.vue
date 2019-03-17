@@ -39,8 +39,7 @@ export default {
   },
   props: {
     filter: String,
-    mediaType: String,
-    compact: Boolean
+    mediaType: String
   },
   data: () => ({
     limit: 50,
@@ -53,6 +52,9 @@ export default {
   computed: {
     seriesList () {
       return this.$store.state.browse.seriesList
+    },
+    compact () {
+      return this.$store.state.media.displayCompact
     }
   },
   methods: {
