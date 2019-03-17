@@ -17,7 +17,7 @@
 
       <div v-if="canLoadMore">
         <button class="btn btn-block btn-primary" v-if="!loadingMore" @click="loadMore">{{$t('media.loadMore')}}</button>
-        <button class="btn btn-block btn-disabled" v-else><loading /></button>
+        <loading v-else />
       </div>
     </div>
 
