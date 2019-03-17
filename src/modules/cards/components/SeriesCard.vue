@@ -9,7 +9,7 @@
       </router-link>
 
       <div class="mx-2 my-1 text-truncate">
-        <span><router-link :to="'/series/' + series.series_id" class="text-reset" :title="series.name">{{series.name}}</router-link></span>
+        <router-link :to="'/series/' + series.series_id" class="text-reset" :title="series.name">{{series.name}}</router-link>
       </div>
     </card>
 
@@ -62,23 +62,6 @@ export default {
 
   .card {
     overflow: hidden;
-  }
-
-  .card .description {
-    display: none;
-  }
-
-  .card:hover .description {
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    padding: 4px;
-    margin: 0;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.6);
   }
 
   .image-container {
