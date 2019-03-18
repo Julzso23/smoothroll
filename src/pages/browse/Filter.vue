@@ -1,22 +1,25 @@
 <template>
   <div>
     <div class="row mb-2">
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.filter')" :options="filterOptions" @selectionUpdate="selection => filter = selection" />
-      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" @selectionUpdate="selection => mediaType = selection" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.filter')" :options="filterOptions" v-model="filter" />
+      <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" v-model="mediaType" />
+      <checkbox class="col-lg-3 col-md-4 col-sm-6 mb-2" v-model="compact" :label="$t('media.compact')" />
     </div>
 
-    <series-list :filter="filter" :mediaType="mediaType" />
+    <series-list :filter="filter ? filter.key : ''" :mediaType="mediaType ? mediaType.key : ''" />
   </div>
 </template>
 
 <script>
 import DropdownSelector from 'modules/shared/components/DropdownSelector'
+import Checkbox from 'modules/shared/components/Checkbox'
 import SeriesList from 'modules/media/components/SeriesList'
 
 export default {
   name: 'browse-filter',
   components: {
     DropdownSelector,
+    Checkbox,
     SeriesList
   },
   data: function () {
@@ -29,18 +32,28 @@ export default {
         { key: 'simulcast', value: this.$t('media.filters.simulcast') },
         { key: 'updated', value: this.$t('media.filters.updated') }
       ],
-      filter: '',
+      filter: null,
 
       mediaOptions: [
         { key: 'anime', value: this.$t('media.types.anime') },
         { key: 'drama', value: this.$t('media.types.drama') }
       ],
-      mediaType: ''
+      mediaType: null
     }
   },
   mounted () {
-    this.filter = this.filterOptions[0].key
-    this.mediaType = this.mediaOptions[0].key
+    this.filter = this.filterOptions[0]
+    this.mediaType = this.mediaOptions[0]
+  },
+  computed: {
+    compact: {
+      get () {
+        return this.$store.state.media.displayCompact
+      },
+      set (value) {
+        this.$store.commit('setCompactDisplay', value)
+      }
+    }
   }
 }
 </script>
