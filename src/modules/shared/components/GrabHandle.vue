@@ -20,7 +20,6 @@ export default {
   $dot-space: 6px;
 
   .grab-handle {
-    margin: auto;
     background:
       linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
       linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
