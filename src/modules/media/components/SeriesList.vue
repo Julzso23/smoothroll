@@ -4,7 +4,13 @@
       {{$t('media.emptyBrowse')}}
     </div>
 
-    <div class="row">
+    <div class="row" v-if="compact">
+      <div class="col-12 mb-2" v-for="series in seriesList" :key="series.series_id">
+        <compact-series-card :series="series" />
+      </div>
+    </div>
+
+    <div class="row" v-else>
       <div class="col-lg-2 col-md-3 col-sm-4 col-6 mb-4" v-for="series in seriesList" :key="series.series_id">
         <series-card :series="series" />
       </div>
@@ -22,30 +28,33 @@
 <script>
 import Loading from 'modules/shared/components/Loading'
 import SeriesCard from 'modules/cards/components/SeriesCard'
+import CompactSeriesCard from 'modules/cards/components/CompactSeriesCard'
 
 export default {
   name: 'series-list',
   components: {
     SeriesCard,
+    CompactSeriesCard,
     Loading
   },
   props: {
     filter: String,
     mediaType: String
   },
-  data: function () {
-    return {
-      limit: 50,
-      offset: 0,
+  data: () => ({
+    limit: 50,
+    offset: 0,
 
-      loading: false,
-      loadingMore: false,
-      canLoadMore: false
-    }
-  },
+    loading: false,
+    loadingMore: false,
+    canLoadMore: false
+  }),
   computed: {
     seriesList () {
       return this.$store.state.browse.seriesList
+    },
+    compact () {
+      return this.$store.state.media.displayCompact
     }
   },
   methods: {

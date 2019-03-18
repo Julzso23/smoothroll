@@ -39,7 +39,7 @@ export default {
   state: {
     queue: [],
     queueOrder: JSON.parse(window.localStorage.getItem('queueOrder')) || [],
-    loading: true
+    loading: false
   },
 
   mutations: {
@@ -56,12 +56,12 @@ export default {
   },
 
   actions: {
-    async getQueue ({ commit, rootState, state, dispatch }) {
+    async getQueue ({ commit, rootState, state, dispatch }, mediaType) {
       commit('setLoading', true)
       await dispatch('verifySession')
 
       return Vue.api.get('queue', {
-        media_types: 'anime|drama',
+        media_types: mediaType || 'anime|drama',
         fields: [
           'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
           'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'

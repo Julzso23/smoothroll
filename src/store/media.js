@@ -8,7 +8,8 @@ export default {
     searchResults: [],
     recentMedia: [],
     recentMediaLoading: true,
-    collection: []
+    collection: [],
+    displayCompact: window.localStorage.getItem('displayCompact') === 'true'
   },
 
   mutations: {
@@ -35,6 +36,10 @@ export default {
     },
     setCollection (state, collection) {
       state.collection = collection
+    },
+    setCompactDisplay (state, compact) {
+      state.displayCompact = compact
+      window.localStorage.setItem('displayCompact', compact)
     }
   },
 
