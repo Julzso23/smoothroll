@@ -3,7 +3,7 @@
     <div class="d-flex flex-row align-items-center">
       <slot></slot>
 
-      <router-link :to="'/media/' + media.media_id" :title="media.name" class="text-reset">
+      <router-link :to="'/media/' + media.media_id" :title="media.name" class="text-reset overflow-hidden">
         <div class="mx-4 my-2 text-truncate">
           {{$t('media.episode', { number: media.episode_number })}}: {{media.name}} - {{this.media.collection_name}}
         </div>
