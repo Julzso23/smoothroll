@@ -29,7 +29,7 @@ export default {
     this.mediaType = this.mediaOptions[0]
   },
   data () {
-    return  {
+    return {
       mediaOptions: [
         { key: 'anime', value: this.$t('media.types.anime') },
         { key: 'drama', value: this.$t('media.types.drama') },
