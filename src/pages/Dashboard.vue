@@ -17,9 +17,9 @@
 </template>
 
 <script>
-import Queue from 'modules/media/components/Queue'
-import RecentMedia from 'modules/media/components/RecentMedia'
-import LoadingSmall from 'modules/shared/components/LoadingSmall'
+import Queue from 'modules/media/Queue'
+import RecentMedia from 'modules/media/RecentMedia'
+import LoadingSmall from 'modules/shared/LoadingSmall'
 
 export default {
   name: 'dashboard',

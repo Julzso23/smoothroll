@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import Queue from 'modules/media/components/Queue'
-import DropdownSelector from 'modules/shared/components/DropdownSelector'
-import Checkbox from 'modules/shared/components/Checkbox'
-import LoadingSmall from 'modules/shared/components/LoadingSmall'
+import Queue from 'modules/media/Queue'
+import DropdownSelector from 'modules/shared/DropdownSelector'
+import Checkbox from 'modules/shared/Checkbox'
+import LoadingSmall from 'modules/shared/LoadingSmall'
 
 export default {
   name: 'queue-page',

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import LoginForm from 'modules/login/components/LoginForm'
+import LoginForm from 'modules/login/LoginForm'
 
 export default {
   name: 'login',

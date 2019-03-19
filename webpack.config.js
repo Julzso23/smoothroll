@@ -2,6 +2,9 @@ const { VueLoaderPlugin } = require('vue-loader')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const { getIfUtils, removeEmpty } = require('webpack-config-utils')
+const { ifProduction } = getIfUtils(process.env.NODE_ENV)
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
@@ -37,7 +40,7 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          'vue-style-loader',
+          ifProduction(MiniCssExtractPlugin.loader, 'vue-style-loader'),
           {
             loader: 'css-loader',
             options: {
@@ -61,7 +64,7 @@ module.exports = {
       }
     ]
   },
-  plugins: [
+  plugins: removeEmpty([
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       title: 'Smoothroll',
@@ -78,8 +81,12 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: path.join(__dirname, '/static'),
       to: path.join(__dirname, '/dist')
-    }])
-  ],
+    }]),
+    ifProduction(new MiniCssExtractPlugin({
+      filename: '[name]_[hash:8].css',
+      chunkFilename: '[name]_[chunkhash:8].css'
+    }))
+  ]),
   optimization: {
     runtimeChunk: 'single',
     splitChunks: {
