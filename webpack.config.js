@@ -10,7 +10,8 @@ module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: '[name]_[hash:8].js',
+    filename: 'assets/js/[name]_[hash:8].js',
+    chunkFilename: 'assets/js/[name]_[chunkhash:8].js',
     publicPath: '/'
   },
   resolve: {
@@ -60,7 +61,12 @@ module.exports = {
       },
       {
         test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader'
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'assets/[ext]/[name]_[hash:8].[ext]'
+          }
+        }]
       }
     ]
   },
@@ -83,8 +89,8 @@ module.exports = {
       to: path.join(__dirname, '/dist')
     }]),
     ifProduction(new MiniCssExtractPlugin({
-      filename: '[name]_[hash:8].css',
-      chunkFilename: '[name]_[chunkhash:8].css'
+      filename: 'assets/css/[name]_[hash:8].css',
+      chunkFilename: 'assets/css/[name]_[chunkhash:8].css'
     }))
   ]),
   optimization: {
