@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import Loading from 'modules/shared/components/Loading'
-import SeriesCard from 'modules/cards/components/SeriesCard'
-import CompactSeriesCard from 'modules/cards/components/CompactSeriesCard'
+import Loading from 'modules/shared/Loading'
+import SeriesCard from 'modules/cards/SeriesCard'
+import CompactSeriesCard from 'modules/cards/CompactSeriesCard'
 
 export default {
   name: 'series-list',

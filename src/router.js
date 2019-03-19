@@ -87,14 +87,6 @@ const router = new Router({
       }
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: () => import('pages/Settings'),
-      meta: {
-        guard: premiumGuard
-      }
-    },
-    {
       path: '*',
       name: 'notFound',
       component: () => import('pages/NotFound')

@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import SeriesList from 'modules/media/components/SeriesList'
-import Checkbox from 'modules/shared/components/Checkbox'
+import SeriesList from 'modules/media/SeriesList'
+import Checkbox from 'modules/shared/Checkbox'
 
 export default {
   name: 'browse-tags',

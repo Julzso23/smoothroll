@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import Loading from 'modules/shared/components/Loading'
-import MediaCard from 'modules/cards/components/MediaCard'
+import Loading from 'modules/shared/Loading'
+import MediaCard from 'modules/cards/MediaCard'
 
 export default {
   name: 'recent-media',

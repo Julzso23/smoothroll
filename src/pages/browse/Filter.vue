@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import DropdownSelector from 'modules/shared/components/DropdownSelector'
-import Checkbox from 'modules/shared/components/Checkbox'
-import SeriesList from 'modules/media/components/SeriesList'
+import DropdownSelector from 'modules/shared/DropdownSelector'
+import Checkbox from 'modules/shared/Checkbox'
+import SeriesList from 'modules/media/SeriesList'
 
 export default {
   name: 'browse-filter',

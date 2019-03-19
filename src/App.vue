@@ -12,8 +12,8 @@
 </template>
 
 <script>
-import Navbar from 'modules/navbar/components/Navbar'
-import AppFooter from 'modules/footer/components/Footer'
+import Navbar from 'modules/navbar/Navbar'
+import AppFooter from 'modules/footer/Footer'
 
 export default {
   name: 'app',

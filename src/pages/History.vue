@@ -34,12 +34,12 @@
 </template>
 
 <script>
-import DropdownSelector from 'modules/shared/components/DropdownSelector'
-import Checkbox from 'modules/shared/components/Checkbox'
-import Loading from 'modules/shared/components/Loading'
-import LoadingSmall from 'modules/shared/components/LoadingSmall'
-import MediaCard from 'modules/cards/components/MediaCard'
-import CompactMediaCard from 'modules/cards/components/CompactMediaCard'
+import DropdownSelector from 'modules/shared/DropdownSelector'
+import Checkbox from 'modules/shared/Checkbox'
+import Loading from 'modules/shared/Loading'
+import LoadingSmall from 'modules/shared/LoadingSmall'
+import MediaCard from 'modules/cards/MediaCard'
+import CompactMediaCard from 'modules/cards/CompactMediaCard'
 
 export default {
   name: 'History',

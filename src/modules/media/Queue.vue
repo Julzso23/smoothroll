@@ -21,10 +21,10 @@
 </template>
 
 <script>
-import MediaCard from 'modules/cards/components/MediaCard'
-import CompactMediaCard from 'modules/cards/components/CompactMediaCard'
-import GrabHandle from 'modules/shared/components/GrabHandle'
-import Loading from 'modules/shared/components/Loading'
+import MediaCard from 'modules/cards/MediaCard'
+import CompactMediaCard from 'modules/cards/CompactMediaCard'
+import GrabHandle from 'modules/shared/GrabHandle'
+import Loading from 'modules/shared/Loading'
 import Draggable from 'vuedraggable'
 
 export default {

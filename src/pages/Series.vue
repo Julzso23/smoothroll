@@ -30,10 +30,10 @@
 </template>
 
 <script>
-import Collection from 'modules/media/components/Collection'
-import Loading from 'modules/shared/components/Loading'
-import ToggleQueueButton from 'modules/media/components/ToggleQueueButton'
-import Rating from 'modules/media/components/Rating'
+import Collection from 'modules/media/Collection'
+import Loading from 'modules/shared/Loading'
+import ToggleQueueButton from 'modules/media/ToggleQueueButton'
+import Rating from 'modules/media/Rating'
 
 export default {
   name: 'series',
