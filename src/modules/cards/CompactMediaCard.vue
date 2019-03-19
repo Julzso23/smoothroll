@@ -16,7 +16,7 @@
 
 <script>
 import Card from './Card'
-import ProgressBar from 'modules/shared/components/ProgressBar'
+import ProgressBar from 'modules/shared/ProgressBar'
 
 export default {
   name: 'compact-series-card',

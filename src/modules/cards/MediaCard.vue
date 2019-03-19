@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ProgressBar from 'modules/shared/components/ProgressBar'
+import ProgressBar from 'modules/shared/ProgressBar'
 import Card from './Card'
 
 export default {

@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import MediaCard from 'modules/cards/components/MediaCard'
+import MediaCard from 'modules/cards/MediaCard'
 
 export default {
   name: 'scrolling-collection',
