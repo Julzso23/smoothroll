@@ -17,8 +17,8 @@
 </template>
 
 <script>
-import DropdownSelector from 'modules/shared/components/DropdownSelector'
-import Loading from 'modules/shared/components/Loading'
+import DropdownSelector from 'modules/shared/DropdownSelector'
+import Loading from 'modules/shared/Loading'
 
 export default {
   name: 'browse-tags',

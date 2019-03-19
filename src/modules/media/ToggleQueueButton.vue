@@ -4,7 +4,7 @@
 </template>
 
 <script>
-import Loading from 'modules/shared/components/Loading'
+import Loading from 'modules/shared/Loading'
 
 export default {
   name: 'toggle-queue-button',

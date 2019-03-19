@@ -12,9 +12,9 @@
 </template>
 
 <script>
-import Player from 'modules/media/components/Player'
-import Loading from 'modules/shared/components/Loading'
-import ScrollingCollection from 'modules/media/components/ScrollingCollection'
+import Player from 'modules/media/Player'
+import Loading from 'modules/shared/Loading'
+import ScrollingCollection from 'modules/media/ScrollingCollection'
 
 export default {
   name: 'media',
