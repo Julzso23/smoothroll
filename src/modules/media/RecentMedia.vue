@@ -46,9 +46,12 @@ export default {
     },
     loading () {
       return this.$store.state.media.recentMediaLoading
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
-  created () {
+  mounted () {
     this.$store.dispatch('getRecentMedia', this.mediaType)
   },
   methods: {
@@ -59,6 +62,11 @@ export default {
         month: 'long'
       }
       return date.toLocaleDateString(navigator.language, options)
+    }
+  },
+  watch: {
+    locale () {
+      this.$store.dispatch('getRecentMedia', this.mediaType)
     }
   }
 }

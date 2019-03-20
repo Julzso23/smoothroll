@@ -18,7 +18,7 @@ import ScrollingCollection from 'modules/media/ScrollingCollection'
 
 export default {
   name: 'media',
-  created () {
+  mounted () {
     this.$store.dispatch('getMedia', this.mediaId)
   },
   computed: {
@@ -30,6 +30,9 @@ export default {
     },
     collection () {
       return this.$store.state.media.collection
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
   components: {
@@ -47,6 +50,9 @@ export default {
       this.$store.dispatch('getCollection', this.media.collection_id)
 
       this.fixMixedContent()
+    },
+    locale () {
+      this.$store.dispatch('getMedia', this.mediaId)
     }
   },
   methods: {

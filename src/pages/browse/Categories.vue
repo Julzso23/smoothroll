@@ -40,6 +40,9 @@ export default {
     },
     seasons () {
       return this.$store.state.browse.categories.season
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
   data () {
@@ -59,6 +62,9 @@ export default {
   },
   watch: {
     mediaType () {
+      this.updateCategories()
+    },
+    locale () {
       this.updateCategories()
     }
   }
