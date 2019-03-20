@@ -53,6 +53,9 @@ export default {
     },
     locale () {
       this.$store.dispatch('getMedia', this.mediaId)
+    },
+    'media.screenshot_image' () {
+      this.fixMixedContent()
     }
   },
   methods: {

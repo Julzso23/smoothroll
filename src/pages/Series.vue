@@ -96,6 +96,12 @@ export default {
     },
     locale () {
       this.$store.dispatch('getSeries', this.seriesId)
+    },
+    'series.landscape_image' () {
+      this.fixMixedContent()
+    },
+    'series.portrait_image' () {
+      this.fixMixedContent()
     }
   },
   methods: {
