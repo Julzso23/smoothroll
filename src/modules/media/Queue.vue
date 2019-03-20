@@ -42,6 +42,9 @@ export default {
   watch: {
     mediaType () {
       this.$store.dispatch('getQueue', this.mediaType)
+    },
+    locale () {
+      this.$store.dispatch('getQueue', this.mediaType)
     }
   },
   computed: {
@@ -55,6 +58,9 @@ export default {
     },
     loading () {
       return this.$store.state.queue.loading
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
   props: {

@@ -37,7 +37,7 @@ import Rating from 'modules/media/Rating'
 
 export default {
   name: 'series',
-  created () {
+  mounted () {
     this.$store.dispatch('getSeries', this.seriesId)
   },
   data: () => ({
@@ -64,6 +64,9 @@ export default {
     },
     seriesId () {
       return this.$route.params.id
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
   components: {
@@ -89,6 +92,9 @@ export default {
       document.title = `${this.series.name} ― Smoothroll`
     },
     seriesId () {
+      this.$store.dispatch('getSeries', this.seriesId)
+    },
+    locale () {
       this.$store.dispatch('getSeries', this.seriesId)
     }
   },

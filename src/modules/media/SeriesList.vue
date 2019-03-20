@@ -55,6 +55,9 @@ export default {
     },
     compact () {
       return this.$store.state.media.displayCompact
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
   methods: {
@@ -104,6 +107,9 @@ export default {
       this.updateSeriesList()
     },
     mediaType () {
+      this.updateSeriesList()
+    },
+    locale () {
       this.updateSeriesList()
     }
   }

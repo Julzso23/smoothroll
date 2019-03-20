@@ -121,10 +121,16 @@ export default {
       set (value) {
         this.$store.commit('setCompactDisplay', value)
       }
+    },
+    locale () {
+      return this.$store.state.locale.locale
     }
   },
   watch: {
     mediaType () {
+      this.updateMediaList()
+    },
+    locale () {
       this.updateMediaList()
     }
   }
