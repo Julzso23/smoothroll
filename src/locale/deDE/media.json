@@ -23,5 +23,7 @@
   "genres": "Genres",
   "seasons": "Jahreszeiten",
   "emptyBrowse": "Deine Suche ergab keine Ergebnisse.",
-  "compact": "Kompakt"
+  "compact": "Kompakt",
+  "markWatched": "Markiere als beobachtet",
+  "markUnwatched": "Als nicht überwacht markieren"
 }

@@ -261,6 +261,13 @@ export default {
             return dispatch('startSession').then(() => dispatch('getCollection', collectionId))
           }
         })
+    },
+
+    async setWatched ({ rootState, dispatch, commit }, { mediaId, watched, duration }) {
+      return dispatch('logTime', {
+        mediaId,
+        time: watched ? duration : 0
+      })
     }
   }
 }

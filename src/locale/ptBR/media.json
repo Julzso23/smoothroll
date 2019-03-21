@@ -23,5 +23,7 @@
   "genres": "Gêneros",
   "seasons": "Temporadas",
   "emptyBrowse": "Sua busca não retornou resultados.",
-  "compact": "Compactar"
+  "compact": "Compactar",
+  "markWatched": "Marcar como visto",
+  "markUnwatched": "Marcar como não assistido"
 }
