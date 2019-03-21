@@ -76,10 +76,12 @@ export default {
     },
 
     logTime (time) {
-      this.$store.dispatch('logTime', {
-        mediaId: this.mediaId,
-        time: time
-      })
+      if (time !== 0 && time <= this.duration) {
+        this.$store.dispatch('logTime', {
+          mediaId: this.mediaId,
+          time: time
+        })
+      }
     }
   }
 }
