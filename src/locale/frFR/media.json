@@ -23,5 +23,7 @@
   "genres": "Les genres",
   "seasons": "Saisons",
   "emptyBrowse": "Votre recherche n'a donné aucun résultat.",
-  "compact": "Compact"
+  "compact": "Compact",
+  "markWatched": "Marquer comme regardé",
+  "markUnwatched": "Marquer comme non regardé"
 }

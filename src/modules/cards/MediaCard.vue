@@ -40,6 +40,11 @@ export default {
         this.media.screenshot_image.large_url = this.media.screenshot_image.large_url.replace('http://', 'https://')
       }
     }
+  },
+  watch: {
+    'media.screenshot_image' () {
+      this.fixMixedContent()
+    }
   }
 }
 </script>

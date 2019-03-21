@@ -5,6 +5,7 @@
     <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.collection_name}}</router-link></h3>
     <h4 class="text-light">{{$t('media.episode', {number: media.episode_number}) + ' - ' + media.name}}</h4>
     <p class="text-light">{{media.description}}</p>
+    <toggle-watched-button :mediaId="media.media_id" :playhead="media.playhead" :duration="media.duration" @toggle="onToggleWatched" />
 
     <scrolling-collection :collection="collection" :active="media.media_id" />
   </div>
@@ -15,6 +16,7 @@
 import Player from 'modules/media/Player'
 import Loading from 'modules/shared/Loading'
 import ScrollingCollection from 'modules/media/ScrollingCollection'
+import ToggleWatchedButton from 'modules/media/ToggleWatchedButton'
 
 export default {
   name: 'media',
@@ -38,7 +40,8 @@ export default {
   components: {
     Player,
     Loading,
-    ScrollingCollection
+    ScrollingCollection,
+    ToggleWatchedButton
   },
   watch: {
     mediaId () {
@@ -53,6 +56,9 @@ export default {
     },
     locale () {
       this.$store.dispatch('getMedia', this.mediaId)
+    },
+    'media.screenshot_image' () {
+      this.fixMixedContent()
     }
   },
   methods: {
@@ -60,6 +66,12 @@ export default {
       if (this.media && this.media.screenshot_image) {
         this.media.screenshot_image.full_url = this.media.screenshot_image.full_url.replace('http://', 'https://')
       }
+    },
+    onToggleWatched (endLoading) {
+      this.$store.dispatch('getMedia', this.mediaId)
+        .then(() => {
+          endLoading()
+        })
     }
   }
 }
