@@ -53,7 +53,12 @@ export default {
     popper: null,
     showPopper: false,
     popperHeight: 0
-  })
+  }),
+  watch: {
+    'series.portrait_image' () {
+      this.fixMixedContent()
+    }
+  }
 }
 </script>
 
