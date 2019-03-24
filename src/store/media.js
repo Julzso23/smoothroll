@@ -101,7 +101,7 @@ export default {
         series_id: id,
         fields: [
           'series.series_id', 'series.name', 'series.description', 'series.portrait_image', 'series.landscape_image',
-          'series.in_queue', 'series.rating', 'series.media_count'
+          'series.in_queue', 'series.rating', 'series.media_count', 'series.genres', 'series.media_type'
         ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,

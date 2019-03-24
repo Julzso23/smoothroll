@@ -10,6 +10,10 @@
         <div class="col-md-9 col-12">
           <p class="text-light">{{series.description}}</p>
 
+          <div class="mb-2">
+            <router-link v-for="genre in series.genres" :key="genre" :to="`/browse/categories/${series.media_type}/${genre}`" class="btn btn-secondary btn-sm mr-1">{{genre}}</router-link>
+          </div>
+
           <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
           <rating class="float-right" :rating="series.rating" />
         </div>
