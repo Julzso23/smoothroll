@@ -13,16 +13,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import 'scss/_variables';
-  $bg-color: $dark;
-  $dot-color: #eee;
-  $dot-size: 2px;
-  $dot-space: 6px;
-
   .grab-handle {
-    background:
-      linear-gradient(90deg, $bg-color ($dot-space - $dot-size), transparent 1%) center,
-      linear-gradient($bg-color ($dot-space - $dot-size), transparent 1%) center, $dot-color;
-    background-size: $dot-space $dot-space;
+    background: url('~images/grabHandle.svg');
+    background-repeat: repeat;
+    transition: transform 100ms;
+  }
+
+  .card:hover .grab-handle {
+    transform: scale((1 / 1.05));
   }
 </style>
