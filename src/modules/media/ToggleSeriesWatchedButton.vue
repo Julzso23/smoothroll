@@ -59,7 +59,7 @@ export default {
         return
       }
 
-      if (this.hasWatched(this.mediaList[this.index]) == watched) {
+      if (this.hasWatched(this.mediaList[this.index]) === watched) {
         this.mark(watched)
         return
       }
