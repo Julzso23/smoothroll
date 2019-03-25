@@ -15,6 +15,7 @@
           </div>
 
           <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
+          <toggle-watched-button :mediaList="mediaList" @complete="onWatchedToggle" />
           <rating class="float-right" :rating="series.rating" />
         </div>
 
@@ -37,6 +38,7 @@
 import Collection from 'modules/media/Collection'
 import Loading from 'modules/shared/Loading'
 import ToggleQueueButton from 'modules/media/ToggleQueueButton'
+import ToggleWatchedButton from 'modules/media/ToggleSeriesWatchedButton'
 import Rating from 'modules/media/Rating'
 
 export default {
@@ -71,12 +73,16 @@ export default {
     },
     locale () {
       return this.$store.state.locale.locale
+    },
+    mediaList () {
+      return this.$store.state.media.mediaList
     }
   },
   components: {
     Collection,
     Loading,
     ToggleQueueButton,
+    ToggleWatchedButton,
     Rating
   },
   watch: {
@@ -123,6 +129,19 @@ export default {
       if (this.series.portrait_image) {
         this.series.portrait_image.large_url = this.series.portrait_image.large_url.replace('http://', 'https://')
       }
+    },
+    onWatchedToggle () {
+      this.collectionsLoading = true
+
+      this.$store.dispatch('listMedia', {
+        seriesId: this.seriesId,
+        count: this.series.media_count
+      })
+        .then(() => {
+          this.collectionsLoading = false
+        })
+
+      this.fixMixedContent()
     }
   }
 }
