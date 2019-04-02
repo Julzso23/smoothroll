@@ -84,7 +84,7 @@ export default {
       this.offset += this.limit
 
       await this.$store.dispatch('getHistory', {
-        mediaTypes: this.mediaType,
+        mediaTypes: this.mediaType.key,
         limit: this.limit,
         offset: this.offset,
         append: true
