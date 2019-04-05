@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import errorHandler from './errorHandler'
 
 export default {
   state: {
@@ -63,11 +64,7 @@ export default {
         .then(data => {
           commit('setMediaList', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('listMedia'))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'listMedia'))
     },
 
     async getMedia ({ commit, rootState, dispatch }, id) {
@@ -87,11 +84,7 @@ export default {
         .then(data => {
           commit('setCurrentMedia', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getMedia', id))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getMedia', id))
     },
 
     async getSeries ({ commit, rootState, dispatch }, id) {
@@ -110,11 +103,7 @@ export default {
         .then(data => {
           commit('setCurrentSeries', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getSeries', id))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getSeries', id))
     },
 
     async search ({ commit, rootState, dispatch }, query) {
@@ -132,11 +121,7 @@ export default {
         .then(data => {
           commit('setSearchResults', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('search', query))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'search', query))
     },
 
     async toggleQueue ({ rootState, dispatch }, { seriesId, inQueue }) {
@@ -148,11 +133,7 @@ export default {
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('toggleQueue', { seriesId, inQueue }))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'toggleQueue', { seriesId, inQueue }))
     },
 
     async logTime ({ rootState, dispatch }, { mediaId, time }) {
@@ -165,11 +146,7 @@ export default {
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('logTime', { mediaId, time }))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'logTime', { mediaId, time }))
     },
 
     async getHistory ({ rootState, dispatch, commit }, { mediaTypes, limit, offset, append }) {
@@ -201,11 +178,7 @@ export default {
 
           return data
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getHistory', { mediaTypes, limit, offset, append }))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getHistory', { mediaTypes, limit, offset, append }))
     },
 
     async getRecentMedia ({ rootState, dispatch, commit }, mediaType) {
@@ -233,11 +206,7 @@ export default {
           commit('setRecentMedia', recentMedia)
           commit('setRecentMediaLoading', false)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getRecentMedia', mediaType))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, getRecentMedia, mediaType))
     },
 
     async getCollection ({ rootState, dispatch, commit }, collectionId) {
@@ -256,11 +225,7 @@ export default {
         .then(data => {
           commit('setCollection', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getCollection', collectionId))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getCollection', collectionId))
     },
 
     async setWatched ({ rootState, dispatch, commit }, { mediaId, watched, duration }) {

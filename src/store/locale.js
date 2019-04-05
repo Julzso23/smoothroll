@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import errorHandler from './errorHandler'
 
 export default {
   state: {
@@ -26,11 +27,7 @@ export default {
         .then(data => {
           commit('setLocaleList', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getLocales'))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getLocales'))
     }
   }
 }
