@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import errorHandler from './errorHandler'
 
 export default {
   state: {
@@ -34,11 +35,7 @@ export default {
         .then(data => {
           commit('setCategories', data)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getCategories', mediaType))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getCategories', mediaType))
     },
 
     async listSeries ({ commit, rootState, dispatch }, { filter, mediaType, limit, offset, append }) {
@@ -63,11 +60,7 @@ export default {
 
           return data
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('listSeries', { filter, mediaType, limit, offset, append }))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'listSeries', { filter, mediaType, limit, offset, append }))
     }
   }
 }
