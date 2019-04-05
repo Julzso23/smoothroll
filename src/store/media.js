@@ -206,7 +206,7 @@ export default {
           commit('setRecentMedia', recentMedia)
           commit('setRecentMediaLoading', false)
         })
-        .catch(({ code }) => errorHandler(code, getRecentMedia, mediaType))
+        .catch(({ code }) => errorHandler(code, 'getRecentMedia', mediaType))
     },
 
     async getCollection ({ rootState, dispatch, commit }, collectionId) {

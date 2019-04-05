@@ -5,9 +5,7 @@ export default (code, sender, senderOptions) => {
   switch (code) {
     case 'bad_request':
       return store.dispatch('logout').then(() => router.push('/login'))
-      break
     case 'bad_session':
       return store.dispatch('startSession').then(() => store.dispatch(sender, senderOptions))
-      break
   }
 }
