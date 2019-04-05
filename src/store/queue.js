@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import errorHandler from './errorHandler'
 
 function sortQueue (queue, order) {
   queue.sort((a, b) => {
@@ -74,11 +75,7 @@ export default {
           commit('setQueue', sortQueue(data, state.queueOrder))
           commit('setLoading', false)
         })
-        .catch(({ code }) => {
-          if (code === 'bad_session') {
-            return dispatch('startSession').then(() => dispatch('getQueue'))
-          }
-        })
+        .catch(({ code }) => errorHandler(code, 'getQueue'))
     },
 
     async sortQueue ({ commit }, queue) {
