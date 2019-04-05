@@ -50,7 +50,7 @@ export default {
     async startSession ({ commit }) {
       const id = uuid().toUpperCase()
 
-      await Vue.api.post('start_session', {
+      return Vue.api.post('start_session', {
         access_token: accessToken,
         device_type: deviceType,
         device_id: id
@@ -61,7 +61,7 @@ export default {
 
     async verifySession ({ dispatch, state }) {
       if (state.sessionId == null) {
-        await dispatch('startSession')
+        return dispatch('startSession')
       }
     },
 
@@ -69,7 +69,7 @@ export default {
       commit('setLoading', true)
       await dispatch('verifySession')
 
-      await Vue.api.post('login', {
+      return Vue.api.post('login', {
         account: account,
         password: password,
         session_id: state.sessionId
