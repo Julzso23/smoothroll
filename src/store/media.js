@@ -75,14 +75,26 @@ export default {
         fields: [
           'media.media_id', 'media.name', 'media.description', 'media.episode_number', 'media.collection_name',
           'media.screenshot_image', 'media.stream_data', 'media.duration', 'media.playhead', 'media.collection_id',
-          'media.series_id'
+          'media.series_id', 'series'
         ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
         .then(data => {
-          commit('setCurrentMedia', data)
+          Vue.api.get('info', {
+            series_id: data.series_id,
+            fields: [
+              'series.in_queue'
+            ].join(','),
+            locale: rootState.locale.locale,
+            session_id: rootState.authentication.sessionId,
+            auth: rootState.authentication.authTicket
+          })
+            .then(seriesData => {
+              data.in_queue = seriesData.in_queue
+              commit('setCurrentMedia', data)
+            })
         })
         .catch(({ code }) => errorHandler(code, 'getMedia', id))
     },
