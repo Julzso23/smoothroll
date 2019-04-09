@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     isLoggedIn () {
-      return this.$store.getters.isLoggedIn
+      return this.$store.getters['authentication/isLoggedIn']
     },
     username () {
       return this.$store.state.authentication.user.username
