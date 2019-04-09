@@ -68,7 +68,7 @@ export default {
   actions: {
     async getQueue ({ commit, rootState, state, dispatch }, mediaType) {
       commit('setLoading', true)
-      await dispatch('authentication/verifySession', null, {root: true})
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('queue', {
         media_types: mediaType || 'anime|drama',

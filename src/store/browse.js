@@ -25,7 +25,7 @@ export default {
 
   actions: {
     async getCategories ({ commit, dispatch, rootState }, mediaType) {
-      await dispatch('authentication/verifySession', null, {root: true})
+      await dispatch('authentication/verifySession', null, { root: true })
 
       await Vue.api.get('categories', {
         media_type: mediaType,
@@ -40,7 +40,7 @@ export default {
     },
 
     async listSeries ({ commit, rootState, dispatch }, { filter, mediaType, limit, offset, append }) {
-      await dispatch('authentication/verifySession', null, {root: true})
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('list_series', {
         filter: filter,

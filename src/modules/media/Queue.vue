@@ -10,7 +10,7 @@
 
     <draggable v-model="queue" draggable=".draggable-card" handle=".handle" class="row" v-else>
       <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4 draggable-card" v-for="queueItem in queue" :key="queueItem.queue_entry_id">
-        <media-card :media="queueItem.most_likely_media" @updated="mediaUpdated">
+        <media-card :media="queueItem.most_likely_media">
           <div class="handle"><grab-handle :dotsX="10" :dotsY="2" class="m-auto" /></div>
         </media-card>
       </div>
@@ -66,11 +66,6 @@ export default {
   props: {
     mediaType: String,
     compact: Boolean
-  },
-  methods: {
-    mediaUpdated (media) {
-      this.$store.dispatch('updateMedia', media)
-    }
   }
 }
 </script>
