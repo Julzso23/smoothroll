@@ -5,7 +5,7 @@ import router from 'router'
 import store from 'store'
 import i18n from 'locale'
 import 'bootstrap'
-import('scss/_theme')
+import 'scss/_theme'
 
 Vue.use(Api)
 
