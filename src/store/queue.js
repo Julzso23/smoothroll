@@ -53,6 +53,14 @@ export default {
     },
     setLoading (state, loading) {
       state.loading = loading
+    },
+    updateMedia (state, media) {
+      for (let item of state.queue) {
+        if (item.most_likely_media.media_id === media.media_id) {
+          item.most_likely_media = media
+          break
+        }
+      }
     }
   },
 
@@ -64,7 +72,7 @@ export default {
       return Vue.api.get('queue', {
         media_types: mediaType || 'anime|drama',
         fields: [
-          'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
+          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image',
           'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
         ].join(','),
         locale: rootState.locale.locale,
