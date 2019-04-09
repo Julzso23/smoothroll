@@ -2,6 +2,7 @@ import Vue from 'vue'
 import errorHandler from './errorHandler'
 
 export default {
+  namespaced: true,
   state: {
     locale: window.localStorage.getItem('locale') || 'enUS',
     localeList: []
@@ -19,7 +20,7 @@ export default {
 
   actions: {
     async getLocales ({ rootState, dispatch, commit }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       Vue.api.get('list_locales', {
         session_id: rootState.authentication.sessionId

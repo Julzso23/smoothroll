@@ -21,7 +21,7 @@ export default {
   methods: {
     search: debounce(function (query) {
       if (query !== '') {
-        this.$store.dispatch('search', query)
+        this.$store.dispatch('media/search', query)
       }
     }, 300),
     hit (result) {

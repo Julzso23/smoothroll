@@ -5,6 +5,7 @@ const accessToken = 'LNDJgOit5yaRIWN'
 const deviceType = 'com.crunchyroll.windows.desktop'
 
 export default {
+  namespaced: true,
   state: {
     sessionId: window.localStorage.getItem('sessionId') || null,
     authTicket: window.localStorage.getItem('authTicket') || null,

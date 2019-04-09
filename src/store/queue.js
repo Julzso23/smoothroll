@@ -37,6 +37,7 @@ function sortQueue (queue, order) {
 }
 
 export default {
+  namespaced: true,
   state: {
     queue: [],
     queueOrder: JSON.parse(window.localStorage.getItem('queueOrder')) || [],
@@ -67,7 +68,7 @@ export default {
   actions: {
     async getQueue ({ commit, rootState, state, dispatch }, mediaType) {
       commit('setLoading', true)
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('queue', {
         media_types: mediaType || 'anime|drama',

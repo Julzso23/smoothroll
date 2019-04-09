@@ -28,7 +28,7 @@ export default {
   methods: {
     updateCategories () {
       this.loading = true
-      this.$store.dispatch('getCategories', this.mediaType.key)
+      this.$store.dispatch('browse/getCategories', this.mediaType.key)
         .then(() => {
           this.loading = false
         })

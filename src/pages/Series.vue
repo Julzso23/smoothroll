@@ -44,7 +44,7 @@ import Rating from 'modules/media/Rating'
 export default {
   name: 'series',
   mounted () {
-    this.$store.dispatch('getSeries', this.seriesId)
+    this.$store.dispatch('media/getSeries', this.seriesId)
   },
   data: () => ({
     collectionsLoading: false
@@ -89,7 +89,7 @@ export default {
     series (value) {
       this.collectionsLoading = true
 
-      this.$store.dispatch('listMedia', {
+      this.$store.dispatch('media/listMedia', {
         seriesId: this.seriesId,
         count: this.series.media_count
       })
@@ -102,10 +102,10 @@ export default {
       document.title = `${this.series.name} ― Smoothroll`
     },
     seriesId () {
-      this.$store.dispatch('getSeries', this.seriesId)
+      this.$store.dispatch('media/getSeries', this.seriesId)
     },
     locale () {
-      this.$store.dispatch('getSeries', this.seriesId)
+      this.$store.dispatch('media/getSeries', this.seriesId)
     },
     'series.landscape_image' () {
       this.fixMixedContent()
@@ -116,7 +116,7 @@ export default {
   },
   methods: {
     onQueueToggle (endLoading) {
-      this.$store.dispatch('getSeries', this.seriesId)
+      this.$store.dispatch('media/getSeries', this.seriesId)
         .then(() => {
           endLoading()
         })
@@ -133,7 +133,7 @@ export default {
     onWatchedToggle () {
       this.collectionsLoading = true
 
-      this.$store.dispatch('listMedia', {
+      this.$store.dispatch('media/listMedia', {
         seriesId: this.seriesId,
         count: this.series.media_count
       })
