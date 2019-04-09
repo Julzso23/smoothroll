@@ -28,6 +28,7 @@ export default {
     },
     async toggleWatched () {
       this.close()
+      this.$emit('beginUpdate')
       await this.$store.dispatch('setWatched', { mediaId: this.mediaId, watched: !this.watched, duration: this.duration })
       let media = await this.$store.dispatch('getUpdatedMedia', this.mediaId)
       this.$emit('updated', media)

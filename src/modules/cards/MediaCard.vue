@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card :class="active ? 'active-card' : ''" @contextmenu.native.prevent.stop="contextMenu" ref="card">
+    <card :class="{'active-card' : active}" @contextmenu.native.prevent.stop="contextMenu" ref="card" v-if="!loading">
       <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
         <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
         <div class="play"></div>
@@ -20,7 +20,13 @@
       <slot></slot>
     </card>
 
-    <media-card-context v-model="showContextMenu" :position="contextMenuPosition" :watched="watched" :mediaId="media.media_id" :duration="media.duration" @updated="mediaUpdated" />
+    <card v-else :class="{'active-card' : active}" :style="{height: cardHeight + 'px'}">
+      <loading class="my-auto" />
+    </card>
+
+    <media-card-context v-model="showContextMenu" :position="contextMenuPosition" :watched="watched"
+                        :mediaId="media.media_id" :duration="media.duration"
+                        @beginUpdate="mediaBeginUpdate" @updated="mediaUpdated" />
   </div>
 </template>
 
@@ -28,6 +34,7 @@
 import ProgressBar from 'modules/shared/ProgressBar'
 import Card from './Card'
 import MediaCardContext from './MediaCardContext'
+import Loading from 'modules/shared/Loading'
 
 export default {
   name: 'media-card',
@@ -40,12 +47,15 @@ export default {
     contextMenuPosition: {
       x: 0,
       y: 0
-    }
+    },
+    loading: false,
+    cardHeight: 0
   }),
   components: {
     ProgressBar,
     Card,
-    MediaCardContext
+    MediaCardContext,
+    Loading
   },
   mounted () {
     this.fixMixedContent()
@@ -62,7 +72,12 @@ export default {
       this.contextMenuPosition.y = event.clientY - this.$refs.card.$el.getBoundingClientRect().top
     },
     mediaUpdated (media) {
+      this.loading = false
       this.$emit('updated', media)
+    },
+    mediaBeginUpdate () {
+      this.cardHeight = this.$refs.card.$el.getBoundingClientRect().height
+      this.loading = true
     }
   },
   watch: {
