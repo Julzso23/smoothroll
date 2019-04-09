@@ -68,6 +68,11 @@ export default {
       if (state.currentMedia && state.currentMedia.media_id === media.media_id) {
         Object.assign(state.currentMedia, media)
       }
+    },
+    updateSeries (state, series) {
+      if (state.currentSeries && state.currentSeries.series_id === series.series_id) {
+        Object.assign(state.currentSeries, series)
+      }
     }
   },
 
@@ -274,7 +279,7 @@ export default {
       })
     },
 
-    async getUpdatedMedia ({ rootState, dispatch }, id) {
+    async updateMedia ({ rootState, dispatch, commit }, id) {
       await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('info', {
@@ -287,9 +292,9 @@ export default {
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
-        .then(data =>
+        .then(media =>
           Vue.api.get('info', {
-            series_id: data.series_id,
+            series_id: media.series_id,
             fields: [
               'series.in_queue'
             ].join(','),
@@ -298,19 +303,29 @@ export default {
             auth: rootState.authentication.authTicket
           })
             .then(seriesData => {
-              data.in_queue = seriesData.in_queue
-              return data
+              media.in_queue = seriesData.in_queue
+              commit('updateMedia', media)
+              commit('queue/updateMedia', media, { root: true })
             })
         )
         .catch(({ code }) => errorHandler(code, 'getUpdatedMedia', id))
     },
 
-    updateMedia ({ commit, dispatch }, id) {
-      return dispatch('getUpdatedMedia', id)
-        .then(media => {
-          commit('updateMedia', media)
-          commit('queue/updateMedia', media, { root: true })
+    async updateSeries ({ commit, rootState, dispatch }, id) {
+      await dispatch('authentication/verifySession', null, { root: true })
+
+      return Vue.api.get('info', {
+        series_id: id,
+        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue', 'series.description'].join(','),
+        locale: rootState.locale.locale,
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
+      })
+        .then(series => {
+          commit('updateSeries', series)
+          commit('browse/updateSeries', series, { root: true })
         })
+        .catch(({ code }) => errorHandler(code, 'getSeries', id))
     }
   }
 }

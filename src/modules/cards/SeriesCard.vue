@@ -1,6 +1,6 @@
 <template>
   <div>
-    <card ref="card">
+    <card ref="card" @contextmenu.native.prevent.stop="contextMenu" v-if="!loading">
       <router-link :to="'/series/' + series.series_id" class="text-reset">
         <div class="card-img-top image-container">
           <ribbon v-if="series.in_queue" />
@@ -13,9 +13,16 @@
       </div>
     </card>
 
+    <card v-else :style="{height: cardHeight + 'px'}">
+      <loading class="my-auto" />
+    </card>
+
     <card ref="popper" :style="{display: showPopper ? 'block' : 'none', height: popperHeight + 'px'}" class="popper block-truncate">
       {{series.description}}
     </card>
+
+    <series-card-context v-model="showContextMenu" :position="contextMenuPosition" :inQueue="series.in_queue"
+                         :seriesId="series.series_id" @beginUpdate="seriesBeginUpdate" @updated="seriesUpdated" />
   </div>
 </template>
 
@@ -23,6 +30,8 @@
 import Card from './Card'
 import Ribbon from './Ribbon'
 import Popper from 'popper.js'
+import Loading from 'modules/shared/Loading'
+import SeriesCardContext from './SeriesCardContext'
 
 export default {
   name: 'series-card',
@@ -31,7 +40,9 @@ export default {
   },
   components: {
     Card,
-    Ribbon
+    Ribbon,
+    Loading,
+    SeriesCardContext
   },
   mounted () {
     this.fixMixedContent()
@@ -47,12 +58,31 @@ export default {
       this.showPopper = visible
       this.popperHeight = this.$refs.card.$el.offsetHeight
       this.popper.scheduleUpdate()
+    },
+    contextMenu (event) {
+      this.showContextMenu = true
+      this.contextMenuPosition.x = event.clientX - this.$refs.card.$el.getBoundingClientRect().left
+      this.contextMenuPosition.y = event.clientY - this.$refs.card.$el.getBoundingClientRect().top
+    },
+    seriesUpdated () {
+      this.loading = false
+    },
+    seriesBeginUpdate () {
+      this.cardHeight = this.$refs.card.$el.getBoundingClientRect().height
+      this.loading = true
     }
   },
   data: () => ({
     popper: null,
     showPopper: false,
-    popperHeight: 0
+    popperHeight: 0,
+    loading: false,
+    cardHeight: 0,
+    showContextMenu: false,
+    contextMenuPosition: {
+      x: 0,
+      y: 0
+    }
   }),
   watch: {
     'series.portrait_image' () {

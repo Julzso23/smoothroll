@@ -1,7 +1,7 @@
 <template>
   <div class="list-group position-absolute text-nowrap" :style="{left: position.x + 'px', top: position.y + 'px'}" v-if="value" v-click-outside="close">
-    <a class="list-group-item list-group-item-action" href="#" @click.prevent.stop="toggleWatched" v-if="watched">{{$t('media.markUnwatched')}}</a>
-    <a class="list-group-item list-group-item-action" href="#" @click.prevent.stop="toggleWatched" v-else>{{$t('media.markWatched')}}</a>
+    <a class="list-group-item list-group-item-action bg-dark text-light" href="#" @click.prevent.stop="toggleWatched" v-if="watched">{{$t('media.markUnwatched')}}</a>
+    <a class="list-group-item list-group-item-action bg-dark text-light" href="#" @click.prevent.stop="toggleWatched" v-else>{{$t('media.markWatched')}}</a>
   </div>
 </template>
 
