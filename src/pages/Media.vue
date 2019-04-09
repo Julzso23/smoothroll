@@ -6,6 +6,7 @@
     <h4 class="text-light">{{$t('media.episode', {number: media.episode_number}) + ' - ' + media.name}}</h4>
     <p class="text-light">{{media.description}}</p>
     <toggle-watched-button :mediaId="media.media_id" :playhead="media.playhead" :duration="media.duration" @toggle="onToggleWatched" />
+    <toggle-queue-button @toggle="onQueueToggle" :seriesId="media.series_id" :inQueue="media.in_queue" />
 
     <scrolling-collection :collection="collection" :active="media.media_id" />
   </div>
@@ -17,11 +18,12 @@ import Player from 'modules/media/Player'
 import Loading from 'modules/shared/Loading'
 import ScrollingCollection from 'modules/media/ScrollingCollection'
 import ToggleWatchedButton from 'modules/media/ToggleWatchedButton'
+import ToggleQueueButton from 'modules/media/ToggleQueueButton'
 
 export default {
   name: 'media',
   mounted () {
-    this.$store.dispatch('getMedia', this.mediaId)
+    this.$store.dispatch('media/getMedia', this.mediaId)
   },
   computed: {
     media () {
@@ -41,21 +43,22 @@ export default {
     Player,
     Loading,
     ScrollingCollection,
-    ToggleWatchedButton
+    ToggleWatchedButton,
+    ToggleQueueButton
   },
   watch: {
     mediaId () {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
     },
     media () {
       document.title = `${this.$t('media.episode', { number: this.media.episode_number })}: ${this.media.name} - ${this.media.collection_name} ― Smoothroll`
 
-      this.$store.dispatch('getCollection', this.media.collection_id)
+      this.$store.dispatch('media/getCollection', this.media.collection_id)
 
       this.fixMixedContent()
     },
     locale () {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
     },
     'media.screenshot_image' () {
       this.fixMixedContent()
@@ -68,7 +71,13 @@ export default {
       }
     },
     onToggleWatched (endLoading) {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
+        .then(() => {
+          endLoading()
+        })
+    },
+    onQueueToggle (endLoading) {
+      this.$store.dispatch('media/getMedia', this.mediaId)
         .then(() => {
           endLoading()
         })

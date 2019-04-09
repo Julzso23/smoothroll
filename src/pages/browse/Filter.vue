@@ -51,7 +51,7 @@ export default {
         return this.$store.state.media.displayCompact
       },
       set (value) {
-        this.$store.commit('setCompactDisplay', value)
+        this.$store.commit('media/setCompactDisplay', value)
       }
     }
   }

@@ -65,7 +65,7 @@ export default {
       this.loading = true
       this.offset = 0
 
-      await this.$store.dispatch('listSeries', {
+      await this.$store.dispatch('browse/listSeries', {
         filter: this.filter,
         mediaType: this.mediaType,
         limit: this.limit,
@@ -85,7 +85,7 @@ export default {
       this.loadingMore = true
       this.offset += this.limit
 
-      await this.$store.dispatch('listSeries', {
+      await this.$store.dispatch('browse/listSeries', {
         filter: this.filter,
         mediaType: this.mediaType,
         limit: this.limit,

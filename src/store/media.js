@@ -2,6 +2,7 @@ import Vue from 'vue'
 import errorHandler from './errorHandler'
 
 export default {
+  namespaced: true,
   state: {
     mediaList: [],
     currentMedia: null,
@@ -41,12 +42,43 @@ export default {
     setCompactDisplay (state, compact) {
       state.displayCompact = compact
       window.localStorage.setItem('displayCompact', compact)
+    },
+    updateMedia (state, media) {
+      for (let item of state.mediaList) {
+        if (item.media_id === media.media_id) {
+          Object.assign(item, media)
+          break
+        }
+      }
+
+      for (let item of state.recentMedia) {
+        if (item.media_id === media.media_id) {
+          Object.assign(item, media)
+          break
+        }
+      }
+
+      for (let item of state.collection) {
+        if (item.media_id === media.media_id) {
+          Object.assign(item, media)
+          break
+        }
+      }
+
+      if (state.currentMedia && state.currentMedia.media_id === media.media_id) {
+        Object.assign(state.currentMedia, media)
+      }
+    },
+    updateSeries (state, series) {
+      if (state.currentSeries && state.currentSeries.series_id === series.series_id) {
+        Object.assign(state.currentSeries, series)
+      }
     }
   },
 
   actions: {
     async listMedia ({ commit, rootState, dispatch }, { seriesId, count }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('list_media', {
         series_id: seriesId,
@@ -68,27 +100,39 @@ export default {
     },
 
     async getMedia ({ commit, rootState, dispatch }, id) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('info', {
         media_id: id,
         fields: [
           'media.media_id', 'media.name', 'media.description', 'media.episode_number', 'media.collection_name',
           'media.screenshot_image', 'media.stream_data', 'media.duration', 'media.playhead', 'media.collection_id',
-          'media.series_id'
+          'media.series_id', 'series'
         ].join(','),
         locale: rootState.locale.locale,
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
         .then(data => {
-          commit('setCurrentMedia', data)
+          return Vue.api.get('info', {
+            series_id: data.series_id,
+            fields: [
+              'series.in_queue'
+            ].join(','),
+            locale: rootState.locale.locale,
+            session_id: rootState.authentication.sessionId,
+            auth: rootState.authentication.authTicket
+          })
+            .then(seriesData => {
+              data.in_queue = seriesData.in_queue
+              commit('setCurrentMedia', data)
+            })
         })
         .catch(({ code }) => errorHandler(code, 'getMedia', id))
     },
 
     async getSeries ({ commit, rootState, dispatch }, id) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('info', {
         series_id: id,
@@ -107,7 +151,7 @@ export default {
     },
 
     async search ({ commit, rootState, dispatch }, query) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('autocomplete', {
         media_types: 'anime|drama',
@@ -125,7 +169,7 @@ export default {
     },
 
     async toggleQueue ({ rootState, dispatch }, { seriesId, inQueue }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       const request = inQueue ? 'remove_from_queue' : 'add_to_queue'
       return Vue.api.post(request, {
@@ -137,7 +181,7 @@ export default {
     },
 
     async logTime ({ rootState, dispatch }, { mediaId, time }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.post('log', {
         media_id: mediaId,
@@ -150,7 +194,7 @@ export default {
     },
 
     async getHistory ({ rootState, dispatch, commit }, { mediaTypes, limit, offset, append }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('recently_watched', {
         media_types: mediaTypes,
@@ -183,7 +227,7 @@ export default {
 
     async getRecentMedia ({ rootState, dispatch, commit }, mediaType) {
       commit('setRecentMediaLoading', true)
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('list_series', {
         media_type: mediaType,
@@ -210,12 +254,13 @@ export default {
     },
 
     async getCollection ({ rootState, dispatch, commit }, collectionId) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('list_media', {
         collection_id: collectionId,
         fields: [
-          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image', 'media.name', 'media.episode_number'
+          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
         ].join(','),
         limit: 999,
         locale: rootState.locale.locale,
@@ -233,6 +278,55 @@ export default {
         mediaId,
         time: watched ? duration : 0
       })
+    },
+
+    async updateMedia ({ rootState, dispatch, commit }, id) {
+      await dispatch('authentication/verifySession', null, { root: true })
+
+      return Vue.api.get('info', {
+        media_id: id,
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
+        ].join(','),
+        locale: rootState.locale.locale,
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
+      })
+        .then(media =>
+          Vue.api.get('info', {
+            series_id: media.series_id,
+            fields: [
+              'series.in_queue'
+            ].join(','),
+            locale: rootState.locale.locale,
+            session_id: rootState.authentication.sessionId,
+            auth: rootState.authentication.authTicket
+          })
+            .then(seriesData => {
+              media.in_queue = seriesData.in_queue
+              commit('updateMedia', media)
+              commit('queue/updateMedia', media, { root: true })
+            })
+        )
+        .catch(({ code }) => errorHandler(code, 'getUpdatedMedia', id))
+    },
+
+    async updateSeries ({ commit, rootState, dispatch }, id) {
+      await dispatch('authentication/verifySession', null, { root: true })
+
+      return Vue.api.get('info', {
+        series_id: id,
+        fields: ['series.series_id', 'series.name', 'series.portrait_image', 'series.in_queue', 'series.description'].join(','),
+        locale: rootState.locale.locale,
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
+      })
+        .then(series => {
+          commit('updateSeries', series)
+          commit('browse/updateSeries', series, { root: true })
+        })
+        .catch(({ code }) => errorHandler(code, 'getSeries', id))
     }
   }
 }

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import errorHandler from './errorHandler'
 
 export default {
+  namespaced: true,
   state: {
     categories: {
       genre: [],
@@ -19,12 +20,20 @@ export default {
     },
     appendSeriesList (state, seriesList) {
       state.seriesList = state.seriesList.concat(seriesList)
+    },
+    updateSeries (state, series) {
+      for (let item of state.seriesList) {
+        if (item.series_id === series.series_id) {
+          Object.assign(item, series)
+          break
+        }
+      }
     }
   },
 
   actions: {
     async getCategories ({ commit, dispatch, rootState }, mediaType) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       await Vue.api.get('categories', {
         media_type: mediaType,
@@ -39,7 +48,7 @@ export default {
     },
 
     async listSeries ({ commit, rootState, dispatch }, { filter, mediaType, limit, offset, append }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('list_series', {
         filter: filter,
