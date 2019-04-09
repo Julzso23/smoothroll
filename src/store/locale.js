@@ -20,7 +20,7 @@ export default {
 
   actions: {
     async getLocales ({ rootState, dispatch, commit }) {
-      await dispatch('authentication/verifySession', null, {root: true})
+      await dispatch('authentication/verifySession', null, { root: true })
 
       Vue.api.get('list_locales', {
         session_id: rootState.authentication.sessionId

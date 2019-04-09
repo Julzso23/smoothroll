@@ -30,8 +30,8 @@ export default {
       this.close()
       this.$emit('beginUpdate')
       await this.$store.dispatch('media/setWatched', { mediaId: this.mediaId, watched: !this.watched, duration: this.duration })
-      let media = await this.$store.dispatch('media/getUpdatedMedia', this.mediaId)
-      this.$emit('updated', media)
+      await this.$store.dispatch('media/updateMedia', this.mediaId)
+      this.$emit('updated')
     }
   }
 }

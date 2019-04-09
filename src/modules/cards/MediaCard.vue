@@ -71,9 +71,8 @@ export default {
       this.contextMenuPosition.x = event.clientX - this.$refs.card.$el.getBoundingClientRect().left
       this.contextMenuPosition.y = event.clientY - this.$refs.card.$el.getBoundingClientRect().top
     },
-    mediaUpdated (media) {
+    mediaUpdated () {
       this.loading = false
-      this.$emit('updated', media)
     },
     mediaBeginUpdate () {
       this.cardHeight = this.$refs.card.$el.getBoundingClientRect().height
