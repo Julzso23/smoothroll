@@ -1,28 +1,40 @@
 <template>
-  <card :class="active ? 'active-card' : ''">
-    <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
-      <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
-      <div class="play"></div>
-      <div class="watched-grey" v-if="watched"></div>
-      <img src="~images/eye.svg" class="watched" v-if="watched" />
-      <span class="badge badge-secondary length">{{length}}</span>
-    </router-link>
+  <div>
+    <card :class="{'active-card' : active}" @contextmenu.native.prevent.stop="contextMenu" ref="card" v-if="!loading">
+      <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
+        <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
+        <div class="play"></div>
+        <div class="watched-grey" v-if="watched"></div>
+        <img src="~images/eye.svg" class="watched" v-if="watched" />
+        <span class="badge badge-secondary length">{{length}}</span>
+      </router-link>
 
-    <progress-bar :value="(media.playhead / media.duration) * 100" />
+      <progress-bar :value="(media.playhead / media.duration) * 100" />
 
-    <div class="mx-2 my-1 d-flex flex-column">
-      <span class="text-truncate"><router-link :to="'/series/' + media.series_id" class="text-reset" :title="media.collection_name">{{media.collection_name}}</router-link></span>
-      <small><router-link :to="'/media/' + media.media_id" class="text-reset">{{$t('media.episode', {number: media.episode_number})}}</router-link></small>
-      <small class="text-truncate"><router-link :to="'/media/' + media.media_id" class="text-reset">{{media.name}}</router-link></small>
-    </div>
+      <div class="mx-2 my-1 d-flex flex-column">
+        <span class="text-truncate"><router-link :to="'/series/' + media.series_id" class="text-reset" :title="media.collection_name">{{media.collection_name}}</router-link></span>
+        <small><router-link :to="'/media/' + media.media_id" class="text-reset">{{$t('media.episode', {number: media.episode_number})}}</router-link></small>
+        <small class="text-truncate"><router-link :to="'/media/' + media.media_id" class="text-reset">{{media.name}}</router-link></small>
+      </div>
 
-    <slot></slot>
-  </card>
+      <slot></slot>
+    </card>
+
+    <card v-else :class="{'active-card' : active}" :style="{height: cardHeight + 'px'}">
+      <loading class="my-auto" />
+    </card>
+
+    <media-card-context v-model="showContextMenu" :position="contextMenuPosition" :watched="watched"
+                        :mediaId="media.media_id" :duration="media.duration"
+                        @beginUpdate="mediaBeginUpdate" @updated="mediaUpdated" />
+  </div>
 </template>
 
 <script>
 import ProgressBar from 'modules/shared/ProgressBar'
 import Card from './Card'
+import MediaCardContext from './MediaCardContext'
+import Loading from 'modules/shared/Loading'
 
 export default {
   name: 'media-card',
@@ -30,9 +42,20 @@ export default {
     media: Object,
     active: Boolean
   },
+  data: () => ({
+    showContextMenu: false,
+    contextMenuPosition: {
+      x: 0,
+      y: 0
+    },
+    loading: false,
+    cardHeight: 0
+  }),
   components: {
     ProgressBar,
-    Card
+    Card,
+    MediaCardContext,
+    Loading
   },
   mounted () {
     this.fixMixedContent()
@@ -42,6 +65,18 @@ export default {
       if (this.media.screenshot_image) {
         this.media.screenshot_image.large_url = this.media.screenshot_image.large_url.replace('http://', 'https://')
       }
+    },
+    contextMenu (event) {
+      this.showContextMenu = true
+      this.contextMenuPosition.x = event.clientX - this.$refs.card.$el.getBoundingClientRect().left
+      this.contextMenuPosition.y = event.clientY - this.$refs.card.$el.getBoundingClientRect().top
+    },
+    mediaUpdated () {
+      this.loading = false
+    },
+    mediaBeginUpdate () {
+      this.cardHeight = this.$refs.card.$el.getBoundingClientRect().height
+      this.loading = true
     }
   },
   watch: {

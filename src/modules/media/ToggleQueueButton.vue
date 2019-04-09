@@ -19,7 +19,7 @@ export default {
     toggleQueue () {
       this.loading = true
 
-      this.$store.dispatch('toggleQueue', {
+      this.$store.dispatch('media/toggleQueue', {
         seriesId: this.seriesId,
         inQueue: this.inQueue
       })

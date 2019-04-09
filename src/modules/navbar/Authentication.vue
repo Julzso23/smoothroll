@@ -27,7 +27,7 @@ export default {
   },
   computed: {
     isLoggedIn () {
-      return this.$store.getters.isLoggedIn
+      return this.$store.getters['authentication/isLoggedIn']
     },
     username () {
       return this.$store.state.authentication.user.username
@@ -35,7 +35,7 @@ export default {
   },
   methods: {
     async logout () {
-      await this.$store.dispatch('logout')
+      await this.$store.dispatch('authentication/logout')
       this.$router.push('/login')
     }
   }

@@ -28,11 +28,11 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getLocales')
+    this.$store.dispatch('locale/getLocales')
   },
   methods: {
     setLocale (locale) {
-      this.$store.commit('setLocale', locale)
+      this.$store.commit('locale/setLocale', locale)
       this.$i18n.locale = locale
     }
   },

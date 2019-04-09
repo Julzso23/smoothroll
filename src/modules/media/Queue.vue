@@ -37,14 +37,14 @@ export default {
     Loading
   },
   mounted () {
-    this.$store.dispatch('getQueue', this.mediaType)
+    this.$store.dispatch('queue/getQueue', this.mediaType)
   },
   watch: {
     mediaType () {
-      this.$store.dispatch('getQueue', this.mediaType)
+      this.$store.dispatch('queue/getQueue', this.mediaType)
     },
     locale () {
-      this.$store.dispatch('getQueue', this.mediaType)
+      this.$store.dispatch('queue/getQueue', this.mediaType)
     }
   },
   computed: {
@@ -53,7 +53,7 @@ export default {
         return this.$store.state.queue.queue
       },
       set (value) {
-        this.$store.dispatch('sortQueue', value)
+        this.$store.dispatch('queue/sortQueue', value)
       }
     },
     loading () {
@@ -79,6 +79,5 @@ export default {
 
   .handle-small {
     cursor: grab;
-    // padding: 0 4px;
   }
 </style>
