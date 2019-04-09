@@ -82,7 +82,7 @@ export default {
         auth: rootState.authentication.authTicket
       })
         .then(data => {
-          Vue.api.get('info', {
+          return Vue.api.get('info', {
             series_id: data.series_id,
             fields: [
               'series.in_queue'
@@ -245,6 +245,35 @@ export default {
         mediaId,
         time: watched ? duration : 0
       })
+    },
+
+    async getUpdatedMedia ({ rootState, dispatch }, id) {
+      return Vue.api.get('info', {
+        media_id: id,
+        fields: [
+          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
+        ].join(','),
+        locale: rootState.locale.locale,
+        session_id: rootState.authentication.sessionId,
+        auth: rootState.authentication.authTicket
+      })
+        .then(data =>
+          Vue.api.get('info', {
+            series_id: data.series_id,
+            fields: [
+              'series.in_queue'
+            ].join(','),
+            locale: rootState.locale.locale,
+            session_id: rootState.authentication.sessionId,
+            auth: rootState.authentication.authTicket
+          })
+            .then(seriesData => {
+              data.in_queue = seriesData.in_queue
+              return data
+            })
+        )
+        .catch(({ code }) => errorHandler(code, 'getUpdatedMedia', id))
     }
   }
 }
