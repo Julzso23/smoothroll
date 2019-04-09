@@ -41,6 +41,32 @@ export default {
     setCompactDisplay (state, compact) {
       state.displayCompact = compact
       window.localStorage.setItem('displayCompact', compact)
+    },
+    updateMedia (state, media) {
+      for (let item of state.mediaList) {
+        if (item.media_id === media.media_id) {
+          item = media
+          break
+        }
+      }
+
+      for (let item of state.recentMedia) {
+        if (item.media_id === media.media_id) {
+          item = media
+          break
+        }
+      }
+
+      for (let item of state.collection) {
+        if (item.media_id === media.media_id) {
+          item = media
+          break
+        }
+      }
+
+      if (state.currentMedia.media_id === media.media_id) {
+        Object.assign(state.currentMedia, media)
+      }
     }
   },
 
