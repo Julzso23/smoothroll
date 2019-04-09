@@ -23,7 +23,7 @@ import ToggleQueueButton from 'modules/media/ToggleQueueButton'
 export default {
   name: 'media',
   mounted () {
-    this.$store.dispatch('getMedia', this.mediaId)
+    this.$store.dispatch('media/getMedia', this.mediaId)
   },
   computed: {
     media () {
@@ -48,17 +48,17 @@ export default {
   },
   watch: {
     mediaId () {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
     },
     media () {
       document.title = `${this.$t('media.episode', { number: this.media.episode_number })}: ${this.media.name} - ${this.media.collection_name} ― Smoothroll`
 
-      this.$store.dispatch('getCollection', this.media.collection_id)
+      this.$store.dispatch('media/getCollection', this.media.collection_id)
 
       this.fixMixedContent()
     },
     locale () {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
     },
     'media.screenshot_image' () {
       this.fixMixedContent()
@@ -71,13 +71,13 @@ export default {
       }
     },
     onToggleWatched (endLoading) {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
         .then(() => {
           endLoading()
         })
     },
     onQueueToggle (endLoading) {
-      this.$store.dispatch('getMedia', this.mediaId)
+      this.$store.dispatch('media/getMedia', this.mediaId)
         .then(() => {
           endLoading()
         })

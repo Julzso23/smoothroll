@@ -64,7 +64,7 @@ export default {
         return
       }
 
-      this.$store.dispatch('setWatched', {
+      this.$store.dispatch('media/setWatched', {
         mediaId: this.mediaList[this.index].media_id,
         watched,
         duration: this.mediaList[this.index].duration

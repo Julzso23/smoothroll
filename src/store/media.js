@@ -2,6 +2,7 @@ import Vue from 'vue'
 import errorHandler from './errorHandler'
 
 export default {
+  namespaced: true,
   state: {
     mediaList: [],
     currentMedia: null,
@@ -72,7 +73,7 @@ export default {
 
   actions: {
     async listMedia ({ commit, rootState, dispatch }, { seriesId, count }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('list_media', {
         series_id: seriesId,
@@ -94,7 +95,7 @@ export default {
     },
 
     async getMedia ({ commit, rootState, dispatch }, id) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('info', {
         media_id: id,
@@ -126,7 +127,7 @@ export default {
     },
 
     async getSeries ({ commit, rootState, dispatch }, id) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('info', {
         series_id: id,
@@ -145,7 +146,7 @@ export default {
     },
 
     async search ({ commit, rootState, dispatch }, query) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('autocomplete', {
         media_types: 'anime|drama',
@@ -163,7 +164,7 @@ export default {
     },
 
     async toggleQueue ({ rootState, dispatch }, { seriesId, inQueue }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       const request = inQueue ? 'remove_from_queue' : 'add_to_queue'
       return Vue.api.post(request, {
@@ -175,7 +176,7 @@ export default {
     },
 
     async logTime ({ rootState, dispatch }, { mediaId, time }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.post('log', {
         media_id: mediaId,
@@ -188,7 +189,7 @@ export default {
     },
 
     async getHistory ({ rootState, dispatch, commit }, { mediaTypes, limit, offset, append }) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('recently_watched', {
         media_types: mediaTypes,
@@ -221,7 +222,7 @@ export default {
 
     async getRecentMedia ({ rootState, dispatch, commit }, mediaType) {
       commit('setRecentMediaLoading', true)
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('list_series', {
         media_type: mediaType,
@@ -248,7 +249,7 @@ export default {
     },
 
     async getCollection ({ rootState, dispatch, commit }, collectionId) {
-      await dispatch('verifySession')
+      await dispatch('authentication/verifySession', null, {root: true})
 
       return Vue.api.get('list_media', {
         collection_id: collectionId,
@@ -274,6 +275,8 @@ export default {
     },
 
     async getUpdatedMedia ({ rootState, dispatch }, id) {
+      await dispatch('authentication/verifySession', null, {root: true})
+
       return Vue.api.get('info', {
         media_id: id,
         fields: [

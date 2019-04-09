@@ -65,7 +65,7 @@ export default {
       this.loading = true
       this.offset = 0
 
-      await this.$store.dispatch('getHistory', {
+      await this.$store.dispatch('media/getHistory', {
         mediaTypes: this.mediaType.key,
         limit: this.limit,
         offset: this.offset
@@ -83,7 +83,7 @@ export default {
       this.loadingMore = true
       this.offset += this.limit
 
-      await this.$store.dispatch('getHistory', {
+      await this.$store.dispatch('media/getHistory', {
         mediaTypes: this.mediaType.key,
         limit: this.limit,
         offset: this.offset,
@@ -119,7 +119,7 @@ export default {
         return this.$store.state.media.displayCompact
       },
       set (value) {
-        this.$store.commit('setCompactDisplay', value)
+        this.$store.commit('media/setCompactDisplay', value)
       }
     },
     locale () {

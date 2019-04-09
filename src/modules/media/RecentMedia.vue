@@ -52,7 +52,7 @@ export default {
     }
   },
   mounted () {
-    this.$store.dispatch('getRecentMedia', this.mediaType)
+    this.$store.dispatch('media/getRecentMedia', this.mediaType)
   },
   methods: {
     timeToDate (time) {
@@ -66,7 +66,7 @@ export default {
   },
   watch: {
     locale () {
-      this.$store.dispatch('getRecentMedia', this.mediaType)
+      this.$store.dispatch('media/getRecentMedia', this.mediaType)
     }
   }
 }

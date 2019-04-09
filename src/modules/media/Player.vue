@@ -77,7 +77,7 @@ export default {
 
     logTime (time) {
       if (time !== 0 && time <= this.duration) {
-        this.$store.dispatch('logTime', {
+        this.$store.dispatch('media/logTime', {
           mediaId: this.mediaId,
           time: time
         })

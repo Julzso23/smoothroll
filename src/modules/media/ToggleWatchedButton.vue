@@ -23,7 +23,7 @@ export default {
   methods: {
     toggleWatched () {
       this.loading = true
-      this.$store.dispatch('setWatched', { mediaId: this.mediaId, watched: !this.watched, duration: this.duration })
+      this.$store.dispatch('media/setWatched', { mediaId: this.mediaId, watched: !this.watched, duration: this.duration })
         .then(() => {
           this.$emit('toggle', this.endLoading)
         })
