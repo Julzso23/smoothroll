@@ -259,7 +259,8 @@ export default {
       return Vue.api.get('list_media', {
         collection_id: collectionId,
         fields: [
-          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image', 'media.name', 'media.episode_number'
+          'media.media_id', 'media.playhead', 'media.duration', 'media.screenshot_image',
+          'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
         ].join(','),
         limit: 999,
         locale: rootState.locale.locale,
