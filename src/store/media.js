@@ -96,7 +96,7 @@ export default {
         .then(data => {
           commit('setMediaList', data)
         })
-        .catch(({ code }) => errorHandler(code, 'listMedia'))
+        .catch(({ code }) => errorHandler(code, 'media/listMedia'))
     },
 
     async getMedia ({ commit, rootState, dispatch }, id) {
@@ -128,7 +128,7 @@ export default {
               commit('setCurrentMedia', data)
             })
         })
-        .catch(({ code }) => errorHandler(code, 'getMedia', id))
+        .catch(({ code }) => errorHandler(code, 'media/getMedia', id))
     },
 
     async getSeries ({ commit, rootState, dispatch }, id) {
@@ -147,7 +147,7 @@ export default {
         .then(data => {
           commit('setCurrentSeries', data)
         })
-        .catch(({ code }) => errorHandler(code, 'getSeries', id))
+        .catch(({ code }) => errorHandler(code, 'media/getSeries', id))
     },
 
     async search ({ commit, rootState, dispatch }, query) {
@@ -165,7 +165,7 @@ export default {
         .then(data => {
           commit('setSearchResults', data)
         })
-        .catch(({ code }) => errorHandler(code, 'search', query))
+        .catch(({ code }) => errorHandler(code, 'media/search', query))
     },
 
     async toggleQueue ({ rootState, dispatch }, { seriesId, inQueue }) {
@@ -177,7 +177,7 @@ export default {
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
-        .catch(({ code }) => errorHandler(code, 'toggleQueue', { seriesId, inQueue }))
+        .catch(({ code }) => errorHandler(code, 'media/toggleQueue', { seriesId, inQueue }))
     },
 
     async logTime ({ rootState, dispatch }, { mediaId, time }) {
@@ -190,7 +190,7 @@ export default {
         session_id: rootState.authentication.sessionId,
         auth: rootState.authentication.authTicket
       })
-        .catch(({ code }) => errorHandler(code, 'logTime', { mediaId, time }))
+        .catch(({ code }) => errorHandler(code, 'media/logTime', { mediaId, time }))
     },
 
     async getHistory ({ rootState, dispatch, commit }, { mediaTypes, limit, offset, append }) {
@@ -222,7 +222,7 @@ export default {
 
           return data
         })
-        .catch(({ code }) => errorHandler(code, 'getHistory', { mediaTypes, limit, offset, append }))
+        .catch(({ code }) => errorHandler(code, 'media/getHistory', { mediaTypes, limit, offset, append }))
     },
 
     async getRecentMedia ({ rootState, dispatch, commit }, mediaType) {
@@ -250,7 +250,7 @@ export default {
           commit('setRecentMedia', recentMedia)
           commit('setRecentMediaLoading', false)
         })
-        .catch(({ code }) => errorHandler(code, 'getRecentMedia', mediaType))
+        .catch(({ code }) => errorHandler(code, 'media/getRecentMedia', mediaType))
     },
 
     async getCollection ({ rootState, dispatch, commit }, collectionId) {
@@ -270,7 +270,7 @@ export default {
         .then(data => {
           commit('setCollection', data)
         })
-        .catch(({ code }) => errorHandler(code, 'getCollection', collectionId))
+        .catch(({ code }) => errorHandler(code, 'media/getCollection', collectionId))
     },
 
     async setWatched ({ rootState, dispatch, commit }, { mediaId, watched, duration }) {
@@ -309,7 +309,7 @@ export default {
               commit('queue/updateMedia', media, { root: true })
             })
         )
-        .catch(({ code }) => errorHandler(code, 'getUpdatedMedia', id))
+        .catch(({ code }) => errorHandler(code, 'media/getUpdatedMedia', id))
     },
 
     async updateSeries ({ commit, rootState, dispatch }, id) {
@@ -326,7 +326,7 @@ export default {
           commit('updateSeries', series)
           commit('browse/updateSeries', series, { root: true })
         })
-        .catch(({ code }) => errorHandler(code, 'getSeries', id))
+        .catch(({ code }) => errorHandler(code, 'media/updateSeries', id))
     }
   }
 }

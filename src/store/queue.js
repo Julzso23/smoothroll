@@ -84,7 +84,7 @@ export default {
           commit('setQueue', sortQueue(data, state.queueOrder))
           commit('setLoading', false)
         })
-        .catch(({ code }) => errorHandler(code, 'getQueue'))
+        .catch(({ code }) => errorHandler(code, 'queue/getQueue'))
     },
 
     async sortQueue ({ commit }, queue) {
