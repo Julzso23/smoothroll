@@ -44,7 +44,7 @@ export default {
         .then(data => {
           commit('setCategories', data)
         })
-        .catch(({ code }) => errorHandler(code, 'getCategories', mediaType))
+        .catch(({ code }) => errorHandler(code, 'browse/getCategories', mediaType))
     },
 
     async listSeries ({ commit, rootState, dispatch }, { filter, mediaType, limit, offset, append }) {
@@ -69,7 +69,7 @@ export default {
 
           return data
         })
-        .catch(({ code }) => errorHandler(code, 'listSeries', { filter, mediaType, limit, offset, append }))
+        .catch(({ code }) => errorHandler(code, 'browse/listSeries', { filter, mediaType, limit, offset, append }))
     }
   }
 }
