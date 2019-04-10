@@ -28,7 +28,7 @@ export default {
         .then(data => {
           commit('setLocaleList', data)
         })
-        .catch(({ code }) => errorHandler(code, 'getLocales'))
+        .catch(({ code }) => errorHandler(code, 'locale/getLocales'))
     }
   }
 }
