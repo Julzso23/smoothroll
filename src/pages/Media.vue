@@ -1,6 +1,6 @@
 <template>
   <div v-if="media && media.media_id == mediaId">
-    <player :mediaId="media.media_id" :streamData="media.stream_data" :poster="media.screenshot_image.full_url" :duration="media.duration" :playhead="media.playhead" />
+    <player :mediaId="media.media_id" :streamData="media.stream_data" :poster="$https(media.screenshot_image.full_url)" :duration="media.duration" :playhead="media.playhead" />
 
     <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.collection_name}}</router-link></h3>
     <h4 class="text-light">{{$t('media.episode', {number: media.episode_number}) + ' - ' + media.name}}</h4>
@@ -54,22 +54,12 @@ export default {
       document.title = `${this.$t('media.episode', { number: this.media.episode_number })}: ${this.media.name} - ${this.media.collection_name} ― Smoothroll`
 
       this.$store.dispatch('media/getCollection', this.media.collection_id)
-
-      this.fixMixedContent()
     },
     locale () {
       this.$store.dispatch('media/getMedia', this.mediaId)
-    },
-    'media.screenshot_image' () {
-      this.fixMixedContent()
     }
   },
   methods: {
-    fixMixedContent () {
-      if (this.media && this.media.screenshot_image) {
-        this.media.screenshot_image.full_url = this.media.screenshot_image.full_url.replace('http://', 'https://')
-      }
-    },
     onToggleWatched (endLoading) {
       this.$store.dispatch('media/getMedia', this.mediaId)
         .then(() => {
