@@ -2,11 +2,14 @@
   <div v-if="media && media.media_id == mediaId">
     <player :mediaId="media.media_id" :streamData="media.stream_data" :poster="$https(media.screenshot_image.full_url)" :duration="media.duration" :playhead="media.playhead" />
 
-    <h3 class="text-light"><router-link :to="'/series/' + media.series_id" class="text-reset">{{media.collection_name}}</router-link></h3>
-    <h4 class="text-light">{{$t('media.episode', {number: media.episode_number}) + ' - ' + media.name}}</h4>
-    <p class="text-light">{{media.description}}</p>
-    <toggle-watched-button :mediaId="media.media_id" :playhead="media.playhead" :duration="media.duration" @toggle="onToggleWatched" />
-    <toggle-queue-button @toggle="onQueueToggle" :seriesId="media.series_id" :inQueue="media.in_queue" />
+    <div class="content-box">
+      <h1 class="text-light title">{{media.name}}</h1>
+      <h2 class="text-light sub-title"><router-link :to="'/series/' + media.series_id" class="text-primary">{{media.collection_name}}</router-link> - {{$t('media.episode', {number: media.episode_number})}}</h2>
+      <p class="text-light">{{media.description}}</p>
+
+      <toggle-watched-button :mediaId="media.media_id" :playhead="media.playhead" :duration="media.duration" @toggle="onToggleWatched" />
+      <toggle-queue-button @toggle="onQueueToggle" :seriesId="media.series_id" :inQueue="media.in_queue" />
+    </div>
 
     <scrolling-collection :collection="collection" :active="media.media_id" />
   </div>
@@ -75,3 +78,20 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import 'scss/_variables';
+
+  .content-box {
+    background: $dark;
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .sub-title {
+    font-size: 1.5rem;
+  }
+</style>
