@@ -57,7 +57,6 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --progress --hot --host 0.0.0.0",
     "build": "cross-env NODE_ENV=production webpack --mode production --progress",
-    "test": "mocha-webpack --mode development --webpack-config webpack.config.js --require src/testSetup.js src/modules/**/*.spec.js",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --fix --ext .js,.vue src"
   }
