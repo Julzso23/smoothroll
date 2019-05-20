@@ -1,6 +1,6 @@
 <template>
   <span>
-    <button class="btn btn-primary" @click="toggle">{{watched ? $t('media.markUnwatched') : $t('media.markWatched')}}</button>
+    <button class="btn btn-primary btn-sm" @click="toggle">{{watched ? $t('media.markUnwatched') : $t('media.markWatched')}}</button>
     <loading-modal id="loadingModal" :completion="completion" :currentEpisode="currentEpisode" />
   </span>
 </template>
