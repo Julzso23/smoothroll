@@ -1,6 +1,6 @@
 <template>
-  <button class="btn btn-primary" @click="toggleWatched" v-if="!loading">{{watched ? $t('media.markUnwatched') : $t('media.markWatched')}}</button>
-  <button class="btn btn-disabled" v-else><loading /></button>
+  <button class="btn btn-primary btn-sm" @click="toggleWatched" v-if="!loading">{{watched ? $t('media.markUnwatched') : $t('media.markWatched')}}</button>
+  <button class="btn btn-disabled btn-sm" v-else><loading /></button>
 </template>
 
 <script>
