@@ -4,7 +4,7 @@
       <router-link :to="'/series/' + series.series_id" class="text-reset">
         <div class="card-img-top image-container">
           <ribbon v-if="series.in_queue" />
-          <img class="card-img-top" :src="series.portrait_image.thumb_url" alt="Series Thumbnail" @mouseenter="setPopperVisible(true)" @mouseleave="setPopperVisible(false)" />
+          <img class="card-img-top" :src="$https(series.portrait_image.thumb_url)" alt="Series Thumbnail" @mouseenter="setPopperVisible(true)" @mouseleave="setPopperVisible(false)" />
         </div>
       </router-link>
 
@@ -45,15 +45,9 @@ export default {
     SeriesCardContext
   },
   mounted () {
-    this.fixMixedContent()
     this.popper = new Popper(this.$refs.card.$el, this.$refs.popper.$el, { placement: 'right-start' })
   },
   methods: {
-    fixMixedContent () {
-      if (this.series.portrait_image) {
-        this.series.portrait_image.thumb_url = this.series.portrait_image.thumb_url.replace('http://', 'https://')
-      }
-    },
     setPopperVisible (visible) {
       this.showPopper = visible
       this.popperHeight = this.$refs.card.$el.offsetHeight
@@ -83,12 +77,7 @@ export default {
       x: 0,
       y: 0
     }
-  }),
-  watch: {
-    'series.portrait_image' () {
-      this.fixMixedContent()
-    }
-  }
+  })
 }
 </script>
 
