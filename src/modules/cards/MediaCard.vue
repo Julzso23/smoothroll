@@ -2,7 +2,7 @@
   <div>
     <card :class="{'active-card' : active}" @contextmenu.native.prevent.stop="contextMenu" ref="card" v-if="!loading">
       <router-link :to="'/media/' + media.media_id" class="text-reset embed-responsive embed-responsive-16by9">
-        <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="media.screenshot_image.large_url" alt="Media Thumbnail" />
+        <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="$https(media.screenshot_image.large_url)" alt="Media Thumbnail" />
         <div class="play"></div>
         <div class="watched-grey" v-if="watched"></div>
         <img src="~images/eye.svg" class="watched" v-if="watched" />
@@ -57,15 +57,7 @@ export default {
     MediaCardContext,
     Loading
   },
-  mounted () {
-    this.fixMixedContent()
-  },
   methods: {
-    fixMixedContent () {
-      if (this.media.screenshot_image) {
-        this.media.screenshot_image.large_url = this.media.screenshot_image.large_url.replace('http://', 'https://')
-      }
-    },
     contextMenu (event) {
       this.showContextMenu = true
       this.contextMenuPosition.x = event.clientX - this.$refs.card.$el.getBoundingClientRect().left
@@ -77,11 +69,6 @@ export default {
     mediaBeginUpdate () {
       this.cardHeight = this.$refs.card.$el.getBoundingClientRect().height
       this.loading = true
-    }
-  },
-  watch: {
-    'media.screenshot_image' () {
-      this.fixMixedContent()
     }
   },
   computed: {
