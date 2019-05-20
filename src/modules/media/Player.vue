@@ -1,5 +1,5 @@
 <template>
-  <div class="player embed-responsive embed-responsive-16by9 mb-3">
+  <div class="player embed-responsive embed-responsive-16by9">
     <div id="player" class="embed-responsive-item"></div>
   </div>
 </template>

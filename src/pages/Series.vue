@@ -1,7 +1,7 @@
 <template>
   <div v-if="series && series.series_id == seriesId">
     <div class="header mb-4">
-      <div class="header-image" :style="{'background-image': `url('${series.landscape_image.full_url}')`}"></div>
+      <div class="header-image" :style="{'background-image': `url('${$https(series.landscape_image.full_url)}')`}"></div>
       <div class="header-gradient"><div class="container"><div class="row"><h2 class="text-light col-9">{{series.name}}</h2></div></div></div>
     </div>
 
@@ -20,7 +20,7 @@
         </div>
 
         <div class="col-3 d-none d-md-block">
-          <img class="img-fluid mx-auto d-block box-image" v-if="series.portrait_image" :src="series.portrait_image.large_url" />
+          <img class="img-fluid mx-auto d-block box-image" v-if="series.portrait_image" :src="$https(series.portrait_image.large_url)" />
         </div>
       </div>
 
@@ -97,8 +97,6 @@ export default {
           this.collectionsLoading = false
         })
 
-      this.fixMixedContent()
-
       document.title = `${this.series.name} ― Smoothroll`
     },
     seriesId () {
@@ -106,12 +104,6 @@ export default {
     },
     locale () {
       this.$store.dispatch('media/getSeries', this.seriesId)
-    },
-    'series.landscape_image' () {
-      this.fixMixedContent()
-    },
-    'series.portrait_image' () {
-      this.fixMixedContent()
     }
   },
   methods: {
@@ -120,15 +112,6 @@ export default {
         .then(() => {
           endLoading()
         })
-    },
-    fixMixedContent () {
-      if (this.series.landscape_image) {
-        this.series.landscape_image.full_url = this.series.landscape_image.full_url.replace('http://', 'https://')
-      }
-
-      if (this.series.portrait_image) {
-        this.series.portrait_image.large_url = this.series.portrait_image.large_url.replace('http://', 'https://')
-      }
     },
     onWatchedToggle () {
       this.collectionsLoading = true
@@ -140,8 +123,6 @@ export default {
         .then(() => {
           this.collectionsLoading = false
         })
-
-      this.fixMixedContent()
     }
   }
 }
