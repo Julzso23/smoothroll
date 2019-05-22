@@ -88,10 +88,10 @@ export default {
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .sub-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 </style>
