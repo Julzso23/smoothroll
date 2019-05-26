@@ -85,6 +85,7 @@ export default {
   .content-box {
     background: $dark;
     padding: 1rem;
+    box-shadow: 0px 1px 2px black;
   }
 
   .title {
