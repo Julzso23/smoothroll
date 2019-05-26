@@ -5,6 +5,7 @@ import media from './media'
 import queue from './queue'
 import locale from './locale'
 import browse from './browse'
+import history from './history'
 
 Vue.use(Vuex)
 
@@ -14,6 +15,7 @@ export default new Vuex.Store({
     media,
     queue,
     locale,
-    browse
+    browse,
+    history
   }
 })
