@@ -55,7 +55,7 @@ export default {
   },
   methods: {
     async updateMediaList () {
-      await this.$store.dispatch('history/getHistory', this.mediaType.key )
+      await this.$store.dispatch('history/getHistory', this.mediaType.key)
     },
 
     async loadMore () {
