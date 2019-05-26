@@ -193,38 +193,6 @@ export default {
         .catch(({ code }) => errorHandler(code, 'media/logTime', { mediaId, time }))
     },
 
-    async getHistory ({ rootState, dispatch, commit }, { mediaTypes, limit, offset, append }) {
-      await dispatch('authentication/verifySession', null, { root: true })
-
-      return Vue.api.get('recently_watched', {
-        media_types: mediaTypes,
-        offset: offset,
-        limit: limit,
-        fields: [
-          'media.media_id', 'media.playhead', 'media.duration', 'media.available_time', 'media.screenshot_image',
-          'media.collection_name', 'media.name', 'media.episode_number', 'media.series_id'
-        ].join(','),
-        locale: rootState.locale.locale,
-        session_id: rootState.authentication.sessionId,
-        auth: rootState.authentication.authTicket
-      })
-        .then(data => {
-          let mediaList = []
-          for (let item of data) {
-            mediaList.push(item.media)
-          }
-
-          if (append) {
-            commit('appendMediaList', mediaList)
-          } else {
-            commit('setMediaList', mediaList)
-          }
-
-          return data
-        })
-        .catch(({ code }) => errorHandler(code, 'media/getHistory', { mediaTypes, limit, offset, append }))
-    },
-
     async getRecentMedia ({ rootState, dispatch, commit }, mediaType) {
       commit('setRecentMediaLoading', true)
       await dispatch('authentication/verifySession', null, { root: true })
@@ -307,6 +275,7 @@ export default {
               media.in_queue = seriesData.in_queue
               commit('updateMedia', media)
               commit('queue/updateMedia', media, { root: true })
+              commit('history/updateMedia', media, { root: true })
             })
         )
         .catch(({ code }) => errorHandler(code, 'media/getUpdatedMedia', id))
