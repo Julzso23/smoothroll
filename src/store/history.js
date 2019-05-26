@@ -83,7 +83,7 @@ export default {
             commit('setLoading', false)
           }
 
-          if (state.history.length % limit !== 0 || mediaList.length === 0) {
+          if (state.history.length % state.limit !== 0 || mediaList.length === 0) {
             commit('setCanLoadMore', false)
           }
 
