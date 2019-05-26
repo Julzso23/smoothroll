@@ -85,13 +85,14 @@ export default {
   .content-box {
     background: $dark;
     padding: 1rem;
+    box-shadow: 0px 1px 2px black;
   }
 
   .title {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .sub-title {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
   }
 </style>

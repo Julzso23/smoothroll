@@ -129,10 +129,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import 'scss/_variables';
+
   .header {
     position: relative;
     overflow: hidden;
     margin-top: -1.5rem;
+    border-bottom: 1px solid $primary;
 
     .header-gradient {
       background: rgb(0,0,0);
@@ -161,5 +164,6 @@ export default {
   .box-image {
     margin-top: -10rem;
     box-shadow: 0 1px 4px black;
+    border-radius: 4px;
   }
 </style>
