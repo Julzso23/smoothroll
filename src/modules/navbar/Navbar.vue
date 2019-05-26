@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-dark mb-4">
+  <div class="bg-dark mb-4 navbar-container">
     <div class="container">
       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <router-link to="/" class="navbar-brand"><img src="~images/logo.svg" alt="logo" /></router-link>
@@ -44,6 +44,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  @import 'scss/_variables';
+
+  .navbar-container {
+    border-bottom: 1px solid $primary;
+  }
+
   .navbar {
     padding: 0;
   }
