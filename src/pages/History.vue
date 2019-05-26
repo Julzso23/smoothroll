@@ -50,51 +50,16 @@ export default {
         { key: 'drama', value: this.$t('media.types.drama') },
         { key: 'anime|drama', value: this.$t('media.types.both') }
       ],
-      mediaType: null,
-
-      limit: 50,
-      offset: 0,
-
-      loading: false,
-      loadingMore: false,
-      canLoadMore: true
+      mediaType: null
     }
   },
   methods: {
     async updateMediaList () {
-      this.loading = true
-      this.offset = 0
-
-      await this.$store.dispatch('media/getHistory', {
-        mediaTypes: this.mediaType.key,
-        limit: this.limit,
-        offset: this.offset
-      })
-        .then(data => {
-          this.loading = false
-
-          if (this.mediaList.length % this.limit !== 0 || data.length === 0) {
-            this.canLoadMore = false
-          }
-        })
+      await this.$store.dispatch('history/getHistory', this.mediaType.key)
     },
 
     async loadMore () {
-      this.loadingMore = true
-      this.offset += this.limit
-
-      await this.$store.dispatch('media/getHistory', {
-        mediaTypes: this.mediaType.key,
-        limit: this.limit,
-        offset: this.offset,
-        append: true
-      })
-        .then(data => {
-          this.loadingMore = false
-          if (this.mediaList.length % this.limit !== 0 || data.length === 0) {
-            this.canLoadMore = false
-          }
-        })
+      await this.$store.dispatch('history/loadMoreHistory', this.mediaType.key)
     }
   },
   mounted () {
@@ -112,7 +77,16 @@ export default {
   },
   computed: {
     mediaList () {
-      return this.$store.state.media.mediaList
+      return this.$store.state.history.history
+    },
+    loading () {
+      return this.$store.state.history.loading
+    },
+    loadingMore () {
+      return this.$store.state.history.loadingMore
+    },
+    canLoadMore () {
+      return this.$store.state.history.canLoadMore
     },
     compact: {
       get () {
