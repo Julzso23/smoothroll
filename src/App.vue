@@ -21,7 +21,7 @@ export default {
     Navbar,
     AppFooter
   },
-  beforeCreate() {
+  beforeCreate () {
     this.$store.commit('locale/setLocale', window.localStorage.getItem('locale'))
   }
 }
