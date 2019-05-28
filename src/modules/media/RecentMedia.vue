@@ -1,6 +1,6 @@
 <template>
   <div v-if="!loading || recentMedia.length != 0">
-    <div v-for="date in recentMedia" :key="date.date">
+    <div v-for="date in recentMedia" :key="date.date" class="date-block px-2 pt-2">
       <h4 class="text-light">{{date.label}}</h4>
 
       <div class="row">
@@ -63,3 +63,19 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  @import 'scss/_variables';
+
+  .date-block {
+    border-bottom: solid 1px rgba(255, 255, 255, 0.1);
+  }
+
+  .date-block:nth-child(even) {
+    background: rgba(255, 255, 255, 0.02)
+  }
+
+  .date-block:last-child {
+    border-bottom: none;
+  }
+</style>
