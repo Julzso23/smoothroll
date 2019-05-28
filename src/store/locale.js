@@ -3,7 +3,7 @@ import errorHandler from './errorHandler'
 import moment from 'moment'
 import i18n from 'locale'
 
-function crunchyrollToMomentLocale(locale) {
+function crunchyrollToMomentLocale (locale) {
   return locale.slice(0, 2) + '-' + locale.slice(2)
 }
 
