@@ -4,14 +4,14 @@
       {{$t('dashboard.queue')}}
       <loading-small v-if="queueLoading && queueLength != 0" />
     </h3>
-    <hr class="mt-0 bg-light" />
+    <hr class="mt-0 bg-primary" />
     <queue ref="queue" />
 
     <h3 class="text-light">
       {{$t('dashboard.recent')}}
       <loading-small v-if="recentMediaLoading && recentMediaLength != 0" />
     </h3>
-    <hr class="mt-0 bg-light" />
+    <hr class="mt-0 bg-primary" />
     <recent-media />
   </div>
 </template>
