@@ -48,6 +48,7 @@ export default {
 
   .navbar-container {
     border-bottom: 1px solid $primary;
+    box-shadow: 0px 1px 2px black;
   }
 
   .navbar {

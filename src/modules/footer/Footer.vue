@@ -30,5 +30,6 @@ export default {
     background: $dark;
     text-align: center;
     margin-top: auto;
+    box-shadow: inset 0px 1px 4px black;
   }
 </style>
