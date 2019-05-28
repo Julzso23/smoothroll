@@ -86,6 +86,7 @@ export default {
     background: $dark;
     padding: 1rem;
     box-shadow: 0px 1px 2px black;
+    border-radius: 0 0 0.2rem 0.2rem;
   }
 
   .title {

@@ -5,7 +5,7 @@
       <loading-small v-if="queueLoading && queueLength != 0" />
     </h3>
     <hr class="mt-0 bg-primary" />
-    <queue ref="queue" />
+    <queue ref="queue" class="px-2" />
 
     <h3 class="text-light">
       {{$t('dashboard.recent')}}
