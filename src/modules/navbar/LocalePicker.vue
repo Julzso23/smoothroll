@@ -33,7 +33,6 @@ export default {
   methods: {
     setLocale (locale) {
       this.$store.commit('locale/setLocale', locale)
-      this.$i18n.locale = locale
     }
   },
   data: () => ({
