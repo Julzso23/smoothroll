@@ -1,13 +1,13 @@
 <template>
   <div v-if="series && series.series_id == seriesId">
-    <div class="header mb-4">
+    <div class="header mb-3">
       <div class="header-image" :style="{'background-image': `url('${$https(series.landscape_image.full_url)}')`}"></div>
       <div class="header-gradient"><div class="container"><div class="row"><h2 class="text-light col-9">{{series.name}}</h2></div></div></div>
     </div>
 
     <div class="container">
-      <div class="row mb-4">
-        <div class="col-md-9 col-12">
+      <div class="row mb-3">
+        <div class="col-md-9 col-12 info-block">
           <p class="text-light">{{series.description}}</p>
 
           <div class="mb-2">
@@ -165,5 +165,12 @@ export default {
     margin-top: -10rem;
     box-shadow: 0 1px 4px black;
     border-radius: 4px;
+  }
+
+  .info-block {
+    background: $dark;
+    padding: 0.5rem 1rem;
+    border-radius: 0.2rem;
+    box-shadow: 0 1px 2px black;
   }
 </style>
