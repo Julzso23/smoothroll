@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading || recentMedia.length != 0">
     <div v-for="date in recentMedia" :key="date.date">
-      <h4 class="text-light">{{date.date}}</h4>
+      <h4 class="text-light">{{date.label}}</h4>
 
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4 draggable-card" v-for="media in date.media" :key="media.media_id">
@@ -17,6 +17,7 @@
 <script>
 import Loading from 'modules/shared/Loading'
 import MediaCard from 'modules/cards/MediaCard'
+import moment from 'moment'
 
 export default {
   name: 'recent-media',
@@ -32,14 +33,15 @@ export default {
       let dates = []
 
       for (let media of this.$store.state.media.recentMedia) {
-        if (!dates.find(date => date.date === this.timeToDate(media.available_time))) {
+        if (!dates.find(date => date.date === moment(media.available_time).dayOfYear())) {
           let date = {}
-          date.date = this.timeToDate(media.available_time)
+          date.date = moment(media.available_time).dayOfYear()
+          date.label = moment(media.available_time).calendar()
           date.media = []
           dates.push(date)
         }
 
-        dates.find(date => date.date === this.timeToDate(media.available_time)).media.push(media)
+        dates.find(date => date.date === moment(media.available_time).dayOfYear()).media.push(media)
       }
 
       return dates
@@ -53,16 +55,6 @@ export default {
   },
   mounted () {
     this.$store.dispatch('media/getRecentMedia', this.mediaType)
-  },
-  methods: {
-    timeToDate (time) {
-      const date = new Date(time)
-      const options = {
-        day: '2-digit',
-        month: 'long'
-      }
-      return date.toLocaleDateString(navigator.language, options)
-    }
   },
   watch: {
     locale () {
