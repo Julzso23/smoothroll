@@ -1,7 +1,7 @@
 <template>
   <div v-if="!loading || recentMedia.length != 0">
     <div v-for="date in recentMedia" :key="date.date" class="date-block px-2 pt-2">
-      <h4 class="text-light">{{date.label}}</h4>
+      <h4 class="text-light" :title="date.title">{{date.label}}</h4>
 
       <div class="row">
         <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2 mb-4 draggable-card" v-for="media in date.media" :key="media.media_id">
@@ -37,6 +37,7 @@ export default {
           let date = {}
           date.date = moment(media.available_time).dayOfYear()
           date.label = moment(media.available_time).calendar()
+          date.title = moment(media.available_time).format('LL')
           date.media = []
           dates.push(date)
         }
