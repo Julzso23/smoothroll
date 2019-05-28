@@ -20,6 +20,9 @@ export default {
   components: {
     Navbar,
     AppFooter
+  },
+  beforeCreate() {
+    this.$store.commit('locale/setLocale', window.localStorage.getItem('locale'))
   }
 }
 </script>
