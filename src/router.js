@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { authGuard, premiumGuard, nonPremiumGuard, loginGuard } from 'routeGuards'
+import { premiumGuard, nonPremiumGuard, loginGuard } from 'routeGuards'
 
 Vue.use(Router)
 
