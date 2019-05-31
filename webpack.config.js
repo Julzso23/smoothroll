@@ -5,6 +5,7 @@ const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { getIfUtils, removeEmpty } = require('webpack-config-utils')
 const { ifProduction } = getIfUtils(process.env.NODE_ENV)
+const { EnvironmentPlugin } = require('webpack')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
@@ -91,7 +92,10 @@ module.exports = {
     ifProduction(new MiniCssExtractPlugin({
       filename: 'assets/css/[name]_[hash:8].css',
       chunkFilename: 'assets/css/[name]_[chunkhash:8].css'
-    }))
+    })),
+    new EnvironmentPlugin({
+      'GA_KEY': null
+    })
   ]),
   optimization: {
     runtimeChunk: 'single',
