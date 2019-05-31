@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { authGuard, premiumGuard, loginGuard } from 'routeGuards'
+import { authGuard, premiumGuard, nonPremiumGuard, loginGuard } from 'routeGuards'
 
 Vue.use(Router)
 
@@ -27,21 +27,27 @@ const router = new Router({
     {
       path: '/browse',
       component: () => import('pages/browse/Browse'),
-      meta: {
-        guard: premiumGuard
-      },
       children: [
         {
           path: 'categories',
-          component: () => import('pages/browse/Categories')
+          component: () => import('pages/browse/Categories'),
+          meta: {
+            guard: premiumGuard
+          }
         },
         {
           path: 'categories/:mediaType/:tag',
-          component: () => import('pages/browse/Tags')
+          component: () => import('pages/browse/Tags'),
+          meta: {
+            guard: premiumGuard
+          }
         },
         {
           path: '',
-          component: () => import('pages/browse/Filter')
+          component: () => import('pages/browse/Filter'),
+          meta: {
+            guard: premiumGuard
+          }
         }
       ]
     },
@@ -75,7 +81,7 @@ const router = new Router({
       name: 'premium',
       component: () => import('pages/Premium'),
       meta: {
-        guard: authGuard
+        guard: nonPremiumGuard
       }
     },
     {
