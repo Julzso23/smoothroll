@@ -51,3 +51,10 @@ export default {
   })
 }
 </script>
+
+<style lang="scss" scoped>
+  .nav-item > .nav-link {
+    padding: 12px;
+    border-bottom: solid 2px transparent;
+  }
+</style>
