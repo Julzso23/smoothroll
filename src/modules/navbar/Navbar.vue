@@ -9,13 +9,13 @@
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
-            <navbar-link to="/" exact>{{$t('navbar.dashboard')}}</navbar-link>
-            <navbar-link to="/browse">{{$t('navbar.browse')}}</navbar-link>
-            <navbar-link to="/queue">{{$t('navbar.queue')}}</navbar-link>
-            <navbar-link to="/history">{{$t('navbar.history')}}</navbar-link>
+            <navbar-link to="/" exact v-if="authenticated">{{$t('navbar.dashboard')}}</navbar-link>
+            <navbar-link to="/browse" v-if="authenticated">{{$t('navbar.browse')}}</navbar-link>
+            <navbar-link to="/queue" v-if="authenticated">{{$t('navbar.queue')}}</navbar-link>
+            <navbar-link to="/history" v-if="authenticated">{{$t('navbar.history')}}</navbar-link>
           </ul>
 
-          <search />
+          <search v-if="authenticated" />
 
           <locale-picker />
 
@@ -39,6 +39,11 @@ export default {
     Authentication,
     Search,
     LocalePicker
+  },
+  computed: {
+    authenticated () {
+      return this.$store.getters['authentication/isLoggedIn'] && this.$store.getters['authentication/isPremium']
+    }
   }
 }
 </script>
