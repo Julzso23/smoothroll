@@ -22,7 +22,7 @@ export default {
     AppFooter
   },
   beforeCreate () {
-    this.$store.commit('locale/setLocale', window.localStorage.getItem('locale'))
+    this.$store.commit('locale/setLocale', window.localStorage.getItem('locale') || 'enUS')
   }
 }
 </script>
