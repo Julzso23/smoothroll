@@ -1,4 +1,4 @@
-$headings-font-family: 'Open Sans';
+$font-family-sans-serif: 'Open Sans';
 
 $enable-responsive-font-sizes: true;
 
@@ -11,3 +11,8 @@ $warning: #5f5f5f;
 $light: #eceeec;
 $dark: #111111;
 $body-bg: #181818;
+
+$embed-responsive-aspect-ratios: (
+    (16 9),
+    (9 18)
+);
