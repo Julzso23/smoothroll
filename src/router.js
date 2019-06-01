@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import { premiumGuard, nonPremiumGuard, loginGuard } from 'routeGuards'
+import { premiumGuard, nonPremiumGuard, loginGuard, landingGuard } from 'routeGuards'
 
 Vue.use(Router)
 
@@ -10,6 +10,14 @@ const router = new Router({
   routes: [
     {
       path: '/',
+      name: 'landing',
+      component: () => import('pages/Landing'),
+      meta: {
+        guard: landingGuard
+      }
+    },
+    {
+      path: '/dashboard',
       name: 'dashboard',
       component: () => import('pages/Dashboard'),
       meta: {

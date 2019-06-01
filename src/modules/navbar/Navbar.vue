@@ -9,7 +9,7 @@
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
-            <navbar-link to="/" exact v-if="authenticated">{{$t('navbar.dashboard')}}</navbar-link>
+            <navbar-link to="/dashboard" v-if="authenticated">{{$t('navbar.dashboard')}}</navbar-link>
             <navbar-link to="/browse" v-if="authenticated">{{$t('navbar.browse')}}</navbar-link>
             <navbar-link to="/queue" v-if="authenticated">{{$t('navbar.queue')}}</navbar-link>
             <navbar-link to="/history" v-if="authenticated">{{$t('navbar.history')}}</navbar-link>

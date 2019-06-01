@@ -5,6 +5,7 @@ import media from './media'
 import footer from './footer'
 import dashboard from './dashboard'
 import error from './error'
+import landing from './landing'
 
 export default {
   navbar,
@@ -13,5 +14,6 @@ export default {
   media,
   footer,
   dashboard,
-  error
+  error,
+  landing
 }
