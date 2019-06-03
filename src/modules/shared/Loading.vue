@@ -1,57 +1,43 @@
 <template>
   <div class="spinner">
-    <div class="rect1"></div>
-    <div class="rect2"></div>
-    <div class="rect3"></div>
-    <div class="rect4"></div>
-    <div class="rect5"></div>
+    <div v-for="i in count" :key="i" :class="'rect rect' + i"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'loading'
+  name: 'loading',
+  data: () => ({
+    count: 5
+  })
 }
 </script>
 
 <style lang="scss" scoped>
   @import "scss/_variables";
 
+  $count: 5;
+
   .spinner {
     margin: 0 auto;
-    width: 50px;
+    width: $count * 8px;
     height: 40px;
-    text-align: center;
-    font-size: 10px;
+    display: flex;
+    justify-content: space-around;
 
-    > div {
+    .rect {
       background-color: $light;
       height: 100%;
       width: 6px;
-      display: inline-block;
 
-      -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
       animation: sk-stretchdelay 1.2s infinite ease-in-out;
     }
 
-    .rect2 {
-      -webkit-animation-delay: -1.1s;
-      animation-delay: -1.1s;
-    }
-
-    .rect3 {
-      -webkit-animation-delay: -1.0s;
-      animation-delay: -1.0s;
-    }
-
-    .rect4 {
-      -webkit-animation-delay: -0.9s;
-      animation-delay: -0.9s;
-    }
-
-    .rect5 {
-      -webkit-animation-delay: -0.8s;
-      animation-delay: -0.8s;
+    @for $i from 1 through $count {
+      .rect#{$i} {
+        -webkit-animation-delay: 0.1s * $i;
+        animation-delay: 0.1s * $i;
+      }
     }
   }
 
