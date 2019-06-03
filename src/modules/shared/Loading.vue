@@ -35,8 +35,7 @@ export default {
 
     @for $i from 1 through $count {
       .rect#{$i} {
-        -webkit-animation-delay: 0.1s * $i;
-        animation-delay: 0.1s * $i;
+        animation-delay: -0.1s * ($count - $i);
       }
     }
   }
