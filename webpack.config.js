@@ -43,12 +43,7 @@ module.exports = {
         test: /\.s?css$/,
         use: [
           ifProduction(MiniCssExtractPlugin.loader, 'vue-style-loader'),
-          {
-            loader: 'css-loader',
-            options: {
-              localIdentName: '[local]_[chunkhash:base64:8]'
-            }
-          },
+          'css-loader',
           {
             loader: 'postcss-loader', // Run postcss actions
             options: {
