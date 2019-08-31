@@ -18,9 +18,9 @@ class Api {
   }
 
   get (route, inputParameters = {}) {
-    let url = new URL(apiUrl + route + '.' + apiVersion + '.json')
+    const url = new URL(apiUrl + route + '.' + apiVersion + '.json')
 
-    let parameters = Object.assign({}, baseParameters, inputParameters)
+    const parameters = Object.assign({}, baseParameters, inputParameters)
 
     url.search = new URLSearchParams(parameters)
 
@@ -36,8 +36,8 @@ class Api {
   }
 
   post (route, inputParameters = {}) {
-    let url = apiUrl + route + '.' + apiVersion + '.json'
-    let parameters = Object.assign({}, baseParameters, inputParameters)
+    const url = apiUrl + route + '.' + apiVersion + '.json'
+    const parameters = Object.assign({}, baseParameters, inputParameters)
 
     return window.fetch(url, {
       method: 'POST',

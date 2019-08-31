@@ -54,10 +54,10 @@ export default {
       return this.$store.state.media.currentSeries
     },
     mediaCollections () {
-      let collections = []
-      for (let media of this.$store.state.media.mediaList) {
+      const collections = []
+      for (const media of this.$store.state.media.mediaList) {
         if (!collections.find(collection => collection.id === media.collection_id)) {
-          let collection = {}
+          const collection = {}
           collection.id = media.collection_id
           collection.name = media.collection_name
           collection.media = []

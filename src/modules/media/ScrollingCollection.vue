@@ -21,7 +21,7 @@ export default {
   watch: {
     collection () {
       this.$nextTick(function () {
-        for (let card of this.$refs.media) {
+        for (const card of this.$refs.media) {
           if (card.$props.active) {
             this.$el.scrollLeft = card.$el.getBoundingClientRect().left - this.$el.getBoundingClientRect().left
             break

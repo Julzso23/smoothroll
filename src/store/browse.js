@@ -22,7 +22,7 @@ export default {
       state.seriesList = state.seriesList.concat(seriesList)
     },
     updateSeries (state, series) {
-      for (let item of state.seriesList) {
+      for (const item of state.seriesList) {
         if (item.series_id === series.series_id) {
           Object.assign(item, series)
           break

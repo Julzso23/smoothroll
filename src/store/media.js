@@ -44,21 +44,21 @@ export default {
       window.localStorage.setItem('displayCompact', compact)
     },
     updateMedia (state, media) {
-      for (let item of state.mediaList) {
+      for (const item of state.mediaList) {
         if (item.media_id === media.media_id) {
           Object.assign(item, media)
           break
         }
       }
 
-      for (let item of state.recentMedia) {
+      for (const item of state.recentMedia) {
         if (item.media_id === media.media_id) {
           Object.assign(item, media)
           break
         }
       }
 
-      for (let item of state.collection) {
+      for (const item of state.collection) {
         if (item.media_id === media.media_id) {
           Object.assign(item, media)
           break
@@ -210,8 +210,8 @@ export default {
         auth: rootState.authentication.authTicket
       })
         .then(data => {
-          let recentMedia = []
-          for (let series of data) {
+          const recentMedia = []
+          for (const series of data) {
             recentMedia.push(series.most_recent_media)
           }
 
