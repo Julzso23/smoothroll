@@ -5,7 +5,7 @@ function sortQueue (queue, order) {
   queue.sort((a, b) => {
     let indexA = null
     let indexB = null
-    for (let i in order) {
+    for (const i in order) {
       if (a.series.series_id === order[i]) {
         indexA = i
       }
@@ -29,7 +29,7 @@ function sortQueue (queue, order) {
     }
   })
 
-  for (let i in queue) {
+  for (const i in queue) {
     queue.queue_entry_id = i
   }
 
@@ -56,7 +56,7 @@ export default {
       state.loading = loading
     },
     updateMedia (state, media) {
-      for (let item of state.queue) {
+      for (const item of state.queue) {
         if (item.most_likely_media.media_id === media.media_id) {
           item.most_likely_media = media
           break
@@ -90,8 +90,8 @@ export default {
     async sortQueue ({ commit }, queue) {
       commit('setQueue', queue)
 
-      let queueOrder = []
-      for (let item of queue) {
+      const queueOrder = []
+      for (const item of queue) {
         queueOrder.push(item.series.series_id)
       }
 
