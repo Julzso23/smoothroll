@@ -5,7 +5,7 @@
         <img class="card-img-top embed-responsive-item image" v-if="media.screenshot_image" :src="$https(media.screenshot_image.large_url)" alt="Media Thumbnail" />
         <div class="play"></div>
         <div class="watched-grey" v-if="watched"></div>
-        <img src="~images/eye.svg" class="watched" v-if="watched" />
+        <fa-icon icon="eye" v-if="watched" class="watched" />
         <span class="badge badge-secondary length">{{length}}</span>
       </router-link>
 
@@ -128,7 +128,6 @@ export default {
     position: absolute;
     left: 4px;
     bottom: 4px;
-    filter: invert(100%);
   }
 
   .card {

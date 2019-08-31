@@ -36,7 +36,7 @@ export default {
       state.offset = 0
     },
     updateMedia (state, media) {
-      for (let item of state.history) {
+      for (const item of state.history) {
         if (item.media_id === media.media_id) {
           Object.assign(item, media)
           break
@@ -70,8 +70,8 @@ export default {
         auth: rootState.authentication.authTicket
       })
         .then(data => {
-          let mediaList = []
-          for (let item of data) {
+          const mediaList = []
+          for (const item of data) {
             mediaList.push(item.media)
           }
 
