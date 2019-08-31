@@ -8,6 +8,7 @@ import i18n from 'locale'
 import VueAnalytics from 'vue-analytics'
 import 'bootstrap'
 import 'scss/_theme'
+import 'fontAwesome'
 
 Vue.use(Api)
 Vue.use(MixedContent)
