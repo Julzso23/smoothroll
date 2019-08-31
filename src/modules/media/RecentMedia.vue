@@ -30,11 +30,11 @@ export default {
   }),
   computed: {
     recentMedia () {
-      let dates = []
+      const dates = []
 
-      for (let media of this.$store.state.media.recentMedia) {
+      for (const media of this.$store.state.media.recentMedia) {
         if (!dates.find(date => date.date === moment(media.available_time).dayOfYear())) {
-          let date = {}
+          const date = {}
           date.date = moment(media.available_time).dayOfYear()
           date.label = moment(media.available_time).calendar()
           date.title = moment(media.available_time).format('LL')

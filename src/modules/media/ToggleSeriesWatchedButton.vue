@@ -16,7 +16,7 @@ export default {
   },
   computed: {
     watched () {
-      for (let media of this.mediaList) {
+      for (const media of this.mediaList) {
         if (!this.hasWatched(media)) {
           return false
         }

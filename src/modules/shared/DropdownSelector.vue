@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     onChange (event) {
-      for (let option of this.options) {
+      for (const option of this.options) {
         if (option.value === event.target.value) {
           this.$emit('input', option)
           break
