@@ -47,7 +47,7 @@ export default {
       this.mark(!this.watched)
     },
     hasWatched (media) {
-      return media.playhead >= media.duration
+      return media.playhead >= media.duration * 0.9
     },
     mark (watched) {
       this.index++
