@@ -84,7 +84,7 @@ export default {
       return new Date(this.media.duration * 1000).toISOString().substr(11, 8)
     },
     watched () {
-      return this.media.playhead >= this.media.duration
+      return this.media.playhead >= this.media.duration * 0.9
     }
   }
 }

@@ -7,6 +7,7 @@ export default {
     mediaList: [],
     currentMedia: null,
     currentSeries: null,
+    currentSeriesKitsuPage: null,
     searchResults: [],
     recentMedia: [],
     recentMediaLoading: true,
@@ -26,6 +27,9 @@ export default {
     },
     setCurrentSeries (state, series) {
       state.currentSeries = series
+    },
+    setCurrentSeriesKitsuPage (state, url) {
+      state.currentSeriesKitsuPage = url
     },
     setSearchResults (state, results) {
       state.searchResults = results
@@ -146,6 +150,19 @@ export default {
       })
         .then(data => {
           commit('setCurrentSeries', data)
+
+          return window.fetch('https://kitsu.io/api/edge/anime?filter[text]=' + data.name)
+            .then(response => response.json())
+            .then(response => {
+              for (const series of response.data) {
+                for (const title of Object.values(series.attributes.titles)) {
+                  if (title.toUpperCase() === data.name.toUpperCase()) {
+                    commit('setCurrentSeriesKitsuPage', 'https://kitsu.io/anime/' + series.attributes.slug)
+                    return
+                  }
+                }
+              }
+            })
         })
         .catch(({ code }) => errorHandler(code, 'media/getSeries', id))
     },
