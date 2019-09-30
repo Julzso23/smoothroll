@@ -16,7 +16,11 @@
 
           <toggle-queue-button @toggle="onQueueToggle" :seriesId="series.series_id" :inQueue="series.in_queue" />
           <toggle-watched-button :mediaList="mediaList" @complete="onWatchedToggle" />
-          <rating class="float-right" :rating="series.rating" />
+
+          <span class="float-right">
+            <a class="kitsu-link" v-if="kitsuPage" :href="kitsuPage" target="_blank" />
+            <rating :rating="series.rating" />
+          </span>
         </div>
 
         <div class="col-3 d-none d-md-block">
@@ -52,6 +56,9 @@ export default {
   computed: {
     series () {
       return this.$store.state.media.currentSeries
+    },
+    kitsuPage () {
+      return this.$store.state.media.currentSeriesKitsuPage
     },
     mediaCollections () {
       const collections = []
@@ -172,5 +179,14 @@ export default {
     padding: 0.5rem 1rem;
     border-radius: 0.2rem;
     box-shadow: 0 1px 2px black;
+  }
+
+  .kitsu-link {
+    background: url('~images/kitsu.svg');
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background-size: cover;
+    margin: -0.5rem 0;
   }
 </style>
