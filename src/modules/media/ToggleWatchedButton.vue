@@ -17,7 +17,7 @@ export default {
   },
   computed: {
     watched () {
-      return this.playhead >= this.duration
+      return this.playhead >= this.duration * 0.9
     }
   },
   methods: {
