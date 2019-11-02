@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     inQueue () {
-      return this.$store.state.queue.queue.find(element => element.series_id === this.series_id)
+      return this.$store.state.queue.queue.find(element => element.series.series_id === this.seriesId) !== undefined
     }
   },
   methods: {
