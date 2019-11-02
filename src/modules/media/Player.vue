@@ -1,6 +1,11 @@
 <template>
-  <div class="player embed-responsive embed-responsive-16by9">
+  <div class="player embed-responsive embed-responsive-16by9" v-if="!broke">
     <div id="player" class="embed-responsive-item"></div>
+  </div>
+  <div v-else class='d-flex justify-content-center align-items-center error-box'>
+    <!-- <div class='self-align-center '> -->
+      <fa-icon icon="exclamation-triangle" class='text-primary' />
+    <!-- </div> -->
   </div>
 </template>
 
@@ -12,7 +17,8 @@ import PlaybackRatePlugin from 'clappr-playback-rate-plugin'
 export default {
   name: 'player',
   data: () => ({
-    player: null
+    player: null,
+    broke: false,
   }),
   props: {
     mediaId: String,
@@ -36,6 +42,14 @@ export default {
   },
   methods: {
     createPlayer () {
+      if (this.streamData.streams.length === 0) {
+        this.broke = true
+
+        return
+      }
+
+      this.broke = false
+
       this.player = new Clappr.Player({
         source: this.streamData.streams[0].url,
         poster: this.poster,
@@ -90,5 +104,13 @@ export default {
 <style lang="scss" scoped>
   .player {
     box-shadow: 0 1px 4px black;
+  }
+
+  .error-box {
+    height: 15rem;
+  }
+
+  .error-box > svg {
+    font-size: 10rem;
   }
 </style>
