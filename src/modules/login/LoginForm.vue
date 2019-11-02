@@ -3,7 +3,7 @@
     <div class="alert alert-danger" role="alert" v-if="error.length != 0">{{error}}</div>
 
     <div class="form-group">
-      <input v-model="account" type="text" name="account" :placeholder="$t('authentication.usernameEmail')" class="form-control" />
+      <input v-model="account" type="text" name="username" :placeholder="$t('authentication.usernameEmail')" class="form-control" />
     </div>
 
     <div class="form-group">
