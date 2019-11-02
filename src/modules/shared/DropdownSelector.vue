@@ -1,9 +1,9 @@
 <template>
   <div class="input-group">
     <div class="input-group-prepend">
-      <label class="input-group-text bg-dark text-light">{{label}}</label>
+      <label class="input-group-text bg-dark text-light border-warning">{{label}}</label>
     </div>
-    <select class="custom-select" :value="value ? value.value : ''" @change="onChange">
+    <select class="custom-select border-warning bg-secondary text-white" :value="value ? value.value : ''" @change="onChange">
       <option v-for="option in options" :key="option.key">{{option.value}}</option>
     </select>
   </div>

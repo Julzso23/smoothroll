@@ -1,10 +1,10 @@
 <template>
   <div class="input-group">
     <div class="input-group-prepend">
-      <label class="input-group-text bg-dark text-light">{{label}}</label>
+      <label class="input-group-text bg-dark border-warning text-light">{{label}}</label>
     </div>
     <div class="input-group-append">
-      <div class="input-group-text">
+      <div class="input-group-text bg-warning border-warning">
         <input type="checkbox" :checked="value" @input="input" />
       </div>
     </div>

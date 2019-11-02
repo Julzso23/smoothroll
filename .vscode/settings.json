@@ -1,5 +1,11 @@
 {
     "files.exclude": {
         "**/node_modules": true
+    },
+    "[javascript]": {
+        "editor.tabSize": 2
+    },
+    "[vue]": {
+        "editor.tabSize": 2
     }
 }

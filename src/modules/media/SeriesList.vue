@@ -44,8 +44,6 @@ export default {
   data: () => ({
     limit: 50,
     offset: 0,
-
-    loading: false,
     loadingMore: false,
     canLoadMore: false
   }),
@@ -58,11 +56,16 @@ export default {
     },
     locale () {
       return this.$store.state.locale.locale
+    },
+    loading () {
+      return this.$store.state.browse.loading
+    },
+    filters () {
+      return this.filter + this.mediaType + this.locale
     }
   },
   methods: {
     async updateSeriesList () {
-      this.loading = true
       this.offset = 0
 
       await this.$store.dispatch('browse/listSeries', {
@@ -72,7 +75,6 @@ export default {
         offset: this.offset
       })
         .then(data => {
-          this.loading = false
           if (this.seriesList.length % this.limit !== 0 || data.length === 0) {
             this.canLoadMore = false
           } else {
@@ -103,13 +105,7 @@ export default {
     }
   },
   watch: {
-    filter () {
-      this.updateSeriesList()
-    },
-    mediaType () {
-      this.updateSeriesList()
-    },
-    locale () {
+    filters () {
       this.updateSeriesList()
     }
   }

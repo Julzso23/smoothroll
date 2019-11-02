@@ -1,10 +1,13 @@
 <template>
   <div>
-    <h3 class="text-light">
-      {{$t('dashboard.queue')}}
-      <loading-small v-if="queueLoading && queueLength != 0" />
-    </h3>
-    <hr class="mt-0 bg-primary" />
+    <div v-if='queueLength != 0'>
+      <h3 class="text-light">
+        {{$t('dashboard.queue')}}
+        <loading-small v-if="queueLoading && queueLength != 0" />
+      </h3>
+      <hr class="mt-0 bg-primary" />
+    </div>
+
     <queue ref="queue" class="px-2" />
 
     <h3 class="text-light">

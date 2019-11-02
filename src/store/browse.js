@@ -8,7 +8,8 @@ export default {
       genre: [],
       season: []
     },
-    seriesList: []
+    seriesList: [],
+    loading: false
   },
 
   mutations: {
@@ -28,6 +29,9 @@ export default {
           break
         }
       }
+    },
+    setLoading (state, loading) {
+      state.loading = loading
     }
   },
 
@@ -48,6 +52,10 @@ export default {
     },
 
     async listSeries ({ commit, rootState, dispatch }, { filter, mediaType, limit, offset, append }) {
+      if (!append) {
+        commit('setLoading', true)
+      }
+
       await dispatch('authentication/verifySession', null, { root: true })
 
       return Vue.api.get('list_series', {
@@ -65,6 +73,7 @@ export default {
             commit('appendSeriesList', data)
           } else {
             commit('setSeriesList', data)
+            commit('setLoading', false)
           }
 
           return data
