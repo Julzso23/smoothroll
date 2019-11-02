@@ -32,7 +32,7 @@ import Ribbon from './Ribbon'
 import Popper from 'popper.js'
 import Loading from 'modules/shared/Loading'
 import SeriesCardContext from './SeriesCardContext'
-import EventBus from 'event-bus'
+import EventBus from 'eventBus'
 
 export default {
   name: 'series-card',
