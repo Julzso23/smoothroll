@@ -6,7 +6,7 @@
         <div class="play"></div>
         <div class="watched-grey" v-if="watched"></div>
         <fa-icon icon="eye" v-if="watched" class="watched" />
-        <span class="badge badge-secondary length">{{length}}</span>
+        <span class="badge badge-secondary length">{{ media.playhead > 0 && !watched ? watchedTime + ' / ' : ''}}{{length}}</span>
       </router-link>
 
       <progress-bar :value="(media.playhead / media.duration) * 100" />
@@ -33,7 +33,7 @@
     </card>
 
     <media-card-context v-model="showContextMenu" :position="contextMenuPosition" :watched="watched"
-                        :mediaId="media.media_id" :duration="media.duration"
+                        :mediaId="media.media_id" :seriesId="media.series_id" :duration="media.duration"
                         @beginUpdate="mediaBeginUpdate" @updated="mediaUpdated" />
   </div>
 </template>
@@ -89,7 +89,10 @@ export default {
   },
   computed: {
     length () {
-      return new Date(this.media.duration * 1000).toISOString().substr(11, 8)
+      return new Date(this.media.duration * 1000).toISOString().substr(11, 8).replace(/^(00:)?0?/, '')
+    },
+    watchedTime () {
+      return new Date(this.media.playhead * 1000).toISOString().substr(11, 8).replace(/^(00:)?0?/, '')
     },
     watched () {
       return this.media.playhead >= this.media.duration * 0.9
