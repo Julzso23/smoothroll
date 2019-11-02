@@ -43,6 +43,7 @@ import ProgressBar from 'modules/shared/ProgressBar'
 import Card from './Card'
 import MediaCardContext from './MediaCardContext'
 import Loading from 'modules/shared/Loading'
+import EventBus from 'event-bus'
 
 export default {
   name: 'media-card',
@@ -65,8 +66,15 @@ export default {
     MediaCardContext,
     Loading
   },
+  created () {
+    EventBus.$on('closeContextMenus', () => {
+      this.showContextMenu = false
+    })
+  },
   methods: {
     contextMenu (event) {
+      EventBus.$emit('closeContextMenus')
+
       this.showContextMenu = true
       this.contextMenuPosition.x = event.clientX - this.$refs.card.$el.getBoundingClientRect().left
       this.contextMenuPosition.y = event.clientY - this.$refs.card.$el.getBoundingClientRect().top
