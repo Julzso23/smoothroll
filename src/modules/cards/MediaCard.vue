@@ -43,7 +43,7 @@ import ProgressBar from 'modules/shared/ProgressBar'
 import Card from './Card'
 import MediaCardContext from './MediaCardContext'
 import Loading from 'modules/shared/Loading'
-import EventBus from 'event-bus'
+import EventBus from 'eventBus'
 
 export default {
   name: 'media-card',
