@@ -35,3 +35,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+  .list-group-item {
+    z-index: 1;
+  }
+</style>

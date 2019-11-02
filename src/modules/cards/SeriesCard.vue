@@ -32,6 +32,7 @@ import Ribbon from './Ribbon'
 import Popper from 'popper.js'
 import Loading from 'modules/shared/Loading'
 import SeriesCardContext from './SeriesCardContext'
+import EventBus from 'event-bus'
 
 export default {
   name: 'series-card',
@@ -47,6 +48,11 @@ export default {
   mounted () {
     this.popper = new Popper(this.$refs.card.$el, this.$refs.popper.$el, { placement: 'right-start' })
   },
+  created () {
+    EventBus.$on('closeContextMenus', () => {
+      this.showContextMenu = false
+    })
+  },
   methods: {
     setPopperVisible (visible) {
       this.showPopper = visible
@@ -54,6 +60,8 @@ export default {
       this.popper.scheduleUpdate()
     },
     contextMenu (event) {
+      EventBus.$emit('closeContextMenus')
+
       this.showContextMenu = true
       this.contextMenuPosition.x = event.clientX - this.$refs.card.$el.getBoundingClientRect().left
       this.contextMenuPosition.y = event.clientY - this.$refs.card.$el.getBoundingClientRect().top
