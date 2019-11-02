@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row mb-2">
+    <div class="row mb-2" v-if="!loading">
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.filter')" :options="filterOptions" v-model="filter" />
       <dropdown-selector class="col-lg-3 col-md-4 col-sm-6 mb-2" :label="$t('media.media')" :options="mediaOptions" v-model="mediaType" />
       <checkbox class="col-lg-3 col-md-4 col-sm-6 mb-2" v-model="compact" :label="$t('media.compact')" />
@@ -53,6 +53,9 @@ export default {
       set (value) {
         this.$store.commit('media/setCompactDisplay', value)
       }
+    },
+    loading () {
+      return this.$store.state.browse.loading
     }
   }
 }
