@@ -38,3 +38,15 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  @import 'scss/_variables';
+
+  .form-control[type='search'] {
+    border-color: $warning;
+  }
+
+  .form-control[type='search']:focus {
+    border-color: $primary;
+  }
+</style>
