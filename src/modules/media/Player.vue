@@ -18,7 +18,7 @@ export default {
   name: 'player',
   data: () => ({
     player: null,
-    broke: false,
+    broke: false
   }),
   props: {
     mediaId: String,
