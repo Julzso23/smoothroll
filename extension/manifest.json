@@ -1,0 +1,21 @@
+{
+  "manifest_version": 2,
+
+  "name": "Smoothroll Enabler",
+  "description": "Allows the Smoothroll player to work",
+  "version": "1.0.0",
+
+  "permissions": [
+    "webRequest",
+    "webRequestBlocking",
+    "https://smoothroll.com/*",
+    "https://*.vrv.co/*",
+    "https://*.dlvr1.net/*",
+    "https://pl.crunchyroll.com/*"
+  ],
+
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  }
+}
