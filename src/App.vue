@@ -1,6 +1,12 @@
 <template>
   <main id="app">
     <navbar />
+    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+      It's quite possible the video player might not work right now. Hopefully I'll make a more elegant solution at a later date, but for now please download the source from <a href="https://github.com/Julzso23/smoothroll/archive/master.zip">here</a>, then head to the url: <b>chrome://extensions/</b>, enable <b>Developer mode</b>, press <b>Load unpacked</b>, then select the <b>extension</b> folder from the source you downloaded
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
     <div class="container" v-if="!$route.meta.disableContainer">
       <router-view />
