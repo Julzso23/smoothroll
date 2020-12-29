@@ -34,6 +34,8 @@ export default {
   },
   mounted () {
     this.createPlayer()
+
+    document.addEventListener('keydown', this.onKeyDown)
   },
   beforeDestroy () {
     if (this.player.isPlaying()) {
@@ -95,6 +97,33 @@ export default {
           mediaId: this.mediaId,
           time: time
         })
+      }
+    },
+
+    onKeyDown (event) {
+      if (this.player !== null && !event.repeat) {
+        switch (event.code) {
+          case 'Space':
+          case 'KeyK':
+          {
+            if (!document.getElementById('player').contains(document.activeElement) || event.code === "KeyK") {
+              if (this.player.isPlaying()) {
+                this.player.pause()
+              } else {
+                this.player.play()
+              }
+            }
+
+            event.preventDefault()
+            break
+          }
+          case 'KeyF':
+          {
+            this.player.core.mediaControl.toggleFullscreen()
+            event.preventDefault()
+            break
+          }
+        }
       }
     }
   }
