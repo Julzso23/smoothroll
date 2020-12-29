@@ -33,11 +33,11 @@ export default {
   methods: {
     dismissWarning () {
       this.warningDismissed = true
-      localStorage.setItem('warningDismissed', this.warningDismissed)
+      window.localStorage.setItem('warningDismissed', this.warningDismissed)
     }
   },
   mounted () {
-    this.warningDismissed = localStorage.getItem('warningDismissed') || false
+    this.warningDismissed = window.localStorage.getItem('warningDismissed') || false
   },
   beforeCreate () {
     this.$store.commit('locale/setLocale', window.localStorage.getItem('locale') || 'enUS')

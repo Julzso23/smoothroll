@@ -106,7 +106,7 @@ export default {
           case 'Space':
           case 'KeyK':
           {
-            if (!document.getElementById('player').contains(document.activeElement) || event.code === "KeyK") {
+            if (!document.getElementById('player').contains(document.activeElement) || event.code === 'KeyK') {
               if (this.player.isPlaying()) {
                 this.player.pause()
               } else {
