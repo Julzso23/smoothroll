@@ -18,7 +18,11 @@ export default {
   name: 'player',
   data: () => ({
     player: null,
-    broke: false
+    broke: false,
+    hasBeenPlayed: false,
+    loggingTime: false,
+    lastTimeUpdate: 0,
+    timeLogRate: 10 // Log the current time once every x seconds
   }),
   props: {
     mediaId: String,
@@ -80,23 +84,44 @@ export default {
             { value: '1.5', label: '1.5x' },
             { value: '2.0', label: '2x' }
           ]
+        },
+        events: {
+          onEnded: () => this.logTime(this.player.getDuration()),
+          onPause: () => this.logTime(this.player.getCurrentTime()),
+          onSeek: time => this.logTime(time),
+          onPlay: this.onPlay,
+          onTimeUpdate: this.onTimeUpdate
         }
       })
-
-      if (this.playhead !== this.duration) {
-        this.player.seek(this.playhead)
-      }
-
-      this.player.on(Clappr.Events.PLAYER_ENDED, () => this.logTime(this.duration))
-      this.player.on(Clappr.Events.PLAYER_PAUSE, () => this.logTime(this.player.getCurrentTime()))
     },
 
     logTime (time) {
-      if (time !== 0 && time <= this.duration) {
+      if (time !== 0 && time <= this.player.getDuration() && !this.loggingTime) {
+        this.loggingTime = true
         this.$store.dispatch('media/logTime', {
           mediaId: this.mediaId,
-          time: time
+          time: Math.floor(time)
+        }).then(() => {
+          this.loggingTime = false
         })
+      }
+    },
+
+    onPlay () {
+      if (!this.hasBeenPlayed) {
+        this.hasBeenPlayed = true
+
+        if (this.playhead < this.player.getDuration() * 0.99) {
+          this.player.seek(this.playhead)
+        }
+      }
+    },
+
+    onTimeUpdate (progress) {
+      const roundedTime = progress.current - progress.current % this.timeLogRate
+      if (roundedTime !== this.lastTimeUpdate) {
+        this.lastTimeUpdate = roundedTime
+        this.logTime(roundedTime)
       }
     },
 
