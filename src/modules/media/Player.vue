@@ -102,16 +102,17 @@ export default {
 
     onKeyDown (event) {
       if (this.player !== null && !event.repeat) {
+        const playerFocused = document.getElementById('player').contains(document.activeElement)
+
         switch (event.code) {
           case 'Space':
+            if (playerFocused) break
           case 'KeyK':
           {
-            if (!document.getElementById('player').contains(document.activeElement) || event.code === 'KeyK') {
-              if (this.player.isPlaying()) {
-                this.player.pause()
-              } else {
-                this.player.play()
-              }
+            if (this.player.isPlaying()) {
+              this.player.pause()
+            } else {
+              this.player.play()
             }
 
             event.preventDefault()
@@ -121,6 +122,28 @@ export default {
           {
             this.player.core.mediaControl.toggleFullscreen()
             event.preventDefault()
+            break
+          }
+          case 'ArrowLeft':
+            if (playerFocused) break
+          case 'KeyJ':
+          {
+            let newTime = this.player.getCurrentTime() - 5
+            if (newTime < 0) {
+              newTime = 0
+            }
+            this.player.seek(newTime)
+            break
+          }
+          case 'ArrowRight':
+            if (playerFocused) break
+          case 'KeyL':
+          {
+            let newTime = this.player.getCurrentTime() + 5
+            if (newTime > this.player.getDuration()) {
+              newTime = this.player.getDuration()
+            }
+            this.player.seek(newTime)
             break
           }
         }
