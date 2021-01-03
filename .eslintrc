@@ -10,5 +10,8 @@
     },
     "plugins": [
         "vue"
-    ]
+    ],
+    "rules": {
+        "no-fallthrough": "off"
+    }
 }

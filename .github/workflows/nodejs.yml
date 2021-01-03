@@ -20,10 +20,15 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - uses: CultureHQ/actions-yarn@master
-    - name: install, lint, build
-      run: |
-        yarn
-        yarn lint
-        yarn build
+    - name: install
+      run: yarn
+      env:
+        CI: true
+    - name: lint
+      run: yarn lint
+      env:
+        CI: true
+    - name: build
+      run: yarn build
       env:
         CI: true
