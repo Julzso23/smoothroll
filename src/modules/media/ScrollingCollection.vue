@@ -1,5 +1,5 @@
 <template>
-  <div class="collection row mb-2">
+  <div class="collection row mb-2" @mousewheel.prevent="onScroll" ref="container">
     <div class="col-lg-3 col-md-4 col-sm-6 offset-sm-0 col-8 offset-2" v-for="mediaItem in collection" :key="mediaItem.media_id">
       <media-card :media="mediaItem" :active="mediaItem.media_id == active" ref="media" />
     </div>
@@ -28,6 +28,11 @@ export default {
           }
         }
       })
+    }
+  },
+  methods: {
+    onScroll (e) {
+      this.$refs.container.scrollLeft -= e.wheelDelta
     }
   }
 }

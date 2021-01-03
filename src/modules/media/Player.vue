@@ -133,6 +133,8 @@ export default {
               newTime = 0
             }
             this.player.seek(newTime)
+
+            event.preventDefault()
             break
           }
           case 'ArrowRight':
@@ -144,6 +146,8 @@ export default {
               newTime = this.player.getDuration()
             }
             this.player.seek(newTime)
+
+            event.preventDefault()
             break
           }
         }
