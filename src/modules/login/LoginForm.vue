@@ -3,11 +3,11 @@
     <div class="alert alert-danger" role="alert" v-if="error.length != 0">{{error}}</div>
 
     <div class="form-group">
-      <input v-model="account" type="text" name="username" :placeholder="$t('authentication.usernameEmail')" class="form-control" />
+      <input v-model="account" type="text" name="username" :placeholder="$t('authentication.usernameEmail')" autocomplete="username" class="form-control" />
     </div>
 
     <div class="form-group">
-      <input v-model="password" type="password" name="password" :placeholder="$t('authentication.password')" class="form-control" />
+      <input v-model="password" type="password" name="password" :placeholder="$t('authentication.password')" autocomplete="current-password" class="form-control" />
     </div>
 
     <button type="submit" class="btn btn-block btn-primary">{{$t('authentication.login')}}</button>
