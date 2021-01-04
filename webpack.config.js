@@ -44,14 +44,7 @@ module.exports = {
         use: [
           ifProduction(MiniCssExtractPlugin.loader, 'vue-style-loader'),
           'css-loader',
-          {
-            loader: 'postcss-loader', // Run postcss actions
-            options: {
-              plugins: () => ([
-                require('autoprefixer')
-              ])
-            }
-          },
+          'postcss-loader',
           'sass-loader'
         ]
       },
@@ -80,10 +73,14 @@ module.exports = {
         useShortDoctype: true
       }
     }),
-    new CopyWebpackPlugin([{
-      from: path.join(__dirname, '/static'),
-      to: path.join(__dirname, '/dist')
-    }]),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.join(__dirname, '/static'),
+          to: path.join(__dirname, '/dist')
+        }
+      ]
+    }),
     ifProduction(new MiniCssExtractPlugin({
       filename: 'assets/css/[name]_[hash:8].css',
       chunkFilename: 'assets/css/[name]_[chunkhash:8].css'

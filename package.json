@@ -58,7 +58,7 @@
     "webpack-dev-server": "^3.11.1"
   },
   "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --mode development --progress --hot --host 0.0.0.0",
+    "dev": "cross-env NODE_ENV=development webpack serve --mode development --progress --hot --host 0.0.0.0",
     "build": "cross-env NODE_ENV=production webpack --mode production --progress",
     "lint": "eslint --ext .js,.vue src",
     "lint:fix": "eslint --fix --ext .js,.vue src"
