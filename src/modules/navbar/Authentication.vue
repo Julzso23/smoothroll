@@ -7,7 +7,7 @@
       <div class="dropdown-menu bg-dark" aria-labelledby="userDropdown">
         <!-- <router-link class="dropdown-item bg-dark text-light" to="/settings">{{$t('navbar.settings')}}</router-link>
         <div class="dropdown-divider"></div> -->
-        <a class="dropdown-item bg-dark text-light" href="#" @click="logout">{{$t('authentication.logout')}}</a>
+        <a class="dropdown-item bg-dark text-light" href="#" @click="logout"><fa-icon icon="sign-out-alt" /> {{$t('authentication.logout')}}</a>
       </div>
     </li>
   </ul>
