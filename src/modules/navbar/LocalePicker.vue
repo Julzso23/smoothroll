@@ -9,6 +9,10 @@
           <span :class="'flag-icon ' + flags[locale.locale_id]"></span>
           {{locale.label}}
         </a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item bg-dark text-light" href="https://github.com/Julzso23/smoothroll/issues/new?assignees=Julzso23&labels=translation+error&template=translation-error.md&title=" target="_blank" rel="noopener noreferrer">
+          Translation issue?
+        </a>
       </div>
     </li>
   </ul>
