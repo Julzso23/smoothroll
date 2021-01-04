@@ -9,10 +9,10 @@
 
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="navbar-nav mr-auto">
-            <navbar-link to="/dashboard" v-if="authenticated">{{$t('navbar.dashboard')}}</navbar-link>
-            <navbar-link to="/browse" v-if="authenticated">{{$t('navbar.browse')}}</navbar-link>
-            <navbar-link to="/queue" v-if="authenticated">{{$t('navbar.queue')}}</navbar-link>
-            <navbar-link to="/history" v-if="authenticated">{{$t('navbar.history')}}</navbar-link>
+            <navbar-link to="/dashboard" v-if="authenticated"><fa-icon icon="stream" /> {{$t('navbar.dashboard')}}</navbar-link>
+            <navbar-link to="/browse" v-if="authenticated"><fa-icon icon="folder-open" /> {{$t('navbar.browse')}}</navbar-link>
+            <navbar-link to="/queue" v-if="authenticated"><fa-icon icon="tasks" /> {{$t('navbar.queue')}}</navbar-link>
+            <navbar-link to="/history" v-if="authenticated"><fa-icon icon="history" /> {{$t('navbar.history')}}</navbar-link>
           </ul>
 
           <search v-if="authenticated" />

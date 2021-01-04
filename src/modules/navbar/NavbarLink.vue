@@ -20,14 +20,15 @@ export default {
   .nav-item > .nav-link {
     padding: 12px;
     border-bottom: solid 2px transparent;
+    transition: border-bottom-color 0.1s linear;
   }
 
   .nav-item > .nav-link:hover {
-    border-bottom: solid 2px $primary / 1.5;
+    border-bottom-color: $primary / 1.5;
     background: rgba(255, 255, 255, 0.03);
   }
 
   .nav-item > .nav-link.active {
-    border-bottom: solid 2px $primary;
+    border-bottom-color: $primary;
   }
 </style>
