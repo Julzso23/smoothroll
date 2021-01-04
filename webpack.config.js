@@ -3,16 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const CopyWebpackPlugin = require('copy-webpack-plugin')
 const path = require('path')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { getIfUtils, removeEmpty } = require('webpack-config-utils')
-const { ifProduction } = getIfUtils(process.env.NODE_ENV)
-const { EnvironmentPlugin } = require('webpack')
+const { removeEmpty } = require('webpack-config-utils')
 
 module.exports = {
   entry: path.join(__dirname, 'src', 'index.js'),
   output: {
     path: path.join(__dirname, 'dist'),
-    filename: 'assets/js/[name]_[hash:8].js',
-    chunkFilename: 'assets/js/[name]_[chunkhash:8].js',
+    filename: 'assets/js/[name]_[hash].js',
+    chunkFilename: 'assets/js/[name]_[chunkhash].js',
     publicPath: '/'
   },
   resolve: {
@@ -42,7 +40,8 @@ module.exports = {
       {
         test: /\.s?css$/,
         use: [
-          ifProduction(MiniCssExtractPlugin.loader, 'vue-style-loader'),
+          'vue-style-loader',
+          MiniCssExtractPlugin.loader,
           'css-loader',
           'postcss-loader',
           'sass-loader'
@@ -53,14 +52,14 @@ module.exports = {
         use: [{
           loader: 'file-loader',
           options: {
-            name: 'assets/[ext]/[name]_[hash:8].[ext]'
+            name: 'assets/[ext]/[name]_[hash].[ext]',
+            esModule: false
           }
         }]
       }
     ]
   },
   plugins: removeEmpty([
-    new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       title: 'Smoothroll',
       template: path.join(__dirname, '/src/index.html'),
@@ -73,6 +72,7 @@ module.exports = {
         useShortDoctype: true
       }
     }),
+    new VueLoaderPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
@@ -81,12 +81,9 @@ module.exports = {
         }
       ]
     }),
-    ifProduction(new MiniCssExtractPlugin({
-      filename: 'assets/css/[name]_[hash:8].css',
-      chunkFilename: 'assets/css/[name]_[chunkhash:8].css'
-    })),
-    new EnvironmentPlugin({
-      'GA_KEY': null
+    new MiniCssExtractPlugin({
+      filename: 'assets/css/[name]_[hash].css',
+      chunkFilename: 'assets/css/[name]_[chunkhash].css'
     })
   ]),
   optimization: {
