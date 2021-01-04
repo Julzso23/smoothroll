@@ -1,17 +1,15 @@
 <template>
   <div>
-    <card ref="card" @contextmenu.native.prevent.stop="contextMenu" v-if="!loading">
-      <router-link :to="'/series/' + series.series_id" class="text-reset">
-        <div class="card-img-top image-container">
-          <ribbon v-if="series.in_queue" />
-          <img class="card-img-top" :src="$https(series.portrait_image.thumb_url)" alt="Series Thumbnail" @mouseenter="setPopperVisible(true)" @mouseleave="setPopperVisible(false)" />
-        </div>
-      </router-link>
+    <router-link :to="'/series/' + series.series_id" class="text-reset" v-if="!loading">
+      <card ref="card" @contextmenu.native.prevent.stop="contextMenu" @mouseenter.native="setPopperVisible(true)" @mouseleave.native="setPopperVisible(false)">
+          <div class="card-img-top image-container">
+            <ribbon v-if="series.in_queue" />
+            <img class="card-img-top" :src="$https(series.portrait_image.thumb_url)" alt="Series Thumbnail" />
+          </div>
 
-      <div class="mx-2 my-1 text-truncate">
-        <router-link :to="'/series/' + series.series_id" class="text-reset" :title="series.name">{{series.name}}</router-link>
-      </div>
-    </card>
+        <div class="mx-2 my-1 text-truncate" :title="series.name">{{series.name}}</div>
+      </card>
+    </router-link>
 
     <card v-else :style="{height: cardHeight + 'px'}">
       <loading class="my-auto" />
@@ -55,6 +53,8 @@ export default {
   },
   methods: {
     setPopperVisible (visible) {
+      if (this.series.description === null || this.series.description.match(/^\s*$/) !== null) return
+
       this.showPopper = visible
       this.popperHeight = this.$refs.card.$el.offsetHeight
       this.popper.scheduleUpdate()
@@ -94,6 +94,10 @@ export default {
 
   .card {
     overflow: hidden;
+  }
+
+  a {
+    text-decoration: none;
   }
 
   .image-container {
