@@ -1,7 +1,7 @@
 <template>
   <div class="phone">
     <div class="screen">
-      <div class="embed-responsive embed-responsive-9by18">
+      <div class="embed-responsive embed-responsive-1by2">
         <img :src="image" class="embed-responsive-item" />
       </div>
     </div>

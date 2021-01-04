@@ -2,9 +2,9 @@
   <div>
     <router-link :to="'/series/' + series.series_id" class="text-reset" v-if="!loading">
       <card ref="card" @contextmenu.native.prevent.stop="contextMenu" @mouseenter.native="setPopperVisible(true)" @mouseleave.native="setPopperVisible(false)">
-          <div class="card-img-top image-container">
+          <div class="card-img-top image-container embed-responsive embed-responsive-2by3">
             <ribbon v-if="series.in_queue" />
-            <img class="card-img-top" :src="$https(series.portrait_image.thumb_url)" alt="Series Thumbnail" />
+            <img class="card-img-top embed-responsive-item" :src="$https(series.portrait_image.thumb_url)" alt="Series Thumbnail" />
           </div>
 
         <div class="mx-2 my-1 text-truncate" :title="series.name">{{series.name}}</div>
@@ -102,6 +102,10 @@ export default {
 
   .image-container {
     position: relative;
+
+    > img {
+      object-fit: cover;
+    }
   }
 
   .popper {
