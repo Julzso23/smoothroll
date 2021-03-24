@@ -129,6 +129,8 @@ export default {
       if (this.player !== null && !event.repeat) {
         const playerFocused = document.getElementById('player').contains(document.activeElement)
 
+        if (document.activeElement.nodeName === 'INPUT') return
+
         switch (event.code) {
           case 'Space':
             if (playerFocused) break

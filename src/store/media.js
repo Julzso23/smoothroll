@@ -138,6 +138,8 @@ export default {
     async getSeries ({ commit, rootState, dispatch }, id) {
       await dispatch('authentication/verifySession', null, { root: true })
 
+      commit('setCurrentSeriesKitsuPage', null)
+
       return Vue.api.get('info', {
         series_id: id,
         fields: [
