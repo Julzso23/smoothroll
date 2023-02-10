@@ -58,5 +58,7 @@ export default {
 
   #boring-alert {
     border-radius: 0;
+    margin: 0;
+    text-align: center;
   }
 </style>
